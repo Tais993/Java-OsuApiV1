@@ -1,0 +1,25 @@
+- name: Qodana - Code Inspection
+  # You may pin to the exact commit or the version.
+  # uses: JetBrains/qodana-action@1a43321c932939bf81e252495fc27d71b107fdca
+  uses: JetBrains/qodana-action@v2.2.1-eap
+  with:
+    # Project folder to inspect
+    project-dir: # optional, default is ${{ github.workspace }}
+    # Save results to folder
+    results-dir: # optional, default is ${{ github.workspace }}/qodana
+    # Save cache to folder
+    cache-dir: # optional, default is /home/runner/work/_temp/_github_home/qodana-cache
+    # Directory to be inspected. If not specified, the whole project is inspected by default
+    inspected-dir: # optional
+    # Run in baseline mode. Provide the path to an exisitng SARIF report to be used in the baseline state calculation
+    baseline: # optional
+    # Include in the output report the results from the baseline run that are absent in the current run
+    baseline-include-absent: # optional
+    # Set the number of problems that will serve as a quality gate. If this number is reached, the inspection run is terminated
+    fail-threshold: # optional
+    # Generate HTML report
+    save-html-report: # optional
+    # Name of a profile defined in project
+    profile-name: # optional
+    # Absolute path to the profile file
+    profile-path: # optional
