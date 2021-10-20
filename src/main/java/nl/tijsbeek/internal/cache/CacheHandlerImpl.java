@@ -1,5 +1,8 @@
-package nl.tijsbeek.api.cache;
+package nl.tijsbeek.internal.cache;
 
+import nl.tijsbeek.api.cache.CacheHandler;
+import nl.tijsbeek.api.cache.CachingPolicy;
+import nl.tijsbeek.api.cache.IdNameCache;
 import nl.tijsbeek.api.entities.User;
 
 import java.util.Map;

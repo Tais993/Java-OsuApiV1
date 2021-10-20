@@ -1,8 +1,13 @@
-package nl.tijsbeek.api.cache;
+package nl.tijsbeek.internal.cache;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import nl.tijsbeek.api.cache.CachingPolicy;
+import nl.tijsbeek.api.cache.IdCache;
 import nl.tijsbeek.api.entities.IdHolder;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Iterator;
 
 public class IdCacheImpl<T extends IdHolder> implements IdCache<T> {
 
@@ -30,5 +35,11 @@ public class IdCacheImpl<T extends IdHolder> implements IdCache<T> {
     @Override
     public T getItemById(long id) {
         return cache.getIfPresent(id);
+    }
+
+    @NotNull
+    @Override
+    public Iterator<T> iterator() {
+        return cache.asMap().values().iterator();
     }
 }

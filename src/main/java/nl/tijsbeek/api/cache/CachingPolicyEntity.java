@@ -4,7 +4,7 @@ import nl.tijsbeek.api.entities.User;
 
 public enum CachingPolicyEntity {
     BEATMAPS(CachingPolicyEntity.class),
-    USERS(User.class),
+    USER(User.class),
     USER_RECENT_SCORES(CachingPolicyEntity.class),
     USER_BEST_SCORE(CachingPolicyEntity.class),
     USER_SCORES(CachingPolicyEntity.class),

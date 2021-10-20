@@ -1,7 +1,12 @@
-package nl.tijsbeek.api.cache;
+package nl.tijsbeek.internal.cache;
 
+import nl.tijsbeek.api.cache.CachingPolicy;
+import nl.tijsbeek.api.cache.IdNameCache;
 import nl.tijsbeek.api.entities.IdHolder;
 import nl.tijsbeek.api.entities.NameHolder;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Iterator;
 
 public class IdNameCacheImpl<T extends IdHolder & NameHolder>
         implements IdNameCache<T> {
@@ -44,5 +49,11 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder>
     @Override
     public T getItemByName(String name) {
         return nameEntityCache.getItemByName(name);
+    }
+
+    @NotNull
+    @Override
+    public Iterator<T> iterator() {
+        return idEntityCache.iterator();
     }
 }
