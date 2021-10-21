@@ -15,4 +15,11 @@ public enum GameMode {
     public int getMode() {
         return mode;
     }
+
+    @Override
+    public String toString() {
+        return "GameMode{" +
+                "mode=" + mode +
+                '}';
+    }
 }

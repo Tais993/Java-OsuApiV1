@@ -5,11 +5,14 @@ import nl.tijsbeek.api.cache.IdNameCache;
 import nl.tijsbeek.api.entities.IdHolder;
 import nl.tijsbeek.api.entities.NameHolder;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
 public class IdNameCacheImpl<T extends IdHolder & NameHolder>
         implements IdNameCache<T> {
+    private static final Logger logger = LoggerFactory.getLogger(IdNameCacheImpl.class);
 
     private final IdCacheImpl<T> idEntityCache;
     private final NameCacheImpl<T> nameEntityCache;
@@ -19,41 +22,47 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder>
         nameEntityCache = new NameCacheImpl<>(cachingPolicy);
     }
 
-    public void addItem(T idHolder) {
+    public final void addItem(T idHolder) {
         idEntityCache.addItem(idHolder);
         nameEntityCache.addItem(idHolder);
     }
 
-    public void removeItem(T idHolder) {
+    public final void removeItem(T idHolder) {
         idEntityCache.removeItem(idHolder);
         nameEntityCache.removeItem(idHolder);
     }
 
-    public void removeItemById(long id) {
+    public final void removeItemById(long id) {
         T holder = idEntityCache.getItemById(id);
-        idEntityCache.removeItem(holder);
-        nameEntityCache.removeItem(holder);
+        removeItem(holder);
     }
 
-    public void removeItemByName(String name) {
+    public final void removeItemByName(String name) {
         T holder = nameEntityCache.getItemByName(name);
-        nameEntityCache.removeItem(holder);
-        idEntityCache.removeItem(holder);
+        removeItem(holder);
     }
 
     @Override
-    public T getItemById(long id) {
+    public final T getItemById(long id) {
         return idEntityCache.getItemById(id);
     }
 
     @Override
-    public T getItemByName(String name) {
+    public final T getItemByName(String name) {
         return nameEntityCache.getItemByName(name);
     }
 
     @NotNull
     @Override
-    public Iterator<T> iterator() {
+    public final Iterator<T> iterator() {
         return idEntityCache.iterator();
+    }
+
+    @Override
+    public final String toString() {
+        return "IdNameCacheImpl{" +
+                "idEntityCache=" + idEntityCache +
+                ", nameEntityCache=" + nameEntityCache +
+                '}';
     }
 }

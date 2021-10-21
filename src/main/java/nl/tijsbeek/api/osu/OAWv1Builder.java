@@ -2,16 +2,20 @@ package nl.tijsbeek.api.osu;
 
 import nl.tijsbeek.api.cache.CachingPolicy;
 import nl.tijsbeek.api.cache.CachingPolicyEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class OAWv1Builder {
+public final class OAWv1Builder {
+    private static final Logger logger = LoggerFactory.getLogger(OAWv1Builder.class);
+
     private String token;
     private CachingPolicy defaultCachingPolicy;
-    private final List<CachingPolicy> cachingPolicies = new ArrayList<>(CachingPolicyEntity.values().length);
+    private final Collection<CachingPolicy> cachingPolicies = new ArrayList<>(CachingPolicyEntity.values().length);
 
     private OAWv1Builder(String token) {
         this.token = token;
@@ -27,7 +31,7 @@ public class OAWv1Builder {
     }
 
     public OAWv1Builder setDefaultCachingPolicy(CachingPolicy cachingPolicy) {
-        this.defaultCachingPolicy = cachingPolicy;
+        defaultCachingPolicy = cachingPolicy;
         return this;
     }
 
@@ -50,5 +54,15 @@ public class OAWv1Builder {
                         }, HashMap::putAll);
 
         return new OAWv1Impl(token, defaultCachingPolicy, cachingPolicyMap);
+    }
+
+    @SuppressWarnings("DuplicateStringLiteralInspection")
+    @Override
+    public String toString() {
+        return "OAWv1Builder{" +
+                "token='" + token + '\'' +
+                ", defaultCachingPolicy=" + defaultCachingPolicy +
+                ", cachingPolicies=" + cachingPolicies +
+                '}';
     }
 }

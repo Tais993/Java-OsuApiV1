@@ -4,6 +4,6 @@ import nl.tijsbeek.api.entities.IdHolder;
 import nl.tijsbeek.api.entities.NameHolder;
 
 public interface IdNameCache<T extends IdHolder & NameHolder>
-        extends IdCache<T>, NameCache<T>, Iterable<T> {
+        extends IdCache<T>, NameCache<T> {
 
 }

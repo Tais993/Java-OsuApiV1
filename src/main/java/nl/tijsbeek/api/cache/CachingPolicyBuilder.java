@@ -1,8 +1,13 @@
 package nl.tijsbeek.api.cache;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.concurrent.TimeUnit;
 
-public class CachingPolicyBuilder {
+public final class CachingPolicyBuilder {
+    private static final Logger logger = LoggerFactory.getLogger(CachingPolicyBuilder.class);
+
     private CachingPolicyEntity entity;
     private long size;
     private long duration;
@@ -14,9 +19,17 @@ public class CachingPolicyBuilder {
         return new CachingPolicyBuilder(entity);
     }
 
+    public CachingPolicyBuilder setSize(int size) {
+        return setSize((long) size);
+    }
+
     public CachingPolicyBuilder setSize(long size) {
         this.size = size;
         return this;
+    }
+
+    public CachingPolicyBuilder setDuration(int duration, TimeUnit timeUnit) {
+        return setDuration((long) duration, timeUnit);
     }
 
     public CachingPolicyBuilder setDuration(long duration, TimeUnit timeUnit) {
@@ -27,5 +40,15 @@ public class CachingPolicyBuilder {
 
     public CachingPolicy createCachingPolicy() {
         return new CachingPolicy(entity, size, duration, timeUnit);
+    }
+
+    @Override
+    public String toString() {
+        return "CachingPolicyBuilder{" +
+                "entity=" + entity +
+                ", size=" + size +
+                ", duration=" + duration +
+                ", timeUnit=" + timeUnit +
+                '}';
     }
 }

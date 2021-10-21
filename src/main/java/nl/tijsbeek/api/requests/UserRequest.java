@@ -1,54 +1,39 @@
 package nl.tijsbeek.api.requests;
 
 import nl.tijsbeek.api.entities.GameMode;
+import nl.tijsbeek.api.entities.UserType;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriBuilder;
 
-public class UserRequest {
+public record UserRequest(String user, UserType userType, GameMode gameMode,
+                          int eventDays) implements Request {
+    private static final Logger logger = LoggerFactory.getLogger(UserRequest.class);
 
-    private String user;
-    private UserType userType;
-
-    private GameMode gameMode;
-
-    private int eventDays;
-
-
-    protected UserRequest(String user, UserType userType, GameMode gameMode, int eventDays) {
+    public UserRequest(@NotNull String user, UserType userType, GameMode gameMode, int eventDays) {
         this.user = user;
         this.userType = userType;
         this.gameMode = gameMode;
         this.eventDays = eventDays;
     }
 
-    public static enum UserType {
-        USERNAME("string"),
-        USER_ID("id");
-
-        private final String type;
-
-        UserType(String type) {
-            this.type = type;
-        }
-
-        public String getType() {
-            return type;
-        }
-    }
-
+    @Override
     public UriBuilder setUriParams(UriBuilder uriBuilder) {
         uriBuilder.queryParam("u", user);
 
-        if (gameMode != null) {
+        if (null != gameMode) {
             uriBuilder.queryParam("m", gameMode.getMode());
         }
 
-        uriBuilder.queryParam("type", userType.type);
+        uriBuilder.queryParam("type", userType.getType());
 
         uriBuilder.queryParam("event_days", eventDays);
 
         return uriBuilder;
     }
 
+    @SuppressWarnings("DuplicateStringLiteralInspection")
     @Override
     public String toString() {
         return "UserRequest{" +

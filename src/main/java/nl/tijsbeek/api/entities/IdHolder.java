@@ -1,10 +1,11 @@
 package nl.tijsbeek.api.entities;
 
+@FunctionalInterface
 public interface IdHolder {
 
     long id();
 
     default String idString() {
-        return id() + "";
+        return String.valueOf(id());
     }
 }

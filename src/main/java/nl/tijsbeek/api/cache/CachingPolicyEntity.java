@@ -1,10 +1,10 @@
 package nl.tijsbeek.api.cache;
 
-import nl.tijsbeek.api.entities.User;
+import nl.tijsbeek.api.entities.UserImpl;
 
 public enum CachingPolicyEntity {
     BEATMAPS(CachingPolicyEntity.class),
-    USER(User.class),
+    USER(UserImpl.class),
     USER_RECENT_SCORES(CachingPolicyEntity.class),
     USER_BEST_SCORE(CachingPolicyEntity.class),
     USER_SCORES(CachingPolicyEntity.class),
@@ -19,5 +19,12 @@ public enum CachingPolicyEntity {
 
     public Class<?> getRelatingClass() {
         return relatingClass;
+    }
+
+    @Override
+    public String toString() {
+        return "CachingPolicyEntity{" +
+                "relatingClass=" + relatingClass +
+                '}';
     }
 }
