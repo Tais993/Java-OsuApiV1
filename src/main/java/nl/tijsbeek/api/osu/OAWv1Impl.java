@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 import java.util.Map;
 
-final class OAWv1Impl implements OAWv1 {
+public final class OAWv1Impl implements OAWv1 {
     private static final Logger logger = LoggerFactory.getLogger(OAWv1Impl.class);
 
     private final String token;
