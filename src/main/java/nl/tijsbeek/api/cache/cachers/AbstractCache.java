@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
-public abstract class AbstractCache<K, T> implements CustomCache<T> {
+public abstract class AbstractCache<K, T> implements CustomCacheStream<T> {
     private final Cache<K, T> cache;
     private final ConcurrentMap<K, T> map;
 

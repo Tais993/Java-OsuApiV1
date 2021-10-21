@@ -9,7 +9,7 @@ import java.util.Collection;
  * The interface for caches containing items by their name
  * @param <T> the {@link nl.tijsbeek.api.entities.NameHolder}
  */
-public interface NameCache<T extends NameHolder> extends CustomCache<T> {
+public interface NameCache<T extends NameHolder> extends CustomCacheStream<T> {
 
     /**
      * Get's the {@link nl.tijsbeek.api.entities.NameHolder} by their name

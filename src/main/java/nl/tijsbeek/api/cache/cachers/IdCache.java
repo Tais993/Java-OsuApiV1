@@ -10,7 +10,7 @@ import java.util.Collection;
  *
  * @param <T> the {@link nl.tijsbeek.api.entities.IdHolder}
  */
-public interface IdCache<T extends IdHolder> extends CustomCache<T> {
+public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
 
     /**
      * Get's the {@link nl.tijsbeek.api.entities.IdHolder} by their ID
