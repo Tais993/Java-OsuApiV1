@@ -24,9 +24,9 @@ public enum Main {
                                 .createCachingPolicy()
                 ).createOsu();
 
-        osu.retrieveUsers(
+        osu.retrieveUser(
                         new UserRequestBuilder()
-                                .setUserId("15423699")
+                                .setUserName("Test")
                                 .createUserRequest())
                 .doOnSuccess(System.out::println)
                 .doOnError(Throwable::printStackTrace)
