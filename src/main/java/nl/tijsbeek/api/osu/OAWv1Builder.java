@@ -47,10 +47,10 @@ public final class OAWv1Builder {
                             Class<?> key = cachingPolicy.entity().getRelatingClass();
 
                             if (hashMap.containsKey(key)) {
-                                throw new IllegalArgumentException("Cannot set multiple CachingPolicies to the same entity!");
+                                logger.error("Cannot set multiple CachingPolicies to the same entity!");
+                            } else {
+                                hashMap.put(key, cachingPolicy);
                             }
-
-                            hashMap.put(key, cachingPolicy);
                         }, HashMap::putAll);
 
         return new OAWv1Impl(token, defaultCachingPolicy, cachingPolicyMap);
