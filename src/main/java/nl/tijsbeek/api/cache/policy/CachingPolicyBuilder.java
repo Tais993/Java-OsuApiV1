@@ -1,13 +1,13 @@
-package nl.tijsbeek.api.cache;
+package nl.tijsbeek.api.cache.policy;
 
-import nl.tijsbeek.internal.cache.CachingPolicyImpl;
+import nl.tijsbeek.internal.cache.policy.CachingPolicyImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * The builder to create {@link nl.tijsbeek.api.cache.CachingPolicy CachingPolicies} with
+ * The builder to create {@link CachingPolicy CachingPolicies} with
  */
 public final class CachingPolicyBuilder {
     private static final Logger logger = LoggerFactory.getLogger(CachingPolicyBuilder.class);
@@ -21,7 +21,7 @@ public final class CachingPolicyBuilder {
 
     /**
      * Creates a CachingPolicyBuilder from the given Entity
-     * @param entity the {@link nl.tijsbeek.api.cache.CachingPolicyEntity} to create a CachingPolicyBuilder for
+     * @param entity the {@link CachingPolicyEntity} to create a CachingPolicyBuilder for
      * @return the CachingPolicyBuilder
      */
     public static CachingPolicyBuilder fromEntity(CachingPolicyEntity entity) {
@@ -71,8 +71,8 @@ public final class CachingPolicyBuilder {
     }
 
     /**
-     * Builds the {@link nl.tijsbeek.api.cache.CachingPolicy}
-      * @return a newly created {@link nl.tijsbeek.api.cache.CachingPolicy} based off the settings on the set on the Builder
+     * Builds the {@link CachingPolicy}
+      * @return a newly created {@link CachingPolicy} based off the settings on the set on the Builder
      */
     public CachingPolicy createCachingPolicy() {
         return new CachingPolicyImpl(entity, size, duration, timeUnit);

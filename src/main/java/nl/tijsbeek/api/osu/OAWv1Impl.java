@@ -1,12 +1,12 @@
 package nl.tijsbeek.api.osu;
 
-import nl.tijsbeek.api.cache.CachingPolicy;
+import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.User;
 import nl.tijsbeek.api.entities.UserImpl;
 import nl.tijsbeek.api.requests.Request;
 import nl.tijsbeek.api.requests.UserRequest;
-import nl.tijsbeek.internal.cache.CacheHandlerImpl;
-import nl.tijsbeek.internal.cache.IdNameCacheImpl;
+import nl.tijsbeek.internal.cache.cachers.IdNameCacheImpl;
+import nl.tijsbeek.internal.cache.handler.CacheHandlerImpl;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

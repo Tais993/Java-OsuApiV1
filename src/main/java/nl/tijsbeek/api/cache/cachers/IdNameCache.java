@@ -1,4 +1,4 @@
-package nl.tijsbeek.api.cache;
+package nl.tijsbeek.api.cache.cachers;
 
 import nl.tijsbeek.api.entities.IdHolder;
 import nl.tijsbeek.api.entities.NameHolder;

@@ -1,6 +1,6 @@
 package nl.tijsbeek.api.osu;
 
-import nl.tijsbeek.api.cache.CacheHandler;
+import nl.tijsbeek.api.cache.handler.CacheHandler;
 import nl.tijsbeek.api.entities.User;
 import nl.tijsbeek.api.requests.UserRequest;
 import org.jetbrains.annotations.NotNull;
@@ -27,8 +27,8 @@ public sealed interface OAWv1 permits OAWv1Impl {
     Mono<? extends User> retrieveUser(@NotNull UserRequest userRequest);
 
     /**
-     * The {@link nl.tijsbeek.api.cache.CacheHandler} to be used for getting cached items
-     * @return the {@link nl.tijsbeek.api.cache.CacheHandler}
+     * The {@link nl.tijsbeek.api.cache.handler.CacheHandler} to be used for getting cached items
+     * @return the {@link nl.tijsbeek.api.cache.handler.CacheHandler}
      */
     CacheHandler getCacheHandler();
 }

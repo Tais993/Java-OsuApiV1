@@ -1,12 +1,12 @@
-package nl.tijsbeek.api.cache;
+package nl.tijsbeek.api.cache.policy;
 
 import nl.tijsbeek.api.entities.UserImpl;
 
 /**
  * Represents an osu entity
  *
- * @see nl.tijsbeek.api.cache.CachingPolicyBuilder
- * @see nl.tijsbeek.api.cache.CachingPolicy
+ * @see CachingPolicyBuilder
+ * @see CachingPolicy
  */
 public enum CachingPolicyEntity {
     // TODO

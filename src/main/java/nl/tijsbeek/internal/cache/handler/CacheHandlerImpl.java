@@ -1,10 +1,11 @@
-package nl.tijsbeek.internal.cache;
+package nl.tijsbeek.internal.cache.handler;
 
-import nl.tijsbeek.api.cache.CacheHandler;
-import nl.tijsbeek.api.cache.CachingPolicy;
-import nl.tijsbeek.api.cache.IdNameCache;
+import nl.tijsbeek.api.cache.cachers.IdNameCache;
+import nl.tijsbeek.api.cache.handler.CacheHandler;
+import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.User;
 import nl.tijsbeek.api.entities.UserImpl;
+import nl.tijsbeek.internal.cache.cachers.IdNameCacheImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

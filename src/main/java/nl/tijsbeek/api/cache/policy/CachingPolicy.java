@@ -1,4 +1,4 @@
-package nl.tijsbeek.api.cache;
+package nl.tijsbeek.api.cache.policy;
 
 import java.util.concurrent.TimeUnit;
 
@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit;
 public interface CachingPolicy {
 
     /**
-     * The {@link nl.tijsbeek.api.cache.CachingPolicyEntity}
+     * The {@link CachingPolicyEntity}
      *
-     * @return {@link nl.tijsbeek.api.cache.CachingPolicyEntity}
+     * @return {@link CachingPolicyEntity}
      */
     CachingPolicyEntity entity();
 

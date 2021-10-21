@@ -1,7 +1,7 @@
-package nl.tijsbeek.internal.cache;
+package nl.tijsbeek.internal.cache.policy;
 
-import nl.tijsbeek.api.cache.CachingPolicy;
-import nl.tijsbeek.api.cache.CachingPolicyEntity;
+import nl.tijsbeek.api.cache.policy.CachingPolicy;
+import nl.tijsbeek.api.cache.policy.CachingPolicyEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

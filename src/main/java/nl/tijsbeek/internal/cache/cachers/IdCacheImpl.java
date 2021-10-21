@@ -1,56 +1,58 @@
-package nl.tijsbeek.internal.cache;
+package nl.tijsbeek.internal.cache.cachers;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import nl.tijsbeek.api.cache.CachingPolicy;
-import nl.tijsbeek.api.cache.IdCache;
+import nl.tijsbeek.api.cache.cachers.AbstractCache;
+import nl.tijsbeek.api.cache.cachers.IdCache;
+import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.IdHolder;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Iterator;
+import java.util.Collection;
 
-public class IdCacheImpl<T extends IdHolder> implements IdCache<T> {
+public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> implements IdCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(IdCacheImpl.class);
 
     private final Cache<Long, T> cache;
 
     public IdCacheImpl(CachingPolicy cachingPolicy) {
-        cache = Caffeine.newBuilder()
+        super(Caffeine.newBuilder()
                 .maximumSize(cachingPolicy.size())
                 .expireAfterAccess(cachingPolicy.duration(), cachingPolicy.timeUnit())
-                .build();
+                .build());
+        cache = getCache();
     }
 
-    public final void addItem(T idHolder) {
+    @Override
+    public T getItemById(long id) {
+        return cache.getIfPresent(id);
+    }
+
+    @Override
+    public Collection<T> getItemsById(Iterable<Long> ids) {
+        return cache.getAllPresent(ids).values();
+    }
+
+
+    public void addItem(T idHolder) {
         cache.put(idHolder.id(), idHolder);
         logger.debug("Added id-holder:{} to cache", idHolder.id());
     }
 
-    public final void removeItem(T idHolder) {
+    public void removeItem(T idHolder) {
         removeItemById(idHolder.id());
     }
 
-    public final void removeItemById(long id) {
+    public void removeItemById(long id) {
         cache.invalidate(id);
         logger.debug("Removed id-holder:{} from cache", id);
     }
 
-    @Override
-    public final T getItemById(long id) {
-        return cache.getIfPresent(id);
-    }
-
-    @NotNull
-    @Override
-    public final Iterator<T> iterator() {
-        return cache.asMap().values().iterator();
-    }
 
     @SuppressWarnings("DuplicateStringLiteralInspection")
     @Override
-    public final String toString() {
+    public String toString() {
         return "IdCacheImpl{" +
                 "cache=" + cache +
                 '}';
