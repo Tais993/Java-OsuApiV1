@@ -1,9 +1,11 @@
 package nl.tijsbeek.api.entities;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Set;
 
 public interface User extends IdHolder, NameHolder {
-    String joinTime();
+    @NotNull String joinTime();
 
     int count300();
     int count100();
@@ -23,9 +25,9 @@ public interface User extends IdHolder, NameHolder {
     int countRankSH();
     int countRankA();
 
-    String country();
+    @NotNull String country();
     int countryRank();
 
     int totalSecondsPlayed();
-    Set<?> events();
+    @NotNull Set<?> events();
 }

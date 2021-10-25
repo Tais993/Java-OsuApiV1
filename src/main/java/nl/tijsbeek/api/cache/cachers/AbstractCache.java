@@ -2,21 +2,28 @@ package nl.tijsbeek.api.cache.cachers;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
-public abstract class AbstractCache<K, T> implements CustomCacheStream<T> {
+public class AbstractCache<K, T> implements CustomCacheStream<T> {
+    private static final Logger logger = LoggerFactory.getLogger(AbstractCache.class);
+
+    @NotNull
     private final Cache<K, T> cache;
     private final ConcurrentMap<K, T> map;
 
-    protected AbstractCache(Cache<K, T> cache) {
+    protected AbstractCache(@NotNull Cache<K, T> cache) {
         this.cache = cache;
-        this.map = cache.asMap();
+        map = cache.asMap();
     }
 
+    @NotNull
     protected Cache<K, T> getCache() {
         return cache;
     }
@@ -34,15 +41,20 @@ public abstract class AbstractCache<K, T> implements CustomCacheStream<T> {
 
 
     @Override
-    public final boolean contains(Object object) {
+    public final boolean contains(@Nullable Object object) {
         return map.containsValue(object);
     }
 
     @Override
-    public final boolean containsAll(Collection<?> objects) {
+    public final boolean containsAll(@NotNull Collection<?> objects) {
         return objects.stream().anyMatch(o -> !map.containsValue(o));
     }
 
+
+    @Override
+    public void cleanUp() {
+        cache.cleanUp();
+    }
 
 
     @NotNull
@@ -53,7 +65,7 @@ public abstract class AbstractCache<K, T> implements CustomCacheStream<T> {
 
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;
 
@@ -64,10 +76,11 @@ public abstract class AbstractCache<K, T> implements CustomCacheStream<T> {
 
     @Override
     public int hashCode() {
-        return null != cache ? cache.hashCode() : 0;
+        return cache.hashCode();
     }
 
-    @SuppressWarnings("DuplicateStringLiteralInspection")
+    @NotNull
+    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override
     public String toString() {
         return "AbstractCache{" +

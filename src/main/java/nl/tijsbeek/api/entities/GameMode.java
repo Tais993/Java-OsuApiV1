@@ -1,5 +1,7 @@
 package nl.tijsbeek.api.entities;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  *
  * See <a href="https://osu.ppy.sh/wiki/en/Game_mode">osu-wiki, game modes</a>
@@ -47,6 +49,8 @@ public enum GameMode {
         return mode;
     }
 
+    @SuppressWarnings("MagicCharacter")
+    @NotNull
     @Override
     public String toString() {
         return "GameMode{" +
