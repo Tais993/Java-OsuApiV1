@@ -22,7 +22,8 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * <p></p>
      *
      * <p> <b>
-     * This method's result may differ if there are any concurrent insertions, removals, or if entries are pending for removal. <br />
+     * This method's result may differ if there are any concurrent insertions, removals,
+     * or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
      * </p> </b>
      *
@@ -44,51 +45,69 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * <p></p>
      *
      * <p> <b>
-     * This method's result may differ if there are any concurrent insertions, removals, or if entries are pending for removal. <br />
+     * This method's result may differ if there are any concurrent insertions, removals,
+     * or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
      * </p> </b>
      *
-     * @param  collector
-     *         The collector used to collect the elements
-     *
-     * @param  <R>
-     *         The output type
-     * @param  <A>
-     *         The accumulator type
-     *
-     * @throws java.lang.IllegalArgumentException
-     *         If the provided collector is {@code null}
-     *
+     * @param collector The collector used to collect the elements
+     * @param <R>       The output type
+     * @param <A>       The accumulator type
      * @return Resulting collections
+     * @throws java.lang.IllegalArgumentException If the provided collector is {@code null}
      */
     default <R, A> R collect(@NotNull Collector<? super T, A, R> collector) {
         return stream().collect(collector);
     }
 
     /**
-     * Returns an array containing
+     * Returns an array containing all the caches elements.
      * <p></p>
      *
      * <p> <b>
-     * This method's result may differ if there are any concurrent insertions, removals, or if entries are pending for removal. <br />
+     * This method's result may differ if there are any concurrent insertions,
+     * removals, or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
      * </p> </b>
      *
      * @param generator a function which produces a new array of the desired
      *                  type and the provided length
-     * @return
+     * @return an array of T
      */
-
     @NotNull
     default T @NotNull [] toArray(IntFunction<T[]> generator) {
         return stream().toArray(generator);
     }
 
+    /**
+     * Returns a modifiable {@link List} of T.
+     * <p></p>
+     *
+     * <p> <b>
+     * This method's result may differ if there are any concurrent insertions, removals,
+     * or if entries are pending for removal. <br />
+     * To clear pending entries, run {@link #cleanUp()} first
+     * </p> </b>
+     *
+     * @return a modifiable {@link List}
+     */
     @NotNull
     default List<T> toList() {
         return stream().collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Returns a modifiable {@link Set} of T.
+     * <p></p>
+     *
+     * <p> <b>
+     * This method's result may differ if there are any concurrent insertions, removals,
+     * or if entries are pending for removal. <br />
+     * To clear pending entries, run {@link #cleanUp()} first
+     * </p> </b>
+     *
+     * @return a modifiable {@link Set}
+     */
     @NotNull
     default Set<T> toSet() {
         return stream().collect(Collectors.toCollection(HashSet::new));
