@@ -6,6 +6,7 @@ import nl.tijsbeek.api.cache.cachers.AbstractCache;
 import nl.tijsbeek.api.cache.cachers.NameCache;
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.NameHolder;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Objects;
+
+import static nl.tijsbeek.internal.Constants.NULL_FALSE;
 
 public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T> implements NameCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(NameCacheImpl.class);
@@ -56,6 +59,7 @@ public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<Str
         cache.invalidate(name);
         logger.debug("Removed name-holder:{} from cache", name);
     }
+    @Contract(value = NULL_FALSE, pure = true)
     @Override
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
@@ -73,6 +77,7 @@ public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<Str
     }
 
 
+    @Contract(pure = true)
     @NotNull
     @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override

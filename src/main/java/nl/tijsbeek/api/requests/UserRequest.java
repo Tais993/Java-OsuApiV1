@@ -11,13 +11,6 @@ public record UserRequest(String user, UserType userType, GameMode gameMode,
                           int eventDays) implements Request {
     private static final Logger logger = LoggerFactory.getLogger(UserRequest.class);
 
-    public UserRequest(@NotNull String user, UserType userType, GameMode gameMode, int eventDays) {
-        this.user = user;
-        this.userType = userType;
-        this.gameMode = gameMode;
-        this.eventDays = eventDays;
-    }
-
     @NotNull
     @Override
     public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
@@ -35,7 +28,7 @@ public record UserRequest(String user, UserType userType, GameMode gameMode,
     }
 
     @NotNull
-    @SuppressWarnings("DuplicateStringLiteralInspection")
+    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override
     public String toString() {
         return "UserRequest{" +

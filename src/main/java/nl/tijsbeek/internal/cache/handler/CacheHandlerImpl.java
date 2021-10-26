@@ -6,6 +6,7 @@ import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.User;
 import nl.tijsbeek.api.entities.UserImpl;
 import nl.tijsbeek.internal.cache.cachers.IdNameCacheImpl;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,17 +21,19 @@ public class CacheHandlerImpl implements CacheHandler {
 
     public CacheHandlerImpl(@NotNull CachingPolicy defaultCachingPolicy, @NotNull Map<Class<?>, CachingPolicy> cachingPolicies) {
 
-                userCache = new IdNameCacheImpl<>(cachingPolicies.getOrDefault(UserImpl.class, defaultCachingPolicy));
+        userCache = new IdNameCacheImpl<>(cachingPolicies.getOrDefault(UserImpl.class, defaultCachingPolicy));
 
         logger.debug("Caches have been created");
     }
 
+    @Contract(pure = true)
     @NotNull
     @Override
     public final IdNameCache<User> getUserCache() {
         return userCache;
     }
 
+    @Contract(pure = true)
     @SuppressWarnings("MagicCharacter")
     @NotNull
     @Override

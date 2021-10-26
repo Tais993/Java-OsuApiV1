@@ -4,6 +4,7 @@ import nl.tijsbeek.api.cache.cachers.IdNameCache;
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.IdHolder;
 import nl.tijsbeek.api.entities.NameHolder;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
+
+import static nl.tijsbeek.internal.Constants.NULL_FALSE;
 
 public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(IdNameCacheImpl.class);
@@ -117,6 +120,7 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     }
 
 
+    @Contract(value = NULL_FALSE, pure = true)
     @Override
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
@@ -135,6 +139,7 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
         return result;
     }
 
+    @Contract(pure = true)
     @SuppressWarnings("MagicCharacter")
     @NotNull
     @Override

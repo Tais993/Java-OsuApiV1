@@ -1,6 +1,7 @@
 package nl.tijsbeek.api.cache.policy;
 
 import nl.tijsbeek.api.entities.UserImpl;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,6 +33,7 @@ public enum CachingPolicyEntity {
     @NotNull
     private final Class<?> relatingClass;
 
+    @Contract(pure = true)
     CachingPolicyEntity(@NotNull Class<?> relatingClass) {
         this.relatingClass = relatingClass;
     }
@@ -39,10 +41,12 @@ public enum CachingPolicyEntity {
     /**
      * @return the Entity's {@link java.lang.Class} instance
      */
+    @Contract(pure = true)
     public @NotNull Class<?> getRelatingClass() {
         return relatingClass;
     }
 
+    @Contract(pure = true)
     @SuppressWarnings("MagicCharacter")
     @NotNull
     @Override

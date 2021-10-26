@@ -8,6 +8,7 @@ import nl.tijsbeek.api.requests.Request;
 import nl.tijsbeek.api.requests.UserRequest;
 import nl.tijsbeek.internal.cache.cachers.IdNameCacheImpl;
 import nl.tijsbeek.internal.cache.handler.CacheHandlerImpl;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -49,6 +50,7 @@ public final class OAWv1Impl implements OAWv1 {
         logger.info("OAW instance has been created with token {}", token);
     }
 
+    @Contract(pure = true)
     @NotNull
     @Override
     public CacheHandlerImpl getCacheHandler() {
@@ -81,6 +83,7 @@ public final class OAWv1Impl implements OAWv1 {
     }
 
 
+    @Contract(pure = true)
     @NotNull
     @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override

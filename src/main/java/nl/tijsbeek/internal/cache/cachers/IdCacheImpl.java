@@ -6,12 +6,16 @@ import nl.tijsbeek.api.cache.cachers.AbstractCache;
 import nl.tijsbeek.api.cache.cachers.IdCache;
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.IdHolder;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.Objects;
+
+import static nl.tijsbeek.internal.Constants.NULL_FALSE;
 
 public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> implements IdCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(IdCacheImpl.class);
@@ -54,7 +58,22 @@ public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T
         logger.debug("Removed id-holder:{} from cache", id);
     }
 
+    @Contract(value = NULL_FALSE, pure = true)
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (this == obj) return true;
+        if (null == obj || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
+        IdCacheImpl<?> idCache = (IdCacheImpl<?>) obj;
+        return cache.equals(idCache.cache);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), cache);
+    }
+
+    @Contract(pure = true)
     @NotNull
     @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override

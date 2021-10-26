@@ -2,6 +2,7 @@ package nl.tijsbeek.api.osu;
 
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.cache.policy.CachingPolicyEntity;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,23 +23,27 @@ public final class OAWv1Builder {
         this.token = token;
     }
 
+    @Contract("_ -> new")
     @NotNull
     public static OAWv1Builder createOsuBuilder(String token) {
         return new OAWv1Builder(token);
     }
 
 
+    @Contract(value = "_ -> this", mutates = "this")
     public @NotNull OAWv1Builder setToken(String token) {
         this.token = token;
         return this;
     }
 
+    @Contract(value = "_ -> this", mutates = "this")
     @NotNull
     public OAWv1Builder setDefaultCachingPolicy(CachingPolicy cachingPolicy) {
         defaultCachingPolicy = cachingPolicy;
         return this;
     }
 
+    @Contract("_ -> this")
     @NotNull
     public OAWv1Builder addCachingPolicy(CachingPolicy cachingPolicy) {
         cachingPolicies.add(cachingPolicy);
@@ -62,6 +67,7 @@ public final class OAWv1Builder {
         return new OAWv1Impl(token, defaultCachingPolicy, cachingPolicyMap);
     }
 
+    @Contract(pure = true)
     @NotNull
     @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override

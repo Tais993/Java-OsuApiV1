@@ -1,6 +1,7 @@
 package nl.tijsbeek.api.cache.cachers;
 
 import com.github.benmanes.caffeine.cache.Cache;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
+
+import static nl.tijsbeek.internal.Constants.NULL_FALSE;
 
 public class AbstractCache<K, T> implements CustomCacheStream<T> {
     private static final Logger logger = LoggerFactory.getLogger(AbstractCache.class);
@@ -40,6 +43,7 @@ public class AbstractCache<K, T> implements CustomCacheStream<T> {
     }
 
 
+    @Contract(pure = true)
     @Override
     public final boolean contains(@Nullable Object object) {
         return map.containsValue(object);
@@ -64,6 +68,7 @@ public class AbstractCache<K, T> implements CustomCacheStream<T> {
     }
 
 
+    @Contract(value = NULL_FALSE, pure = true)
     @Override
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;

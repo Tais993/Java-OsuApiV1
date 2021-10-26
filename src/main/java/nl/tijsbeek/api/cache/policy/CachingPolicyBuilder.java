@@ -1,6 +1,7 @@
 package nl.tijsbeek.api.cache.policy;
 
 import nl.tijsbeek.internal.cache.policy.CachingPolicyImpl;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,10 +21,12 @@ public final class CachingPolicyBuilder {
     private long duration = 0;
     private @NotNull TimeUnit timeUnit = TimeUnit.DAYS;
 
+    @Contract(pure = true)
     private CachingPolicyBuilder(@NotNull CachingPolicyEntity entity) {
         this.entity = entity;
     }
 
+    @Contract(pure = true)
     private CachingPolicyBuilder() {
         entity = null;
     }
@@ -34,11 +37,13 @@ public final class CachingPolicyBuilder {
      * @param entity the {@link CachingPolicyEntity} to create a CachingPolicyBuilder for
      * @return the CachingPolicyBuilder
      */
+    @Contract(value = "_ -> new", pure = true)
     @NotNull
     public static CachingPolicyBuilder fromEntity(@NotNull CachingPolicyEntity entity) {
         return new CachingPolicyBuilder(entity);
     }
 
+    @Contract(value = " -> new", pure = true)
     @NotNull
     public static CachingPolicyBuilder forAll() {
         return new CachingPolicyBuilder();
@@ -50,6 +55,7 @@ public final class CachingPolicyBuilder {
      * @param size the size
      * @return The CachingPolicyBuilder instance
      */
+    @Contract(value = "_ -> this", mutates = "this")
     @NotNull
     public CachingPolicyBuilder setSize(long size) {
         this.size = size;
@@ -63,6 +69,7 @@ public final class CachingPolicyBuilder {
      * @param timeUnit the {@link TimeUnit} of the duration
      * @return The CachingPolicyBuilder instance
      */
+    @Contract(value = "_, _ -> this", mutates = "this")
     @NotNull
     public CachingPolicyBuilder setDuration(long duration, @NotNull TimeUnit timeUnit) {
         this.duration = duration;
@@ -75,11 +82,13 @@ public final class CachingPolicyBuilder {
      *
      * @return a newly created {@link CachingPolicy} based off the settings on the set on the Builder
      */
+    @Contract(" -> new")
     @NotNull
     public CachingPolicy createCachingPolicy() {
         return new CachingPolicyImpl(entity, size, duration, timeUnit);
     }
 
+    @Contract(pure = true)
     @NonNls
     @NotNull
     @Override

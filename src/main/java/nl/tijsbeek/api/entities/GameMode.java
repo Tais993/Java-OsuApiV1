@@ -1,5 +1,6 @@
 package nl.tijsbeek.api.entities;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -37,6 +38,7 @@ public enum GameMode {
 
     private final int mode;
 
+    @Contract(pure = true)
     GameMode(int mode) {
         this.mode = mode;
     }
@@ -45,10 +47,12 @@ public enum GameMode {
      * Get the mode as an int
      * @return the mode
      */
+    @Contract(pure = true)
     public int getMode() {
         return mode;
     }
 
+    @Contract(pure = true)
     @SuppressWarnings("MagicCharacter")
     @NotNull
     @Override
