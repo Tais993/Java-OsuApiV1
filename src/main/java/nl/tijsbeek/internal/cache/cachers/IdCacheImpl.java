@@ -6,6 +6,8 @@ import nl.tijsbeek.api.cache.cachers.AbstractCache;
 import nl.tijsbeek.api.cache.cachers.IdCache;
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.IdHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,9 +16,10 @@ import java.util.Collection;
 public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> implements IdCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(IdCacheImpl.class);
 
+    @NotNull
     private final Cache<Long, T> cache;
 
-    public IdCacheImpl(CachingPolicy cachingPolicy) {
+    public IdCacheImpl(@NotNull CachingPolicy cachingPolicy) {
         super(Caffeine.newBuilder()
                 .maximumSize(cachingPolicy.size())
                 .expireAfterAccess(cachingPolicy.duration(), cachingPolicy.timeUnit())
@@ -24,23 +27,25 @@ public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T
         cache = getCache();
     }
 
+    @Nullable
     @Override
     public T getItemById(long id) {
         return cache.getIfPresent(id);
     }
 
+    @NotNull
     @Override
-    public Collection<T> getItemsById(Iterable<Long> ids) {
+    public Collection<T> getItemsById(@NotNull Iterable<Long> ids) {
         return cache.getAllPresent(ids).values();
     }
 
 
-    public void addItem(T idHolder) {
+    public void addItem(@NotNull T idHolder) {
         cache.put(idHolder.id(), idHolder);
         logger.debug("Added id-holder:{} to cache", idHolder.id());
     }
 
-    public void removeItem(T idHolder) {
+    public void removeItem(@NotNull T idHolder) {
         removeItemById(idHolder.id());
     }
 
@@ -50,7 +55,8 @@ public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T
     }
 
 
-    @SuppressWarnings("DuplicateStringLiteralInspection")
+    @NotNull
+    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override
     public String toString() {
         return "IdCacheImpl{" +

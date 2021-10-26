@@ -1,6 +1,8 @@
 package nl.tijsbeek.api.cache.cachers;
 
 import nl.tijsbeek.api.entities.NameHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,11 +14,11 @@ import java.util.Collection;
 public interface NameCache<T extends NameHolder> extends CustomCacheStream<T> {
 
     /**
-     * Get's the {@link nl.tijsbeek.api.entities.NameHolder} by their name
+     * Gets the {@link nl.tijsbeek.api.entities.NameHolder} by their name
      * @param name the {@link nl.tijsbeek.api.entities.NameHolder NameHolder's} name
      * @return the {@link nl.tijsbeek.api.entities.NameHolder}
      */
-    T getItemByName(String name);
+    @Nullable T getItemByName(String name);
 
     /**
      * Get the {@link nl.tijsbeek.api.entities.NameHolder NameHolder's} by their names
@@ -25,17 +27,17 @@ public interface NameCache<T extends NameHolder> extends CustomCacheStream<T> {
      *
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List< nl.tijsbeek.api.entities.IdHolder >}
      */
-    Collection<T> getItemsByName(Iterable<String> names);
+    @NotNull Collection<T> getItemsByName(@NotNull Iterable<String> names);
 
 
     /**
-     * Get's the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their ID
+     * Gets the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their ID
      *
      * @param names the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their ID
      *
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List< nl.tijsbeek.api.entities.IdHolder >}
      */
-    default Collection<T> getItemsByName(String... names) {
+    default @NotNull Collection<T> getItemsByName(String @NotNull ... names) {
         return getItemsByName(
                 Arrays.stream(names)
                         .toList()

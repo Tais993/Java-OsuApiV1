@@ -5,6 +5,7 @@ import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.IdHolder;
 import nl.tijsbeek.api.entities.NameHolder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,62 +13,72 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class IdNameCacheImpl<T extends IdHolder & NameHolder>
-        implements IdNameCache<T> {
+public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(IdNameCacheImpl.class);
 
+    @NotNull
     private final IdCacheImpl<T> idEntityCache;
+    @NotNull
     private final NameCacheImpl<T> nameEntityCache;
 
-    public IdNameCacheImpl(CachingPolicy cachingPolicy) {
+
+    public IdNameCacheImpl(@NotNull CachingPolicy cachingPolicy) {
         idEntityCache = new IdCacheImpl<>(cachingPolicy);
         nameEntityCache = new NameCacheImpl<>(cachingPolicy);
     }
 
 
 
+    @Nullable
     @Override
     public final T getItemById(long id) {
         return idEntityCache.getItemById(id);
     }
 
+    @NotNull
     @Override
-    public Collection<T> getItemsById(Iterable<Long> ids) {
+    public Collection<T> getItemsById(@NotNull Iterable<Long> ids) {
         return idEntityCache.getItemsById(ids);
     }
 
 
+    @Nullable
     @Override
     public final T getItemByName(String name) {
         return nameEntityCache.getItemByName(name);
     }
 
+    @NotNull
     @Override
-    public Collection<T> getItemsByName(Iterable<String> names) {
+    public Collection<T> getItemsByName(@NotNull Iterable<String> names) {
         return nameEntityCache.getItemsByName(names);
     }
 
 
 
-    public final void addItem(T idHolder) {
+    public final void addItem(@NotNull T idHolder) {
         idEntityCache.addItem(idHolder);
         nameEntityCache.addItem(idHolder);
     }
 
 
-    public final void removeItem(T idHolder) {
+    public final void removeItem(@NotNull T idHolder) {
         idEntityCache.removeItem(idHolder);
         nameEntityCache.removeItem(idHolder);
     }
 
     public final void removeItemById(long id) {
         T holder = idEntityCache.getItemById(id);
-        removeItem(holder);
+        if (null != holder) {
+            removeItem(holder);
+        }
     }
 
     public final void removeItemByName(String name) {
         T holder = nameEntityCache.getItemByName(name);
-        removeItem(holder);
+        if (null != holder) {
+            removeItem(holder);
+        }
     }
 
 
@@ -88,10 +99,15 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder>
     }
 
     @Override
-    public boolean containsAll(Collection<?> objects) {
+    public boolean containsAll(@NotNull Collection<?> objects) {
         return idEntityCache.containsAll(objects);
     }
 
+    @Override
+    public void cleanUp() {
+        idEntityCache.cleanUp();
+        nameEntityCache.cleanUp();
+    }
 
 
     @NotNull
@@ -102,7 +118,7 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder>
 
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;
 
@@ -119,6 +135,8 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder>
         return result;
     }
 
+    @SuppressWarnings("MagicCharacter")
+    @NotNull
     @Override
     public final String toString() {
         return "IdNameCacheImpl{" +

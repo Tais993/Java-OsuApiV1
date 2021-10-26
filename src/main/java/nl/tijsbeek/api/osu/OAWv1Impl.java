@@ -1,6 +1,7 @@
 package nl.tijsbeek.api.osu;
 
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
+import nl.tijsbeek.api.cache.policy.CachingPolicyBuilder;
 import nl.tijsbeek.api.entities.User;
 import nl.tijsbeek.api.entities.UserImpl;
 import nl.tijsbeek.api.requests.Request;
@@ -8,6 +9,7 @@ import nl.tijsbeek.api.requests.UserRequest;
 import nl.tijsbeek.internal.cache.cachers.IdNameCacheImpl;
 import nl.tijsbeek.internal.cache.handler.CacheHandlerImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -21,13 +23,25 @@ public final class OAWv1Impl implements OAWv1 {
     private static final Logger logger = LoggerFactory.getLogger(OAWv1Impl.class);
 
     private final String token;
+    @NotNull
     private final CacheHandlerImpl cacheHandlerImpl;
 
+    @NotNull
     private final WebClient webClient;
 
 
-    public OAWv1Impl(String token, CachingPolicy defaultCachingPolicy, Map<Class<?>, CachingPolicy> cachingPolicyMap) {
+    public OAWv1Impl(String token, @Nullable CachingPolicy argumentCachingPolicy,
+                     @NotNull Map<Class<?>, @NotNull CachingPolicy> cachingPolicyMap) {
+
         this.token = token;
+
+
+        CachingPolicy defaultCachingPolicy = argumentCachingPolicy;
+
+        if (null == argumentCachingPolicy) {
+            defaultCachingPolicy = CachingPolicyBuilder.forAll().createCachingPolicy();
+        }
+
         cacheHandlerImpl = new CacheHandlerImpl(defaultCachingPolicy, cachingPolicyMap);
 
         webClient = WebClient.builder().baseUrl("https://osu.ppy.sh/api/").build();
@@ -35,6 +49,7 @@ public final class OAWv1Impl implements OAWv1 {
         logger.info("OAW instance has been created with token {}", token);
     }
 
+    @NotNull
     @Override
     public CacheHandlerImpl getCacheHandler() {
         return cacheHandlerImpl;
@@ -51,7 +66,10 @@ public final class OAWv1Impl implements OAWv1 {
                 });
     }
 
-    private <T> Mono<T> createMono(Request request, String path, ParameterizedTypeReference<T> type) {
+    @NotNull
+    private <T> Mono<T> createMono(@NotNull Request request, @NotNull String path,
+                                   @NotNull ParameterizedTypeReference<T> type) {
+
         logger.info("Retrieving path {} with request {}", path, request);
 
         return webClient.get().uri(uriBuilder -> request.setUriParams(uriBuilder
@@ -63,7 +81,8 @@ public final class OAWv1Impl implements OAWv1 {
     }
 
 
-    @SuppressWarnings("DuplicateStringLiteralInspection")
+    @NotNull
+    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override
     public String toString() {
         return "OAWv1Impl{" +

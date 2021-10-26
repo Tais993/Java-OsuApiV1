@@ -18,8 +18,9 @@ public record UserRequest(String user, UserType userType, GameMode gameMode,
         this.eventDays = eventDays;
     }
 
+    @NotNull
     @Override
-    public UriBuilder setUriParams(UriBuilder uriBuilder) {
+    public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
         uriBuilder.queryParam("u", user);
 
         if (null != gameMode) {
@@ -33,6 +34,7 @@ public record UserRequest(String user, UserType userType, GameMode gameMode,
         return uriBuilder;
     }
 
+    @NotNull
     @SuppressWarnings("DuplicateStringLiteralInspection")
     @Override
     public String toString() {

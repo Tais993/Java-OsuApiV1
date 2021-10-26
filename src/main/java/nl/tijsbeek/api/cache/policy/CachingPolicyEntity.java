@@ -1,6 +1,7 @@
 package nl.tijsbeek.api.cache.policy;
 
 import nl.tijsbeek.api.entities.UserImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents an osu entity
@@ -28,19 +29,22 @@ public enum CachingPolicyEntity {
     // TODO
     REPLAY(CachingPolicyEntity.class);
 
+    @NotNull
     private final Class<?> relatingClass;
 
-    CachingPolicyEntity(Class<?> relatingClass) {
+    CachingPolicyEntity(@NotNull Class<?> relatingClass) {
         this.relatingClass = relatingClass;
     }
 
     /**
      * @return the Entity's {@link java.lang.Class} instance
      */
-    public Class<?> getRelatingClass() {
+    public @NotNull Class<?> getRelatingClass() {
         return relatingClass;
     }
 
+    @SuppressWarnings("MagicCharacter")
+    @NotNull
     @Override
     public String toString() {
         return "CachingPolicyEntity{" +

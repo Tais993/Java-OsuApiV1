@@ -1,5 +1,8 @@
 package nl.tijsbeek.api.cache.policy;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,7 +15,7 @@ public interface CachingPolicy {
      *
      * @return {@link CachingPolicyEntity}
      */
-    CachingPolicyEntity entity();
+    @Nullable CachingPolicyEntity entity();
 
     /**
      * The cache's max-size as a {@code long}
@@ -22,7 +25,7 @@ public interface CachingPolicy {
     long size();
 
     /**
-     * How many .. of the specified {@link TimeUnit}
+     * How many of the specified {@link TimeUnit}
      *
      * @return the duration
      *
@@ -37,5 +40,5 @@ public interface CachingPolicy {
      *
      * @see #duration()
      */
-    TimeUnit timeUnit();
+    @NotNull TimeUnit timeUnit();
 }

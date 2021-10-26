@@ -30,5 +30,5 @@ public sealed interface OAWv1 permits OAWv1Impl {
      * The {@link nl.tijsbeek.api.cache.handler.CacheHandler} to be used for getting cached items
      * @return the {@link nl.tijsbeek.api.cache.handler.CacheHandler}
      */
-    CacheHandler getCacheHandler();
+    @NotNull CacheHandler getCacheHandler();
 }
