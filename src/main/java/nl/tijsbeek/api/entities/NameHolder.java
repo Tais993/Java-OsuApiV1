@@ -10,6 +10,7 @@ public interface NameHolder {
 
     /**
      * Returns the name as a {@link java.lang.String}
+     *
      * @return name
      */
     @NotNull String name();

@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Builder for a {@link UserRequest}
+ */
 public class UserRequestBuilder {
     private static final Logger logger = LoggerFactory.getLogger(UserRequestBuilder.class);
 
@@ -128,6 +131,7 @@ public class UserRequestBuilder {
 
     /**
      * Builds the {@link UserRequest} so all the variables are final
+     *
      * @return {@link UserRequest} based of the builders variables
      */
     @NotNull

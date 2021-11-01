@@ -7,6 +7,11 @@ import java.util.Collection;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+/**
+ * Wraps around the {@link com.github.benmanes.caffeine.cache.Cache} of Caffeine
+ *
+ * @param <T> what will be cached
+ */
 public interface CustomCache<T> extends Iterable<T> {
 
     /**
@@ -17,7 +22,7 @@ public interface CustomCache<T> extends Iterable<T> {
      * <p> <b>
      * This method's result may differ if there are any concurrent insertions, removals, or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
-     * </p> </b>
+     * </b> </p>
      *
      * @return approximate number of entries in this cache
      * @see #isEmpty()
@@ -32,7 +37,7 @@ public interface CustomCache<T> extends Iterable<T> {
      * <p> <b>
      * This method's result may differ if there are any concurrent insertions, removals, or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
-     * </p> </b>
+     * </b> </p>
      *
      * @return approximation whenever the cache is empty
      * @see #estimatedSize()
@@ -48,7 +53,7 @@ public interface CustomCache<T> extends Iterable<T> {
      * <p> <b>
      * This method's result may differ if there are any concurrent insertions, removals, or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
-     * </p> </b>
+     * </b> </p>
      *
      * @param object the element whose presence in this cache is to be tested
      * @return true if this cache contains the specified element
@@ -64,7 +69,7 @@ public interface CustomCache<T> extends Iterable<T> {
      * <p> <b>
      * This method's result may differ if there are any concurrent insertions, removals, or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
-     * </p> </b>
+     * </b> </p>
      *
      * @param objects collection to be checked for containment in this collection
      * @return true if this cache contains the specified elements

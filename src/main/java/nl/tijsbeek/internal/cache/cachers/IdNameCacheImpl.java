@@ -31,7 +31,6 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     }
 
 
-
     @Nullable
     @Override
     public final T getItemById(long id) {
@@ -58,7 +57,6 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     }
 
 
-
     public final void addItem(@NotNull T idHolder) {
         idEntityCache.addItem(idHolder);
         nameEntityCache.addItem(idHolder);
@@ -83,7 +81,6 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
             removeItem(holder);
         }
     }
-
 
 
     @Override

@@ -1,8 +1,10 @@
 package nl.tijsbeek.internal;
 
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 
+/**
+ * Contains some of the constants
+ */
 public enum Constants {
     ;
 

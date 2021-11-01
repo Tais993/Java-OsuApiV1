@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * The builder to create {@link CachingPolicy CachingPolicies} with. <br />
- *
+ * The builder to create {@link CachingPolicy CachingPolicies} with.
+ * <p>
  * Use {@link #fromEntity(CachingPolicyEntity)} and {@link #defaultPolicy()} for getting a builder instance
  */
 public final class CachingPolicyBuilder {
@@ -47,6 +47,7 @@ public final class CachingPolicyBuilder {
 
     /**
      * Creates a CachingPolicyBuilder to be used as default policy.
+     *
      * @return the CachingPolicyBuilder
      */
     @Contract(value = " -> new", pure = true)

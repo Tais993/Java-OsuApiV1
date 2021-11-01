@@ -12,6 +12,11 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Adds shortcut for {@link Stream}
+ *
+ * @param <T> what will be cached
+ */
 public interface CustomCacheStream<T> extends CustomCache<T> {
 
     /**
@@ -25,7 +30,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * This method's result may differ if there are any concurrent insertions, removals,
      * or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
-     * </p> </b>
+     * </b> </p>
      *
      * @param predicate a predicate to apply to each element to determine if it
      *                  should be included
@@ -48,7 +53,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * This method's result may differ if there are any concurrent insertions, removals,
      * or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
-     * </p> </b>
+     * </b> </p>
      *
      * @param collector The collector used to collect the elements
      * @param <R>       The output type
@@ -68,7 +73,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * This method's result may differ if there are any concurrent insertions,
      * removals, or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
-     * </p> </b>
+     * </b> </p>
      *
      * @param generator a function which produces a new array of the desired
      *                  type and the provided length
@@ -87,7 +92,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * This method's result may differ if there are any concurrent insertions, removals,
      * or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
-     * </p> </b>
+     * </b> </p>
      *
      * @return a modifiable {@link List}
      */
@@ -104,7 +109,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * This method's result may differ if there are any concurrent insertions, removals,
      * or if entries are pending for removal. <br />
      * To clear pending entries, run {@link #cleanUp()} first
-     * </p> </b>
+     * </b> </p>
      *
      * @return a modifiable {@link Set}
      */

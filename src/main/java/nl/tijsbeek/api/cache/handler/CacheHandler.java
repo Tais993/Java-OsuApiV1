@@ -11,8 +11,8 @@ public interface CacheHandler {
 
     /**
      * The cacher for Users
-     * @return
-     *  {@link nl.tijsbeek.api.cache.cachers.IdNameCache <UserImpl>} instance for the user cache
+     *
+     * @return {@link nl.tijsbeek.api.cache.cachers.IdNameCache} instance for the user cache
      */
     @NotNull IdNameCache<User> getUserCache();
 }

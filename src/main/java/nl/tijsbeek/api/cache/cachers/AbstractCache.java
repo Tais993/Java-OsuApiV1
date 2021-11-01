@@ -15,13 +15,24 @@ import java.util.concurrent.ConcurrentMap;
 
 import static nl.tijsbeek.internal.Constants.NULL_FALSE;
 
-public class AbstractCache<K, T> implements CustomCacheStream<T> {
+/**
+ * Handles a lot of the methods required for the {@link CustomCache}
+ *
+ * @param <K> the key
+ * @param <T> the value
+ */
+public class AbstractCache<K, T> implements CustomCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(AbstractCache.class);
 
     @NotNull
     private final Cache<K, T> cache;
     private final ConcurrentMap<K, T> map;
 
+    /**
+     * Constructs an instance to wrap around
+     *
+     * @param cache the cache to wrap around
+     */
     protected AbstractCache(@NotNull Cache<K, T> cache) {
         this.cache = cache;
         map = cache.asMap();

@@ -45,7 +45,6 @@ public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<Str
     }
 
 
-
     public void addItem(@NotNull T nameHolder) {
         cache.put(nameHolder.name(), nameHolder);
         logger.debug("Added name-holder:{} to cache", nameHolder.name());
@@ -59,6 +58,7 @@ public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<Str
         cache.invalidate(name);
         logger.debug("Removed name-holder:{} from cache", name);
     }
+
     @Contract(value = NULL_FALSE, pure = true)
     @Override
     public boolean equals(@Nullable Object obj) {

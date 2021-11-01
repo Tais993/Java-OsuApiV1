@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
- *
  * See <a href="https://osu.ppy.sh/wiki/en/Game_mode">osu-wiki, game modes</a>
  */
 public enum GameMode {
@@ -46,6 +45,7 @@ public enum GameMode {
 
     /**
      * Get the mode as an int
+     *
      * @return the mode
      */
     @Contract(pure = true)

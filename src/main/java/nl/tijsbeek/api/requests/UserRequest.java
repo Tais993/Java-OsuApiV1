@@ -9,13 +9,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriBuilder;
 
+/**
+ * A request for {@link nl.tijsbeek.api.entities.User User's}
+ * <p>
+ * Creation of a request can be done using {@link UserRequestBuilder}
+ */
 public record UserRequest(String user, UserType userType, GameMode gameMode,
                           int eventDays) implements Request {
     private static final Logger logger = LoggerFactory.getLogger(UserRequest.class);
 
     @NotNull
     @Override
-    @Contract("_ -> param1")
+    @Contract(value = "_ -> param1", mutates = "param1")
     public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
         uriBuilder.queryParam("u", user);
 
@@ -23,7 +28,7 @@ public record UserRequest(String user, UserType userType, GameMode gameMode,
             uriBuilder.queryParam("m", gameMode.getMode());
         }
 
-        if (userType != null) {
+        if (null != userType) {
             uriBuilder.queryParam("type", userType.getType());
         }
 

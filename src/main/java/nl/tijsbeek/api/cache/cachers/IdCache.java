@@ -18,7 +18,6 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * Gets the {@link nl.tijsbeek.api.entities.IdHolder} by their ID
      *
      * @param id the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} ID
-     *
      * @return the {@link nl.tijsbeek.api.entities.IdHolder}
      */
     @Nullable T getItemById(long id);
@@ -28,7 +27,6 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * Get the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their IDs
      *
      * @param ids the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their ID
-     *
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
     @NotNull Collection<T> getItemsById(@NotNull Iterable<Long> ids);
@@ -38,7 +36,6 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * Get the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their IDs
      *
      * @param ids the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their ID
-     *
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
     default @NotNull Collection<T> getItemsById(long @NotNull ... ids) {
@@ -53,7 +50,6 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * Get the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their IDs
      *
      * @param ids the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their ID
-     *
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
     default @NotNull Collection<T> getItemsById(String @NotNull ... ids) {
@@ -68,7 +64,6 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * Gets the {@link nl.tijsbeek.api.entities.IdHolder} by their ID
      *
      * @param id the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} ID
-     *
      * @return the {@link nl.tijsbeek.api.entities.IdHolder}
      */
     default @Nullable T getItemById(@NotNull String id) {

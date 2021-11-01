@@ -90,6 +90,7 @@ public final class OAWv1Builder {
 
     /**
      * Builds the {@link OAWv1} instance
+     *
      * @return the {@link OAWv1}
      */
     @NotNull
