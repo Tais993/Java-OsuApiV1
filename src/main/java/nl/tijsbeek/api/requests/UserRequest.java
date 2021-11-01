@@ -2,6 +2,8 @@ package nl.tijsbeek.api.requests;
 
 import nl.tijsbeek.api.entities.GameMode;
 import nl.tijsbeek.api.entities.UserType;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ public record UserRequest(String user, UserType userType, GameMode gameMode,
 
     @NotNull
     @Override
+    @Contract("_ -> param1")
     public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
         uriBuilder.queryParam("u", user);
 
@@ -20,16 +23,20 @@ public record UserRequest(String user, UserType userType, GameMode gameMode,
             uriBuilder.queryParam("m", gameMode.getMode());
         }
 
-        uriBuilder.queryParam("type", userType.getType());
+        if (userType != null) {
+            uriBuilder.queryParam("type", userType.getType());
+        }
 
         uriBuilder.queryParam("event_days", eventDays);
 
         return uriBuilder;
     }
 
+    @NonNls
     @NotNull
-    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override
+    @Contract(pure = true)
+    @SuppressWarnings("DuplicateStringLiteralInspection")
     public String toString() {
         return "UserRequest{" +
                 "user='" + user + '\'' +

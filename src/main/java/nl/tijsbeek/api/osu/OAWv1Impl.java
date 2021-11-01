@@ -40,7 +40,7 @@ public final class OAWv1Impl implements OAWv1 {
         CachingPolicy defaultCachingPolicy = argumentCachingPolicy;
 
         if (null == argumentCachingPolicy) {
-            defaultCachingPolicy = CachingPolicyBuilder.forAll().createCachingPolicy();
+            defaultCachingPolicy = CachingPolicyBuilder.defaultPolicy().createCachingPolicy();
         }
 
         cacheHandlerImpl = new CacheHandlerImpl(defaultCachingPolicy, cachingPolicyMap);

@@ -2,6 +2,7 @@ package nl.tijsbeek.api.cache.cachers;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -39,18 +40,18 @@ public class AbstractCache<K, T> implements CustomCacheStream<T> {
 
     @Override
     public boolean isEmpty() {
-        return 0 == estimatedSize();
+        return 0L == estimatedSize();
     }
 
 
     @Contract(pure = true)
     @Override
-    public final boolean contains(@Nullable Object object) {
+    public boolean contains(@Nullable Object object) {
         return map.containsValue(object);
     }
 
     @Override
-    public final boolean containsAll(@NotNull Collection<?> objects) {
+    public boolean containsAll(@NotNull Collection<?> objects) {
         return objects.stream().anyMatch(o -> !map.containsValue(o));
     }
 
@@ -68,8 +69,8 @@ public class AbstractCache<K, T> implements CustomCacheStream<T> {
     }
 
 
-    @Contract(value = NULL_FALSE, pure = true)
     @Override
+    @Contract(value = NULL_FALSE, pure = true)
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;
@@ -84,9 +85,10 @@ public class AbstractCache<K, T> implements CustomCacheStream<T> {
         return cache.hashCode();
     }
 
+    @NonNls
     @NotNull
-    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override
+    @SuppressWarnings("DuplicateStringLiteralInspection")
     public String toString() {
         return "AbstractCache{" +
                 "cache=" + cache +

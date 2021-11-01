@@ -1,13 +1,32 @@
 package nl.tijsbeek.api.entities;
 
+import nl.tijsbeek.api.requests.UserRequestBuilder;
+
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Used with the {@link UserRequestBuilder}
+ *
+ * If no user-type is given, a username might be interpreted as an ID
+ * To fix this, the user can manually define what type the given user is.
+ *
+ * The user may also use the {@link UserRequestBuilder#setUserName(String)} or {@link UserRequestBuilder#setUserId(String)} method instead
+ *
+ * @see UserRequestBuilder
+ */
 public enum UserType {
+    /**
+     * Sets the given user to be handled as an username
+     */
     USERNAME("string"),
+    /**
+     * Sets the given user to be handled as an user-id
+     */
     USER_ID("id");
 
-    @NotNull
+        @NotNull
     private final String type;
 
     @Contract(pure = true)
@@ -15,15 +34,19 @@ public enum UserType {
         this.type = type;
     }
 
+    /**
+     * The API's expected value for the used type
+     * @return
+     */
     @Contract(pure = true)
     public @NotNull String getType() {
         return type;
     }
 
-    @Contract(pure = true)
-    @SuppressWarnings("MagicCharacter")
+    @NonNls
     @NotNull
     @Override
+    @Contract(pure = true)
     public String toString() {
         return "UserType{" +
                 "type='" + type + '\'' +

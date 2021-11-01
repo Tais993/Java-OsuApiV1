@@ -1,6 +1,7 @@
 package nl.tijsbeek.api.entities;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -52,10 +53,10 @@ public enum GameMode {
         return mode;
     }
 
-    @Contract(pure = true)
-    @SuppressWarnings("MagicCharacter")
+    @NonNls
     @NotNull
     @Override
+    @Contract(pure = true)
     public String toString() {
         return "GameMode{" +
                 "mode=" + mode +
