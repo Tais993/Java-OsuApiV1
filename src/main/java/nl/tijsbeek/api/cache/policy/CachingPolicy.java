@@ -6,7 +6,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Contains a created CachingPolicy The values can't be changed after creation.
+ * Contains a created CachingPolicy. <br />
+ * The values can't be changed after creation.
+ * <p>
+ * For caching policies, use the {@link CachingPolicyBuilder}
+ *
+ * @see CachingPolicyBuilder
  */
 public interface CachingPolicy {
 
@@ -28,7 +33,6 @@ public interface CachingPolicy {
      * How many of the specified {@link TimeUnit}
      *
      * @return the duration
-     *
      * @see #timeUnit()
      */
     long duration();
@@ -37,7 +41,6 @@ public interface CachingPolicy {
      * What TimeUnit the given size is.
      *
      * @return the {@link TimeUnit timeUnit}
-     *
      * @see #duration()
      */
     @NotNull TimeUnit timeUnit();

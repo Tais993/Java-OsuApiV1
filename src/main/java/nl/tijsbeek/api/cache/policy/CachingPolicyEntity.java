@@ -11,23 +11,46 @@ import org.jetbrains.annotations.NotNull;
  * @see CachingPolicy
  */
 public enum CachingPolicyEntity {
-    // TODO
+    /**
+     * beatmaps
+     */
     BEATMAPS(CachingPolicyEntity.class),
+
     /**
      * The entity for {@link nl.tijsbeek.api.entities.UserImpl}
      *
      * @see <a href="https://github.com/ppy/osu-api/wiki#response-1">osu-api wiki</a>
      */
     USER(UserImpl.class),
+
     // TODO
+    /**
+     * user recent score
+     */
     USER_RECENT_SCORES(CachingPolicyEntity.class),
+
     // TODO
+    /**
+     * user best score
+     */
     USER_BEST_SCORE(CachingPolicyEntity.class),
+
     // TODO
+    /**
+     * user scores
+     */
     USER_SCORES(CachingPolicyEntity.class),
+
     // TODO
+    /**
+     * match
+     */
     MATCH(CachingPolicyEntity.class),
+
     // TODO
+    /**
+     * replay
+     */
     REPLAY(CachingPolicyEntity.class);
 
     @NotNull

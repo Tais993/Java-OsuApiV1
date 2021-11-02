@@ -20,7 +20,6 @@ public sealed interface OAWv1 permits OAWv1Impl {
      *
      * @param userRequest the request
      * @return A {@link reactor.core.publisher.Mono<User>} of {@link nl.tijsbeek.api.entities.User}
-     *
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_user">osu-wiki get_user</a>
      */
     @NotNull
@@ -28,6 +27,7 @@ public sealed interface OAWv1 permits OAWv1Impl {
 
     /**
      * The {@link nl.tijsbeek.api.cache.handler.CacheHandler} to be used for getting cached items
+     *
      * @return the {@link nl.tijsbeek.api.cache.handler.CacheHandler}
      */
     @NotNull CacheHandler getCacheHandler();

@@ -1,10 +1,10 @@
 package nl.tijsbeek.api.entities;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
- *
  * See <a href="https://osu.ppy.sh/wiki/en/Game_mode">osu-wiki, game modes</a>
  */
 public enum GameMode {
@@ -45,6 +45,7 @@ public enum GameMode {
 
     /**
      * Get the mode as an int
+     *
      * @return the mode
      */
     @Contract(pure = true)
@@ -52,10 +53,10 @@ public enum GameMode {
         return mode;
     }
 
-    @Contract(pure = true)
-    @SuppressWarnings("MagicCharacter")
+    @NonNls
     @NotNull
     @Override
+    @Contract(pure = true)
     public String toString() {
         return "GameMode{" +
                 "mode=" + mode +

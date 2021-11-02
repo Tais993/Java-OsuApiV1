@@ -40,7 +40,7 @@ public final class OAWv1Impl implements OAWv1 {
         CachingPolicy defaultCachingPolicy = argumentCachingPolicy;
 
         if (null == argumentCachingPolicy) {
-            defaultCachingPolicy = CachingPolicyBuilder.forAll().createCachingPolicy();
+            defaultCachingPolicy = CachingPolicyBuilder.defaultPolicy().createCachingPolicy();
         }
 
         cacheHandlerImpl = new CacheHandlerImpl(defaultCachingPolicy, cachingPolicyMap);
@@ -60,7 +60,8 @@ public final class OAWv1Impl implements OAWv1 {
     @Override
     @NotNull
     public Mono<? extends User> retrieveUser(@NotNull UserRequest userRequest) {
-    return createMono(userRequest, "get_user", new ParameterizedTypeReference<List<UserImpl>>() {})
+        return createMono(userRequest, "get_user", new ParameterizedTypeReference<List<UserImpl>>() {
+        })
                 .map(users -> users.get(0))
                 .doOnSuccess(user -> {
                     IdNameCacheImpl<User> userCache = (IdNameCacheImpl<User>) cacheHandlerImpl.getUserCache();

@@ -11,14 +11,16 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * The builder to create {@link CachingPolicy CachingPolicies} with
+ * The builder to create {@link CachingPolicy CachingPolicies} with.
+ * <p>
+ * Use {@link #fromEntity(CachingPolicyEntity)} and {@link #defaultPolicy()} for getting a builder instance
  */
 public final class CachingPolicyBuilder {
     private static final Logger logger = LoggerFactory.getLogger(CachingPolicyBuilder.class);
 
     private final @Nullable CachingPolicyEntity entity;
-    private long size = 0;
-    private long duration = 0;
+    private long size;
+    private long duration;
     private @NotNull TimeUnit timeUnit = TimeUnit.DAYS;
 
     @Contract(pure = true)
@@ -43,9 +45,14 @@ public final class CachingPolicyBuilder {
         return new CachingPolicyBuilder(entity);
     }
 
+    /**
+     * Creates a CachingPolicyBuilder to be used as default policy.
+     *
+     * @return the CachingPolicyBuilder
+     */
     @Contract(value = " -> new", pure = true)
     @NotNull
-    public static CachingPolicyBuilder forAll() {
+    public static CachingPolicyBuilder defaultPolicy() {
         return new CachingPolicyBuilder();
     }
 
