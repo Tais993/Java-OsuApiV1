@@ -38,6 +38,12 @@ public class AbstractCache<K, T> implements CustomCache<T> {
         map = cache.asMap();
     }
 
+    /**
+     * Returns the cache that was given in the constructor. <br />
+     * This is a view and modifications are reflected in the cache maintained by this class.
+     *
+     * @return the {@link Cache} given in the constructor
+     */
     @NotNull
     protected Cache<K, T> getCache() {
         return cache;
