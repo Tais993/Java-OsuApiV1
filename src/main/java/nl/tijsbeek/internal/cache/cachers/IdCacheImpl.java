@@ -2,7 +2,6 @@ package nl.tijsbeek.internal.cache.cachers;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import nl.tijsbeek.api.cache.cachers.AbstractCache;
 import nl.tijsbeek.api.cache.cachers.IdCache;
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.entities.IdHolder;

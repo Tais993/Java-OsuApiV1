@@ -1,2 +1,3 @@
-rootProject.name = 'Java-OsuApiWrapper-ApiV1'
+rootProject.name = 'Java-OsuApiV1'
+include 'test'
 

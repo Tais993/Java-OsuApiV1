@@ -1,13 +1,14 @@
-package nl.tijsbeek.api.osu;
+package nl.tijsbeek.internal.osu;
 
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.cache.policy.CachingPolicyBuilder;
 import nl.tijsbeek.api.entities.User;
-import nl.tijsbeek.api.entities.UserImpl;
+import nl.tijsbeek.api.osu.OAWv1;
 import nl.tijsbeek.api.requests.Request;
 import nl.tijsbeek.api.requests.UserRequest;
 import nl.tijsbeek.internal.cache.cachers.IdNameCacheImpl;
 import nl.tijsbeek.internal.cache.handler.CacheHandlerImpl;
+import nl.tijsbeek.internal.entities.UserImpl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,8 +59,7 @@ public final class OAWv1Impl implements OAWv1 {
     }
 
     @Override
-    @NotNull
-    public Mono<? extends User> retrieveUser(@NotNull UserRequest userRequest) {
+    public @NotNull Mono<? extends User> retrieveUser(@NotNull UserRequest userRequest) {
         return createMono(userRequest, "get_user", new ParameterizedTypeReference<List<UserImpl>>() {
         })
                 .map(users -> users.get(0))

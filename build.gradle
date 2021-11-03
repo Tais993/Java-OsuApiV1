@@ -7,6 +7,9 @@ plugins {
 group 'nl.tijsbeek'
 version '1.0-SNAPSHOT'
 
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
 repositories {
     mavenCentral()
 }
@@ -21,6 +24,10 @@ dependencies {
     implementation 'org.jetbrains:annotations:22.0.0'
     implementation 'com.github.ben-manes.caffeine:caffeine:3.0.4'
 
+
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
     testImplementation 'io.projectreactor:reactor-test:3.4.11'

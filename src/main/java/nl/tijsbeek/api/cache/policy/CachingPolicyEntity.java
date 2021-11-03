@@ -1,6 +1,6 @@
 package nl.tijsbeek.api.cache.policy;
 
-import nl.tijsbeek.api.entities.UserImpl;
+import nl.tijsbeek.internal.entities.UserImpl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +17,7 @@ public enum CachingPolicyEntity {
     BEATMAPS(CachingPolicyEntity.class),
 
     /**
-     * The entity for {@link nl.tijsbeek.api.entities.UserImpl}
+     * The entity for {@link UserImpl}
      *
      * @see <a href="https://github.com/ppy/osu-api/wiki#response-1">osu-api wiki</a>
      */

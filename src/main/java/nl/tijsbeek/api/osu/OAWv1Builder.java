@@ -3,6 +3,7 @@ package nl.tijsbeek.api.osu;
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.cache.policy.CachingPolicyBuilder;
 import nl.tijsbeek.api.cache.policy.CachingPolicyEntity;
+import nl.tijsbeek.internal.osu.OAWv1Impl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;

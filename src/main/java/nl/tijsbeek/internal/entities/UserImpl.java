@@ -1,6 +1,7 @@
-package nl.tijsbeek.api.entities;
+package nl.tijsbeek.internal.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import nl.tijsbeek.api.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

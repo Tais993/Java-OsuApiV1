@@ -13,13 +13,13 @@ import reactor.core.publisher.Mono;
  *
  * @see nl.tijsbeek.api.osu.OAWv1Builder
  */
-public sealed interface OAWv1 permits OAWv1Impl {
+public interface OAWv1 {
 
     /**
      * Retrieve a user based on the Request created
      *
      * @param userRequest the request
-     * @return A {@link reactor.core.publisher.Mono<User>} of {@link nl.tijsbeek.api.entities.User}
+     * @return A {@link Mono<User>} of {@link nl.tijsbeek.api.entities.User}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_user">osu-wiki get_user</a>
      */
     @NotNull

@@ -1,6 +1,7 @@
-package nl.tijsbeek.api.cache.cachers;
+package nl.tijsbeek.internal.cache.cachers;
 
 import com.github.benmanes.caffeine.cache.Cache;
+import nl.tijsbeek.api.cache.cachers.CustomCache;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
