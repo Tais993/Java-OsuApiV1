@@ -2,6 +2,8 @@ package nl.tijsbeek.api.entities;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 /**
@@ -16,11 +18,23 @@ public interface User extends IdHolder, NameHolder {
 
     /**
      * Time the player joined in UTC
+     * <p>
+     * Format is: yyyy-MM-dd HH:mm:ss
      *
      * @return UTC join time
      */
     @NotNull
-    String joinTime();
+    String joinTimeString();
+
+    /**
+     * The join time as a {@link LocalDateTime}
+     *
+     * @return {@link #joinTimeString()} as an {@link LocalDateTime}
+     */
+    @NotNull
+    default LocalDateTime joinTime() {
+        return LocalDateTime.parse(joinTimeString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 
 
     /**
@@ -174,4 +188,13 @@ public interface User extends IdHolder, NameHolder {
      */
     @NotNull
     Set<?> events();
+
+    /**
+     * URL for the player's profile picture
+     *
+     * @return the profile picture
+     */
+    default String profilePictureUrl() {
+        return "https://s.ppy.sh/a/" + idString();
+    }
 }
