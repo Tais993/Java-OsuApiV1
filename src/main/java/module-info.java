@@ -11,9 +11,7 @@ module Java.OsuApiV1.main {
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
-
-    opens nl.tijsbeek.internal.entities to com.fasterxml.jackson.databind;
-
+    requires org.reactivestreams;
 
     exports nl.tijsbeek.api.cache.cachers;
     exports nl.tijsbeek.api.cache.handler;
@@ -22,4 +20,9 @@ module Java.OsuApiV1.main {
     exports nl.tijsbeek.api.entities;
     exports nl.tijsbeek.api.osu;
     exports nl.tijsbeek.api.requests;
+    exports nl.tijsbeek.internal.entities;
+
+    opens nl.tijsbeek.api.entities to com.fasterxml.jackson.databind;
+    opens nl.tijsbeek.internal.entities to com.fasterxml.jackson.databind;
+    opens nl.tijsbeek.internal.jackson to com.fasterxml.jackson.databind;
 }

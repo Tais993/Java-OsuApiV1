@@ -1,0 +1,155 @@
+package nl.tijsbeek.internal.entities;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import nl.tijsbeek.api.entities.Beatmap;
+import nl.tijsbeek.api.entities.BeatmapApproved;
+import nl.tijsbeek.api.entities.GameMode;
+import nl.tijsbeek.internal.jackson.NumericBooleanDeserializer;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
+public record BeatmapImpl(
+        BeatmapApproved approved,
+
+        String submitDateString,
+        String approvedDateString,
+        String lastUpdateString,
+
+        String artist,
+
+        long beatmapId,
+        long beatmapSetId,
+        double bpm,
+
+        String creatorName,
+        String creatorId,
+
+        double difficultyRating,
+        double diffAim,
+        double diffSpeed,
+        double diffSize,
+        double diffOverall,
+        double diffApproach,
+        double diffDrain,
+
+        int hitLength,
+        String source,
+        int genreId,
+        int languageId,
+        String title,
+        int totalLength,
+        String version,
+        String fileMd5,
+        GameMode mode,
+        List<String> tags,
+
+        int favouriteCount,
+        double rating,
+        long playCount,
+        long passCount,
+
+        int countNormal,
+        int countSlider,
+        int countSpinner,
+
+        int maxCombo,
+
+        boolean hasStoryboard,
+        boolean hasVideo,
+        boolean downloadIsAvailable,
+        boolean audioIsAvailable
+) implements Beatmap {
+
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public BeatmapImpl(
+            @JsonProperty("approved") int approved,
+
+            @JsonProperty("submit_date") String submitDate,
+            @JsonProperty("approved_date") String approvedDate,
+            @JsonProperty("last_update") String lastUpdate,
+
+            @JsonProperty("artist") String artist,
+            @JsonProperty("beatmap_id") long beatmapId,
+            @JsonProperty("beatmapset_id") long beatmapSetId,
+
+            @JsonProperty("bpm") double bpm,
+
+            @JsonProperty("creator") String creatorName,
+            @JsonProperty("creator_id") String creatorId,
+
+            @JsonProperty("difficultyrating") double difficultyRating,
+            @JsonProperty("diff_aim") double diffAim,
+            @JsonProperty("diff_speed") double diffSpeed,
+            @JsonProperty("diff_size") double diffSize,
+            @JsonProperty("diff_overall") double diffOverall,
+            @JsonProperty("diff_approach") double diffApproach,
+            @JsonProperty("diff_drain") double diffDrain,
+
+            @JsonProperty("hit_length") int hitLength,
+
+            @JsonProperty("source") String source,
+
+            @JsonProperty("genre_id") int genreId,
+            @JsonProperty("language_id") int languageId,
+
+            @JsonProperty("title") String title,
+
+            @JsonProperty("total_length") int totalLength,
+
+            @JsonProperty("version") String version,
+
+            @JsonProperty("file_md5") String fileMd5,
+
+            @JsonProperty("mode") int mode,
+
+            @JsonProperty("tags") @NotNull String tags,
+
+            @JsonProperty("favourite_count") int favouriteCount,
+
+            @JsonProperty("rating") double rating,
+
+            @JsonProperty("playcount") long playCount,
+            @JsonProperty("pass_count") long passCount,
+
+            @JsonProperty("count_normal") int countNormal,
+            @JsonProperty("count_slider") int countSlider,
+            @JsonProperty("count_spinner") int countSpinner,
+
+            @JsonProperty("max_combo") int maxCombo,
+
+            @JsonDeserialize(using = NumericBooleanDeserializer.class)
+            @JsonProperty("storyboard")
+                    boolean hasStoryboard,
+
+            @JsonDeserialize(using = NumericBooleanDeserializer.class)
+            @JsonProperty("video")
+                    boolean hasVideo,
+
+            @JsonDeserialize(using = NumericBooleanDeserializer.class)
+            @JsonProperty("download_unavailable")
+                    boolean downloadIsUnavailable,
+
+            @JsonDeserialize(using = NumericBooleanDeserializer.class)
+            @JsonProperty("audio_unavailable")
+                    boolean audioIsUnavailable
+    ) {
+        this(BeatmapApproved.getByIndex(approved), submitDate,
+                approvedDate, lastUpdate, artist,
+                beatmapId, beatmapSetId, bpm,
+                creatorName, creatorId, difficultyRating,
+                diffAim, diffSpeed, diffSize,
+                diffOverall, diffApproach, diffDrain,
+                hitLength, source, genreId,
+                languageId, title, totalLength,
+                version, fileMd5, GameMode.getByIndex(mode),
+                List.of(tags.split(("\\s+"))),
+                favouriteCount, rating, playCount,
+                passCount, countNormal, countSlider,
+                countSpinner, maxCombo, hasStoryboard,
+                hasVideo, !downloadIsUnavailable, !audioIsUnavailable);
+    }
+}

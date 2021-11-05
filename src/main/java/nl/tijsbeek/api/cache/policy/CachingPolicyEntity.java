@@ -1,5 +1,7 @@
 package nl.tijsbeek.api.cache.policy;
 
+import nl.tijsbeek.internal.entities.BeatmapImpl;
+import nl.tijsbeek.internal.entities.BeatmapSetImpl;
 import nl.tijsbeek.internal.entities.UserImpl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -11,10 +13,16 @@ import org.jetbrains.annotations.NotNull;
  * @see CachingPolicy
  */
 public enum CachingPolicyEntity {
+    // TODO
     /**
      * beatmaps
      */
-    BEATMAPS(CachingPolicyEntity.class),
+    BEATMAPS(BeatmapImpl.class),
+
+    /**
+     * beatmap sets
+     */
+    BEATMAPS_SET(BeatmapSetImpl.class),
 
     /**
      * The entity for {@link UserImpl}

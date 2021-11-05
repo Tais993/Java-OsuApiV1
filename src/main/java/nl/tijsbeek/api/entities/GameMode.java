@@ -36,6 +36,18 @@ public enum GameMode {
      */
     MANIA(3);
 
+    @Contract(pure = true)
+    public static GameMode getByIndex(int index) {
+        return switch (index) {
+            case 0 -> OSU;
+            case 1 -> TAIKO;
+            case 2 -> CTB;
+            case 3 -> MANIA;
+            default -> throw new IndexOutOfBoundsException(index);
+        };
+    }
+
+
     private final int mode;
 
     @Contract(pure = true)
@@ -52,6 +64,7 @@ public enum GameMode {
     public int getMode() {
         return mode;
     }
+
 
     @NonNls
     @NotNull

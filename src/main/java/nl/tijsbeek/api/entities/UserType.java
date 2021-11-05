@@ -19,11 +19,11 @@ public enum UserType {
     /**
      * Sets the given user to be handled as an username
      */
-    USERNAME("string"),
+    NAME("string"),
     /**
      * Sets the given user to be handled as an user-id
      */
-    USER_ID("id");
+    ID("id");
 
     @NotNull
     private final String type;

@@ -22,6 +22,7 @@ public interface User extends IdHolder, NameHolder {
      * Format is: yyyy-MM-dd HH:mm:ss
      *
      * @return UTC join time
+     * @see #joinTime()
      */
     @NotNull
     String joinTimeString();

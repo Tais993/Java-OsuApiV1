@@ -9,7 +9,7 @@ import java.util.Set;
 
 public record UserImpl(@JsonProperty("user_id") long id,
                        @JsonProperty("username") String name,
-                       @JsonProperty("join_date") String joinTime,
+                       @JsonProperty("join_date") String joinTimeString,
                        int count300,
                        int count100,
                        int count50,

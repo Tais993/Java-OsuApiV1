@@ -40,7 +40,7 @@ public class UserRequestBuilder {
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
     public UserRequestBuilder setUserName(@NotNull String userName) {
-        return setUser(userName, UserType.USERNAME);
+        return setUser(userName, UserType.NAME);
     }
 
     /**
@@ -54,7 +54,7 @@ public class UserRequestBuilder {
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
     public UserRequestBuilder setUserId(@NotNull String userId) {
-        return setUser(userId, UserType.USER_ID);
+        return setUser(userId, UserType.ID);
     }
 
     /**

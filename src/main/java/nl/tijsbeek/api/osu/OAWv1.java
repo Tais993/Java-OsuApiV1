@@ -2,8 +2,11 @@ package nl.tijsbeek.api.osu;
 
 import nl.tijsbeek.api.cache.handler.CacheHandler;
 import nl.tijsbeek.api.entities.User;
+import nl.tijsbeek.api.requests.BeatmapRequest;
 import nl.tijsbeek.api.requests.UserRequest;
+import nl.tijsbeek.internal.entities.BeatmapSet;
 import org.jetbrains.annotations.NotNull;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
@@ -24,6 +27,16 @@ public interface OAWv1 {
      */
     @NotNull
     Mono<? extends User> retrieveUser(@NotNull UserRequest userRequest);
+
+    /**
+     * Retrieve a beatmap based on the Request created
+     *
+     * @param beatmapRequest the request
+     * @return A {@link Flux<User>} of {@link nl.tijsbeek.api.entities.Beatmap}
+     * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
+     */
+    @NotNull
+    Mono<? extends BeatmapSet> retrieveBeatmap(@NotNull BeatmapRequest beatmapRequest);
 
     /**
      * The {@link nl.tijsbeek.api.cache.handler.CacheHandler} to be used for getting cached items
