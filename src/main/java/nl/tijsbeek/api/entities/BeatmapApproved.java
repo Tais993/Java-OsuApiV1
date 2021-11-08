@@ -5,15 +5,18 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 public enum BeatmapApproved {
+    GRAVEYARD("graveyard"),
+    WIP("WIP"),
     PENDING("pending"),
     RANKED("ranked"),
     APPROVED("approved"),
     QUALIFIED("qualified"),
     LOVED("loved");
 
-    @Contract(pure = true)
     public static BeatmapApproved getByIndex(int index) {
         return switch (index) {
+            case -2 -> GRAVEYARD;
+            case -1 -> WIP;
             case 0 -> PENDING;
             case 1 -> RANKED;
             case 2 -> APPROVED;

@@ -5,11 +5,15 @@ import nl.tijsbeek.api.entities.Mod;
 import nl.tijsbeek.api.entities.UserType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriBuilder;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.Set;
 
 public record BeatmapRequest(
         LocalDateTime since,
@@ -21,9 +25,19 @@ public record BeatmapRequest(
         boolean includeConverted,
         String beatmapHash,
         int limit,
-        List<Mod> mods)
+        Set<Mod> mods)
         implements Request {
+    private static final Logger logger = LoggerFactory.getLogger(BeatmapRequest.class);
 
+    BeatmapRequest(LocalDateTime since, long beatmapSetId, long beatmapId,
+                   String user, UserType userType, GameMode mode,
+                   boolean includeConverted, String beatmapHash, int limit, Collection<Mod> mods) {
+
+        this(since, beatmapSetId, beatmapId,
+                user, userType, mode,
+                includeConverted, beatmapHash, limit,
+                (mods.isEmpty()) ? EnumSet.noneOf(Mod.class) : EnumSet.copyOf(mods));
+    }
 
     @Override
     @Contract(value = "_ -> param1", mutates = "param1")
@@ -34,11 +48,11 @@ public record BeatmapRequest(
             uriBuilder.queryParam("since", since.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         }
 
-        if (beatmapSetId != 0) {
+        if (beatmapSetId != 0L) {
             uriBuilder.queryParam("s", beatmapSetId);
         }
 
-        if (beatmapId != 0) {
+        if (beatmapId != 0L) {
             uriBuilder.queryParam("b", beatmapId);
         }
 

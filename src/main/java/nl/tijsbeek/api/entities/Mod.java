@@ -3,9 +3,7 @@ package nl.tijsbeek.api.entities;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public enum Mod {
@@ -58,20 +56,20 @@ public enum Mod {
         return modsToBitwise(List.of(mods));
     }
 
-    public static int modsToBitwise(@NotNull List<Mod> mods) {
+    public static int modsToBitwise(@NotNull Collection<Mod> mods) {
         return mods.stream()
                 .mapToInt(Mod::getBitwise)
                 .sum();
     }
 
     @NotNull
-    public static List<Mod> getByBitwise(int bitwiseInt) {
+    public static Set<Mod> getByBitwise(int bitwiseInt) {
         List<Mod> reversedMods = new ArrayList<>(List.of(Mod.values()));
         Collections.reverse(reversedMods);
 
-        List<Mod> mods = new ArrayList<>();
+        Set<Mod> mods = EnumSet.noneOf(Mod.class);
 
-        final AtomicInteger bitwise = new AtomicInteger(bitwiseInt);
+        AtomicInteger bitwise = new AtomicInteger(bitwiseInt);
         while (bitwise.get() != 0) {
 
             for (Mod reversedMod : reversedMods) {

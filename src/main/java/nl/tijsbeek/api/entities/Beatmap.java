@@ -1,6 +1,7 @@
 package nl.tijsbeek.api.entities;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,18 +10,30 @@ import java.util.List;
 public interface Beatmap extends IdHolder, NameHolder {
     @NotNull BeatmapApproved approved();
 
-    @NotNull String submitDateString();
+    @Nullable String submitDateString();
 
-    default @NotNull LocalDateTime submitDate() {
-        return LocalDateTime.parse(submitDateString(),
+    default @Nullable LocalDateTime submitDate() {
+        String submitDateString = submitDateString();
+
+        if (submitDateString == null) {
+            return null;
+        }
+
+        return LocalDateTime.parse(submitDateString,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         );
     }
 
-    @NotNull String approvedDateString();
+    @Nullable String approvedDateString();
 
-    default @NotNull LocalDateTime approvedDate() {
-        return LocalDateTime.parse(approvedDateString(),
+    default @Nullable LocalDateTime approvedDate() {
+        String approvedDateString = approvedDateString();
+
+        if (approvedDateString == null) {
+            return null;
+        }
+
+        return LocalDateTime.parse(approvedDateString,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         );
     }

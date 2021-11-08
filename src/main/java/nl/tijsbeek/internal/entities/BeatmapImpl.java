@@ -18,6 +18,7 @@ public record BeatmapImpl(
         String approvedDateString,
         String lastUpdateString,
 
+        @NotNull
         String artist,
 
         long beatmapId,
