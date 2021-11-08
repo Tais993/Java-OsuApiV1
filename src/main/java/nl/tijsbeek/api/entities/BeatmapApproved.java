@@ -30,10 +30,11 @@ public enum BeatmapApproved {
     private final String readableName;
 
     @Contract(pure = true)
-    BeatmapApproved(String readableName) {
+    BeatmapApproved(@NotNull String readableName) {
         this.readableName = readableName;
     }
 
+    @NotNull
     @Contract(pure = true)
     public String getReadableName() {
         return readableName;
