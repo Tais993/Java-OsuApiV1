@@ -142,7 +142,7 @@ public interface Beatmap extends IdHolder, NameHolder {
 
     boolean hasVideo();
 
-    boolean downloadIsAvailable();
+    boolean hasDownloadAvailable();
 
-    boolean audioIsAvailable();
+    boolean hasAudioAvailable();
 }

@@ -8,8 +8,11 @@ import nl.tijsbeek.api.entities.BeatmapApproved;
 import nl.tijsbeek.api.entities.GameMode;
 import nl.tijsbeek.internal.jackson.NumericBooleanDeserializer;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public record BeatmapImpl(
         BeatmapApproved approved,
@@ -18,7 +21,6 @@ public record BeatmapImpl(
         String approvedDateString,
         String lastUpdateString,
 
-        @NotNull
         String artist,
 
         long beatmapId,
@@ -60,10 +62,11 @@ public record BeatmapImpl(
 
         boolean hasStoryboard,
         boolean hasVideo,
-        boolean downloadIsAvailable,
-        boolean audioIsAvailable
+        boolean hasDownloadAvailable,
+        boolean hasAudioAvailable
 ) implements Beatmap {
-
+    private static final Logger logger = LoggerFactory.getLogger(BeatmapImpl.class);
+    private static final Pattern TAGS_PATTERN = Pattern.compile(("\\s+"));
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public BeatmapImpl(
@@ -107,7 +110,7 @@ public record BeatmapImpl(
 
             @JsonProperty("mode") int mode,
 
-            @JsonProperty("tags") @NotNull String tags,
+            @JsonProperty("tags") @NotNull CharSequence tags,
 
             @JsonProperty("favourite_count") int favouriteCount,
 
@@ -147,7 +150,7 @@ public record BeatmapImpl(
                 hitLength, source, genreId,
                 languageId, title, totalLength,
                 version, fileMd5, GameMode.getByIndex(mode),
-                List.of(tags.split(("\\s+"))),
+                List.of(TAGS_PATTERN.split(tags)),
                 favouriteCount, rating, playCount,
                 passCount, countNormal, countSlider,
                 countSpinner, maxCombo, hasStoryboard,
