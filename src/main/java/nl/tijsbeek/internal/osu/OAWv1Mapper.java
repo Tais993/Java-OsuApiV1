@@ -1,6 +1,6 @@
 package nl.tijsbeek.internal.osu;
 
-import nl.tijsbeek.api.entities.Beatmap;
+import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.internal.entities.BeatmapImpl;
 import nl.tijsbeek.internal.entities.BeatmapSet;
 import nl.tijsbeek.internal.entities.BeatmapSetImpl;

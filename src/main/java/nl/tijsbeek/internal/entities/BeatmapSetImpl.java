@@ -1,7 +1,7 @@
 package nl.tijsbeek.internal.entities;
 
-import nl.tijsbeek.api.entities.Beatmap;
-import nl.tijsbeek.api.entities.BeatmapApproved;
+import nl.tijsbeek.api.entities.beatmap.Beatmap;
+import nl.tijsbeek.api.entities.beatmap.BeatmapStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -11,7 +11,7 @@ import java.util.*;
 
 public record BeatmapSetImpl(List<Beatmap> beatmaps,
 
-                             BeatmapApproved approved,
+                             BeatmapStatus approved,
 
                              String submitDateString,
                              String approvedDateString,
@@ -76,7 +76,7 @@ public record BeatmapSetImpl(List<Beatmap> beatmaps,
     }
 
     private BeatmapSetImpl() {
-        this(null, null, null,
+        this(List.of(), null, null,
                 null, null,
                 null, 0L, null,
                 null, null, 0,

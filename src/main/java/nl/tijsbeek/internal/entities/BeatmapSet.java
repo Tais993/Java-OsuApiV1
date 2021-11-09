@@ -1,9 +1,9 @@
 package nl.tijsbeek.internal.entities;
 
-import nl.tijsbeek.api.entities.Beatmap;
-import nl.tijsbeek.api.entities.BeatmapApproved;
 import nl.tijsbeek.api.entities.IdHolder;
 import nl.tijsbeek.api.entities.NameHolder;
+import nl.tijsbeek.api.entities.beatmap.Beatmap;
+import nl.tijsbeek.api.entities.beatmap.BeatmapStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +18,7 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
 
     List<Beatmap> beatmaps();
 
-    BeatmapApproved approved();
+    BeatmapStatus approved();
 
     String submitDateString();
 

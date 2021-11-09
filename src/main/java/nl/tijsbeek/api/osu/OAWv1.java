@@ -1,8 +1,8 @@
 package nl.tijsbeek.api.osu;
 
 import nl.tijsbeek.api.cache.handler.CacheHandler;
-import nl.tijsbeek.api.entities.Beatmap;
 import nl.tijsbeek.api.entities.User;
+import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.api.requests.BeatmapSetRequest;
 import nl.tijsbeek.api.requests.UserRequest;
 import nl.tijsbeek.internal.entities.BeatmapSet;
@@ -36,27 +36,27 @@ public interface OAWv1 {
      * Retrieve all beatmapsets based on the Request created
      *
      * @param beatmapSetRequest the request
-     * @return A {@link Flux<User>} of {@link nl.tijsbeek.api.entities.Beatmap}
+     * @return A {@link Flux<User>} of {@link Beatmap}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
      */
     Mono<Collection<BeatmapSet>> retrieveBeatmapSets(@NotNull BeatmapSetRequest beatmapSetRequest);
 
     /**
-     * Retrieve a beatmap based on the Request created <br \>
+     * Retrieve a beatmap based on the Request created <br />
      * This grabs the first given Beatmap
      *
      * @param beatmapSetRequest the request
-     * @return A {@link Flux<User>} of {@link nl.tijsbeek.api.entities.Beatmap}
+     * @return A {@link Flux<User>} of {@link Beatmap}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
      */
     Mono<Optional<Beatmap>> retrieveBeatmap(@NotNull BeatmapSetRequest beatmapSetRequest);
 
     /**
-     * Retrieve a beatmapset based on the Request created <br \>
+     * Retrieve a beatmapset based on the Request created <br />
      * This grabs the first given BeatmapSet
      *
      * @param beatmapSetRequest the request
-     * @return A {@link Flux<User>} of {@link nl.tijsbeek.api.entities.Beatmap}
+     * @return A {@link Flux<User>} of {@link Beatmap}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
      */
     Mono<Optional<BeatmapSet>> retrieveBeatmapSet(@NotNull BeatmapSetRequest beatmapSetRequest);

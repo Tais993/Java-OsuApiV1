@@ -12,6 +12,7 @@ public interface IdHolder {
      * Returns the ID as an {@link java.lang.Long}
      *
      * @return id
+     * @see #idString()
      */
     long id();
 
@@ -19,6 +20,7 @@ public interface IdHolder {
      * Returns the ID as a {@link java.lang.String}
      *
      * @return id
+     * @see #id()
      */
     @NotNull
     default String idString() {

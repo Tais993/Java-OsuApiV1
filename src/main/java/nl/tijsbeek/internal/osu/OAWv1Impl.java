@@ -2,8 +2,8 @@ package nl.tijsbeek.internal.osu;
 
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.cache.policy.CachingPolicyBuilder;
-import nl.tijsbeek.api.entities.Beatmap;
 import nl.tijsbeek.api.entities.User;
+import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.api.osu.OAWv1;
 import nl.tijsbeek.api.requests.BeatmapSetRequest;
 import nl.tijsbeek.api.requests.Request;

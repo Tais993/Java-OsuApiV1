@@ -18,11 +18,12 @@ module Java.OsuApiV1.main {
     exports nl.tijsbeek.api.cache.policy;
 
     exports nl.tijsbeek.api.entities;
+    exports nl.tijsbeek.api.entities.beatmap;
     exports nl.tijsbeek.api.osu;
     exports nl.tijsbeek.api.requests;
-    exports nl.tijsbeek.internal.entities;
 
     opens nl.tijsbeek.api.entities to com.fasterxml.jackson.databind;
     opens nl.tijsbeek.internal.entities to com.fasterxml.jackson.databind;
     opens nl.tijsbeek.internal.jackson to com.fasterxml.jackson.databind;
+    opens nl.tijsbeek.api.entities.beatmap to com.fasterxml.jackson.databind;
 }

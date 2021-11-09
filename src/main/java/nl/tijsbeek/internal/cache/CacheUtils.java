@@ -1,7 +1,7 @@
 package nl.tijsbeek.internal.cache;
 
-import nl.tijsbeek.api.entities.Beatmap;
 import nl.tijsbeek.api.entities.User;
+import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.internal.cache.cachers.IdNameCacheImpl;
 import nl.tijsbeek.internal.cache.handler.CacheHandlerImpl;
 import nl.tijsbeek.internal.entities.BeatmapSet;

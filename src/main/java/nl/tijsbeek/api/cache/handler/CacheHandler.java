@@ -1,8 +1,8 @@
 package nl.tijsbeek.api.cache.handler;
 
 import nl.tijsbeek.api.cache.cachers.IdNameCache;
-import nl.tijsbeek.api.entities.Beatmap;
 import nl.tijsbeek.api.entities.User;
+import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import org.jetbrains.annotations.NotNull;
 
 /**

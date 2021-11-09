@@ -1,10 +1,11 @@
-package nl.tijsbeek.api.entities;
+package nl.tijsbeek.api.entities.beatmap;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
-public enum BeatmapApproved {
+public enum BeatmapStatus {
     GRAVEYARD("graveyard"),
     WIP("WIP"),
     PENDING("pending"),
@@ -13,7 +14,8 @@ public enum BeatmapApproved {
     QUALIFIED("qualified"),
     LOVED("loved");
 
-    public static BeatmapApproved getByIndex(int index) {
+    @Contract(pure = true)
+    public static BeatmapStatus getByIndex(@Range(from = -2, to = 4) int index) {
         return switch (index) {
             case -2 -> GRAVEYARD;
             case -1 -> WIP;
@@ -30,7 +32,7 @@ public enum BeatmapApproved {
     private final String readableName;
 
     @Contract(pure = true)
-    BeatmapApproved(@NotNull String readableName) {
+    BeatmapStatus(@NotNull String readableName) {
         this.readableName = readableName;
     }
 

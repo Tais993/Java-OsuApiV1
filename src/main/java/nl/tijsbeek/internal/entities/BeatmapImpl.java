@@ -3,9 +3,9 @@ package nl.tijsbeek.internal.entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import nl.tijsbeek.api.entities.Beatmap;
-import nl.tijsbeek.api.entities.BeatmapApproved;
 import nl.tijsbeek.api.entities.GameMode;
+import nl.tijsbeek.api.entities.beatmap.Beatmap;
+import nl.tijsbeek.api.entities.beatmap.BeatmapStatus;
 import nl.tijsbeek.internal.jackson.NumericBooleanDeserializer;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public record BeatmapImpl(
-        BeatmapApproved approved,
+        BeatmapStatus approved,
 
         String submitDateString,
         String approvedDateString,
@@ -141,7 +141,7 @@ public record BeatmapImpl(
             @JsonProperty("audio_unavailable")
                     boolean audioIsUnavailable
     ) {
-        this(BeatmapApproved.getByIndex(approved), submitDate,
+        this(BeatmapStatus.getByIndex(approved), submitDate,
                 approvedDate, lastUpdate, artist,
                 beatmapId, beatmapSetId, bpm,
                 creatorName, creatorId, difficultyRating,
