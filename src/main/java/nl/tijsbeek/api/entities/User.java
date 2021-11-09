@@ -10,16 +10,16 @@ import java.util.Set;
  * An osu "player", formally known as User. <br />
  * Contains all the information visible on the website.
  * <p>
- * Examples are <a href="https://osu.ppy.sh/users/2">Peppy on osu</a>
+ * An example is <a href="https://osu.ppy.sh/users/2">Peppy on the osu site</a>
  *
- * @see <a href="https://github.com/ppy/osu-api/wiki#user">osu-api User</a>
+ * @see <a href="https://github.com/ppy/osu-api/wiki#user">osu! API on users</a>
  */
 public interface User extends IdHolder, NameHolder {
 
     /**
      * Time the player joined in UTC
      * <p>
-     * Format is: yyyy-MM-dd HH:mm:ss
+     * Format is: "yyyy-MM-dd HH:mm:ss"
      *
      * @return UTC join time
      * @see #joinTime()

@@ -7,11 +7,42 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * An osu beatmap, which is a playable "map" in osu.
+ * This beatmap contains information about the map, such as the artist, title, creator, and more.
+ *
+ * <p>
+ * Examples are <a href="https://osu.ppy.sh/beatmapsets/1540868#taiko/3254237">osu!mania</a> and <a href="https://osu.ppy.sh/beatmapsets/1360496">osu!standard</a>.
+ *
+ * @see <a href="https://osu.ppy.sh/help/wiki/Beatmaps">osu! wiki on beatmaps</a>
+ * @see <a href="https://github.com/ppy/osu-api/wiki#beatmap">osu! API on beatmaps</a>
+ */
 public interface Beatmap extends IdHolder, NameHolder {
+
+    // TODO
+
+    /**
+     * The beatmap's status
+     *
+     * @return
+     */
     @NotNull BeatmapApproved approved();
 
+    /**
+     * The beatmap's submit date
+     * <p>
+     * Format is: "yyyy-MM-dd HH:mm:ss"
+     *
+     * @return UTC submit date
+     * @see #submitDate()
+     */
     @Nullable String submitDateString();
 
+    /**
+     * The submit date as a {@link LocalDateTime}
+     *
+     * @return {@link #submitDateString()} as a {@link LocalDateTime}
+     */
     default @Nullable LocalDateTime submitDate() {
         String submitDateString = submitDateString();
 

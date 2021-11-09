@@ -5,14 +5,13 @@ import nl.tijsbeek.api.cache.policy.CachingPolicyBuilder;
 import nl.tijsbeek.api.entities.Beatmap;
 import nl.tijsbeek.api.entities.User;
 import nl.tijsbeek.api.osu.OAWv1;
-import nl.tijsbeek.api.requests.BeatmapRequest;
+import nl.tijsbeek.api.requests.BeatmapSetRequest;
 import nl.tijsbeek.api.requests.Request;
 import nl.tijsbeek.api.requests.UserRequest;
 import nl.tijsbeek.internal.cache.CacheUtils;
 import nl.tijsbeek.internal.cache.handler.CacheHandlerImpl;
 import nl.tijsbeek.internal.entities.BeatmapImpl;
 import nl.tijsbeek.internal.entities.BeatmapSet;
-import nl.tijsbeek.internal.entities.BeatmapSetImpl;
 import nl.tijsbeek.internal.entities.UserImpl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -23,12 +22,10 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 
 public final class OAWv1Impl implements OAWv1 {
@@ -81,44 +78,32 @@ public final class OAWv1Impl implements OAWv1 {
 
 
     @Override
-    public Mono<Collection<BeatmapSet>> retrieveBeatmapSet(@NotNull BeatmapRequest beatmapRequest) {
-        return createResponse(beatmapRequest, "get_beatmaps")
-                .bodyToMono(new ParameterizedTypeReference<List<BeatmapImpl>>() {
-                })
-                .map(OAWv1Impl::mapToBeatmapSets)
+    public Mono<Collection<BeatmapSet>> retrieveBeatmapSets(@NotNull BeatmapSetRequest beatmapSetRequest) {
+        return createResponse(beatmapSetRequest, "get_beatmaps")
+                .bodyToMono(new BeatmapImplListType())
+                .map(OAWv1Mapper::mapToBeatmapSets)
                 .doOnSuccess(cacheUtils::cacheBeatmapSets);
     }
 
-    @Contract("_ -> new")
-    private static Collection<BeatmapSet> mapToBeatmapSets(@NotNull Collection<BeatmapImpl> beatmapImpls) {
-//        Collector<Beatmap, ?, Optional<BeatmapSetImpl>> reducer = Collectors.reducing((object1, object2) -> {
-//            return new BeatmapSetImpl(object1, object2);
-//        });
-//
-//        Collector<Beatmap, ?, Map<Long, Optional<Object>>> collector =
-//                Collectors.groupingBy(Beatmap::beatmapSetId, reducer);
+    @Override
+    public Mono<Optional<Beatmap>> retrieveBeatmap(@NotNull BeatmapSetRequest beatmapSetRequest) {
+        return createResponse(beatmapSetRequest, "get_beatmaps")
+                .bodyToMono(new BeatmapImplListType())
+                .map(OAWv1Mapper::mapToBeatmap)
+                .doOnSuccess(beatmap -> {
+                    beatmap.ifPresent(cacheUtils::cacheBeatmap);
+                });
+    }
 
-        Collector<BeatmapImpl, ?, Map<Long, ArrayList<Beatmap>>> workingCollector =
-                Collectors.groupingBy(BeatmapImpl::beatmapSetId,
-                        Collector.of(
-                                ArrayList::new,
-                                ArrayList::add,
-                                (list1, list2) -> {
-                                    list1.addAll(list2);
-                                    return list1;
-                                }));
-
-        return beatmapImpls.stream()
-                .collect(workingCollector).values()
-                .stream()
-                .map(list -> {
-                    Beatmap beatmap = list.get(0);
-
-                    if (beatmap == null)
-                        throw new IndexOutOfBoundsException("List is empty");
-
-                    return ((BeatmapSet) new BeatmapSetImpl(list, beatmap));
-                }).toList();
+    @NotNull
+    @Override
+    public Mono<Optional<BeatmapSet>> retrieveBeatmapSet(@NotNull BeatmapSetRequest beatmapSetRequest) {
+        return createResponse(beatmapSetRequest, "get_beatmaps")
+                .bodyToMono(new BeatmapImplListType())
+                .map(OAWv1Mapper::mapToBeatmapSet)
+                .doOnSuccess(beatmapSet -> {
+                    beatmapSet.ifPresent(cacheUtils::cacheBeatmapSets);
+                });
     }
 
 
@@ -135,15 +120,18 @@ public final class OAWv1Impl implements OAWv1 {
     }
 
 
-    @Contract(pure = true)
     @NotNull
-    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override
+    @Contract(pure = true)
+    @SuppressWarnings("MagicCharacter")
     public String toString() {
         return "OAWv1Impl{" +
                 "token='" + token + '\'' +
                 ", cacheHandlerImpl=" + cacheHandlerImpl +
+                ", cacheUtils=" + cacheUtils +
                 ", webClient=" + webClient +
                 '}';
     }
+
+    private static class BeatmapImplListType extends ParameterizedTypeReference<List<BeatmapImpl>> {}
 }

@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 
-public record BeatmapRequest(
+public record BeatmapSetRequest(
         LocalDateTime since,
         long beatmapSetId,
         long beatmapId,
@@ -27,11 +27,11 @@ public record BeatmapRequest(
         int limit,
         Set<Mod> mods)
         implements Request {
-    private static final Logger logger = LoggerFactory.getLogger(BeatmapRequest.class);
+    private static final Logger logger = LoggerFactory.getLogger(BeatmapSetRequest.class);
 
-    BeatmapRequest(LocalDateTime since, long beatmapSetId, long beatmapId,
-                   String user, UserType userType, GameMode mode,
-                   boolean includeConverted, String beatmapHash, int limit, Collection<Mod> mods) {
+    BeatmapSetRequest(LocalDateTime since, long beatmapSetId, long beatmapId,
+                      String user, UserType userType, GameMode mode,
+                      boolean includeConverted, String beatmapHash, int limit, Collection<Mod> mods) {
 
         this(since, beatmapSetId, beatmapId,
                 user, userType, mode,

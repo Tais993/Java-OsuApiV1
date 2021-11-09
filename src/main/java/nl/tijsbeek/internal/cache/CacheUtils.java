@@ -7,6 +7,8 @@ import nl.tijsbeek.internal.cache.handler.CacheHandlerImpl;
 import nl.tijsbeek.internal.entities.BeatmapSet;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public record CacheUtils(CacheHandlerImpl cacheHandlerImpl) {
 
     public void cacheUser(@NotNull User user) {
@@ -25,5 +27,16 @@ public record CacheUtils(CacheHandlerImpl cacheHandlerImpl) {
                 beatmapSet.beatmaps().forEach(beatmapCache::addItem);
             });
         }
+    }
+
+    public void cacheBeatmapSets(@NotNull BeatmapSet... beatmapSets) {
+        {
+            cacheBeatmapSets(List.of(beatmapSets));
+        }
+    }
+
+    public void cacheBeatmap(@NotNull Beatmap beatmap) {
+        IdNameCacheImpl<Beatmap> beatmapCache = (IdNameCacheImpl<Beatmap>) cacheHandlerImpl.getBeatmapCache();
+        beatmapCache.addItem(beatmap);
     }
 }

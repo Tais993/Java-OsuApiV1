@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class BeatmapRequestBuilder {
-    private static final Logger logger = LoggerFactory.getLogger(BeatmapRequestBuilder.class);
+public class BeatmapSetRequestBuilder {
+    private static final Logger logger = LoggerFactory.getLogger(BeatmapSetRequestBuilder.class);
 
     private static final int MAX_LIMIT = 500;
     private static final int MIN_LIMIT = 0;
@@ -43,81 +43,81 @@ public class BeatmapRequestBuilder {
     private final List<Mod> mods = new ArrayList<>(Mod.values().length);
 
     @Contract(pure = true)
-    public BeatmapRequestBuilder() {
+    public BeatmapSetRequestBuilder() {
     }
 
     @NotNull
-    public BeatmapRequestBuilder setSince(LocalDateTime since) {
+    public BeatmapSetRequestBuilder setSince(LocalDateTime since) {
         this.since = since;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setBeatmapSetId(long beatmapSetId) {
+    public BeatmapSetRequestBuilder setBeatmapSetId(long beatmapSetId) {
         this.beatmapSetId = beatmapSetId;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setBeatmapId(long beatmapId) {
+    public BeatmapSetRequestBuilder setBeatmapId(long beatmapId) {
         this.beatmapId = beatmapId;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setUserId(long userId) {
+    public BeatmapSetRequestBuilder setUserId(long userId) {
         this.user = String.valueOf(userId);
         this.userType = UserType.ID;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setUserId(String userId) {
+    public BeatmapSetRequestBuilder setUserId(String userId) {
         this.user = userId;
         this.userType = UserType.ID;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setUserName(String userName) {
+    public BeatmapSetRequestBuilder setUserName(String userName) {
         this.user = userName;
         this.userType = UserType.NAME;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setUser(String user) {
+    public BeatmapSetRequestBuilder setUser(String user) {
         this.user = user;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setUser(String user, UserType userType) {
+    public BeatmapSetRequestBuilder setUser(String user, UserType userType) {
         this.user = user;
         this.userType = userType;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setGameMode(GameMode mode) {
+    public BeatmapSetRequestBuilder setGameMode(GameMode mode) {
         this.mode = mode;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder doesIncludeConverted(boolean includeConverted) {
+    public BeatmapSetRequestBuilder doesIncludeConverted(boolean includeConverted) {
         this.includeConverted = includeConverted;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setBeatmapHash(String beatmapHash) {
+    public BeatmapSetRequestBuilder setBeatmapHash(String beatmapHash) {
         this.beatmapHash = beatmapHash;
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder setLimit(@Range(from = MIN_LIMIT, to = MAX_LIMIT) int limit) {
+    public BeatmapSetRequestBuilder setLimit(@Range(from = MIN_LIMIT, to = MAX_LIMIT) int limit) {
         //noinspection ConstantConditions
         if (MIN_LIMIT > limit || limit > MAX_LIMIT) {
             throw new IllegalArgumentException("Limit must be between " + MIN_LIMIT + " and " + MAX_LIMIT);
@@ -127,20 +127,20 @@ public class BeatmapRequestBuilder {
     }
 
     @NotNull
-    public BeatmapRequestBuilder addMods(Mod... mods) {
+    public BeatmapSetRequestBuilder addMods(Mod... mods) {
         this.mods.addAll(List.of(mods));
         return this;
     }
 
     @NotNull
-    public BeatmapRequestBuilder addMods(Collection<Mod> mods) {
+    public BeatmapSetRequestBuilder addMods(Collection<Mod> mods) {
         this.mods.addAll(mods);
         return this;
     }
 
     @NotNull
-    public BeatmapRequest build() {
-        return new BeatmapRequest(since, beatmapSetId, beatmapId,
+    public BeatmapSetRequest build() {
+        return new BeatmapSetRequest(since, beatmapSetId, beatmapId,
                 user, userType, mode,
                 includeConverted, beatmapHash, limit,
                 mods);
