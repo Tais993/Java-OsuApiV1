@@ -14,13 +14,16 @@ public record CacheUtils(CacheHandlerImpl cacheHandlerImpl) {
         userCache.addItem(user);
     }
 
-    public void cacheBeatmapSet(@NotNull BeatmapSet beatmapSet) {
+    public void cacheBeatmapSets(@NotNull Iterable<? extends BeatmapSet> beatmapSets) {
         {
-            IdNameCacheImpl<BeatmapSet> beatmapSetCache = (IdNameCacheImpl<BeatmapSet>) cacheHandlerImpl.getBeatmapSetCache();
-            beatmapSetCache.addItem(beatmapSet);
+            beatmapSets.forEach(beatmapSet -> {
 
-            IdNameCacheImpl<Beatmap> beatmapCache = (IdNameCacheImpl<Beatmap>) cacheHandlerImpl.getBeatmapCache();
-            beatmapSet.beatmaps().forEach(beatmapCache::addItem);
+                IdNameCacheImpl<BeatmapSet> beatmapSetCache = (IdNameCacheImpl<BeatmapSet>) cacheHandlerImpl.getBeatmapSetCache();
+                beatmapSetCache.addItem(beatmapSet);
+
+                IdNameCacheImpl<Beatmap> beatmapCache = (IdNameCacheImpl<Beatmap>) cacheHandlerImpl.getBeatmapCache();
+                beatmapSet.beatmaps().forEach(beatmapCache::addItem);
+            });
         }
     }
 }

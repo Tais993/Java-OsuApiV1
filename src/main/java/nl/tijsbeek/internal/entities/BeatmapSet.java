@@ -42,7 +42,7 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
 
     String title();
 
-    String name();
+    @NotNull String name();
 
     List<String> tags();
 

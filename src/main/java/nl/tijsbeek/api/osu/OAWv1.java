@@ -9,6 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Collection;
+
 
 /**
  * The of the wrapper.
@@ -35,8 +37,7 @@ public interface OAWv1 {
      * @return A {@link Flux<User>} of {@link nl.tijsbeek.api.entities.Beatmap}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
      */
-    @NotNull
-    Mono<? extends BeatmapSet> retrieveBeatmap(@NotNull BeatmapRequest beatmapRequest);
+    Mono<Collection<BeatmapSet>> retrieveBeatmapSet(@NotNull BeatmapRequest beatmapRequest);
 
     /**
      * The {@link nl.tijsbeek.api.cache.handler.CacheHandler} to be used for getting cached items

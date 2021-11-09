@@ -24,8 +24,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 
 public final class OAWv1Impl implements OAWv1 {
     private static final Logger logger = LoggerFactory.getLogger(OAWv1Impl.class);
@@ -77,26 +81,44 @@ public final class OAWv1Impl implements OAWv1 {
 
 
     @Override
-    public @NotNull Mono<? extends BeatmapSet> retrieveBeatmap(@NotNull BeatmapRequest beatmapRequest) {
+    public Mono<Collection<BeatmapSet>> retrieveBeatmapSet(@NotNull BeatmapRequest beatmapRequest) {
         return createResponse(beatmapRequest, "get_beatmaps")
                 .bodyToMono(new ParameterizedTypeReference<List<BeatmapImpl>>() {
                 })
-                .map(OAWv1Impl::mapToBeatmapSet)
-                .doOnSuccess(cacheUtils::cacheBeatmapSet);
+                .map(OAWv1Impl::mapToBeatmapSets)
+                .doOnSuccess(cacheUtils::cacheBeatmapSets);
     }
 
-    @NotNull
     @Contract("_ -> new")
-    private static BeatmapSet mapToBeatmapSet(@NotNull List<BeatmapImpl> beatmapImpls) {
-        List<Beatmap> beatmaps = new ArrayList<>(beatmapImpls);
+    private static Collection<BeatmapSet> mapToBeatmapSets(@NotNull Collection<BeatmapImpl> beatmapImpls) {
+//        Collector<Beatmap, ?, Optional<BeatmapSetImpl>> reducer = Collectors.reducing((object1, object2) -> {
+//            return new BeatmapSetImpl(object1, object2);
+//        });
+//
+//        Collector<Beatmap, ?, Map<Long, Optional<Object>>> collector =
+//                Collectors.groupingBy(Beatmap::beatmapSetId, reducer);
 
-        Beatmap firstBeatmap = beatmaps.get(0);
+        Collector<BeatmapImpl, ?, Map<Long, ArrayList<Beatmap>>> workingCollector =
+                Collectors.groupingBy(BeatmapImpl::beatmapSetId,
+                        Collector.of(
+                                ArrayList::new,
+                                ArrayList::add,
+                                (list1, list2) -> {
+                                    list1.addAll(list2);
+                                    return list1;
+                                }));
 
-        if (firstBeatmap != null) {
-            return new BeatmapSetImpl(beatmaps, firstBeatmap);
-        } else {
-            return new BeatmapSetImpl(beatmaps);
-        }
+        return beatmapImpls.stream()
+                .collect(workingCollector).values()
+                .stream()
+                .map(list -> {
+                    Beatmap beatmap = list.get(0);
+
+                    if (beatmap == null)
+                        throw new IndexOutOfBoundsException("List is empty");
+
+                    return ((BeatmapSet) new BeatmapSetImpl(list, beatmap));
+                }).toList();
     }
 
 
