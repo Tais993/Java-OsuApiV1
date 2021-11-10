@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * An osu beatmap, which is a playable "map" in osu.
- * This beatmap contains information about the map, such as the artist, title, creator, and more.
+ * This beatmap contains information about the map, such as the slider count, gamemode,  and more.
  *
  * <p>
  * Examples are <a href="https://osu.ppy.sh/beatmapsets/1540868#taiko/3254237">osu!mania</a> and <a href="https://osu.ppy.sh/beatmapsets/1360496">osu!standard</a>.
@@ -27,7 +27,7 @@ public interface Beatmap extends IdHolder, NameHolder {
      *
      * @return {@link BeatmapStatus}
      */
-    @NotNull BeatmapStatus approved();
+    @NotNull BeatmapStatus status();
 
     /**
      * The beatmap's submit date
@@ -115,9 +115,9 @@ public interface Beatmap extends IdHolder, NameHolder {
     @NotNull String artist();
 
     /**
-     * The beatmap's ID
+     * The beatmap's id
      *
-     * @return the beatmap's ID
+     * @return the beatmap's id
      * @see #id()
      * @see #idString()
      * @see #beatmapSetId()
@@ -127,7 +127,7 @@ public interface Beatmap extends IdHolder, NameHolder {
     /**
      * {@inheritDoc}
      *
-     * <p> In this context, the beatmaps (difficulty) ID will be identified as ID;
+     * <p> In this context, the beatmaps (difficulty) id will be identified as id;
      *
      * @return {@link #beatmapId()}
      * @see #idString()
@@ -138,9 +138,9 @@ public interface Beatmap extends IdHolder, NameHolder {
     }
 
     /**
-     * The beatmap's set ID
+     * The beatmap's set id
      *
-     * @return the beatmap's set ID
+     * @return the beatmap's set id
      * @see #beatmapId()
      */
     long beatmapSetId();
@@ -162,51 +162,82 @@ public interface Beatmap extends IdHolder, NameHolder {
     @NotNull String creatorName();
 
     /**
-     * The creator's ID
+     * The creator's id
      *
-     * @return the creator's ID
+     * @return the id
      * @see #creatorName()
      */
-    @NotNull String creatorId();
+    long creatorId();
 
     /**
-     * The beatmap's difficulity / star-rating
+     * The creator's id
      *
-     * @return the difficulty/star rating
+     * @return the id
+     * @see #creatorName()
      */
-    double difficultyRating();
+    @NotNull
+    default String creatorIdString() {
+        return String.valueOf(creatorId());
+    }
 
     /**
-     * The beatmap's aim difficulty
+     * The beatmap's difficulity information
      *
-     * @return the aim difficulty
+     * @return a {@link BeatmapDifficulty} instance
      */
-    double diffAim();
+    BeatmapDifficulty difficulty();
 
-    double diffSpeed();
-
-    double diffSize();
-
-    double diffOverall();
-
-    double diffApproach();
-
-    double diffDrain();
-
+    /**
+     * The amount of time in seconds your HP drains.
+     *
+     * @return the drain time
+     */
     int hitLength();
 
+    // TODO: figure out what this means
+
+    /**
+     * Unsure
+     *
+     * @return a
+     */
     @NotNull String source();
 
-    int genreId();
+    /**
+     * The beatmap's genre
+     *
+     * @return a {@link BeatmapGenre} instace
+     */
+    @NotNull BeatmapGenre genre();
 
-    int languageId();
+    /**
+     * The beatmap's language
+     *
+     * @return a {@link BeatmapLanguage} instance
+     */
+    @NotNull BeatmapLanguage language();
 
 
+    /**
+     * The beatmap's title
+     *
+     * @return the title
+     */
     @NotNull String title();
 
+    /**
+     * The beatmap's total length in seconds
+     *
+     * @return the total length in seconds
+     */
     int totalLength();
 
 
+    /**
+     * The beatmap's difficulty name
+     *
+     * @return the difficulty name
+     */
     @NotNull String version();
 
     /**
@@ -216,40 +247,119 @@ public interface Beatmap extends IdHolder, NameHolder {
      *
      * @return {@link #version()}
      */
-    @Override
     @NotNull
+    @Override
     default String name() {
         return version();
     }
 
 
+    /**
+     * The beatmap's md5 hash
+     *
+     * @return the md5 hash
+     */
     @NotNull String fileMd5();
 
+    /**
+     * The beatmap's game-mode
+     *
+     * @return the {@link GameMode} instance
+     */
     @NotNull GameMode mode();
 
+    /**
+     * The beatmap's tags
+     *
+     * @return the tags
+     */
     @NotNull List<String> tags();
 
+    /**
+     * Amount of favourites the beatmap has
+     *
+     * @return the amount of favourites
+     */
     int favouriteCount();
 
+    // TODO: figure out what this means
+
+    /**
+     * Unsure
+     *
+     * @return a
+     */
     double rating();
 
+    /**
+     * Amount of plays the beatmap has
+     *
+     * @return the amount of plays
+     */
     long playCount();
 
+    /**
+     * Amount of pass's the beatmap has
+     *
+     * @return the amount of passes
+     */
     long passCount();
 
+    /**
+     * Count of circles in the beatmap
+     *
+     * @return the amount of circles
+     */
     int countNormal();
 
+    /**
+     * Count of sliders in the beatmap
+     *
+     * @return the amount of sliders
+     */
     int countSlider();
 
+    /**
+     * Count of spinners in the beatmap
+     *
+     * @return the amount of spinners
+     */
     int countSpinner();
 
+    /**
+     * Max possible combo this beatmap has
+     *
+     * @return the max combo
+     */
     int maxCombo();
 
+    /**
+     * Whenever the beatmap has a storyboard
+     *
+     * @return true if the beatmap has a storyboard
+     */
     boolean hasStoryboard();
 
+    /**
+     * Whenever the beatmap has a video (background)
+     *
+     * @return true if the beatmap has a video (background)
+     */
     boolean hasVideo();
 
+    /**
+     * Whenever the beatmap is downloadable
+     * Download might not be available because the map is old.
+     *
+     * @return true if the beatmap is downloadable
+     */
     boolean hasDownloadAvailable();
 
+    /**
+     * Whenever the beatmap has audio. <br />
+     * Audio might be unavailable due to a DMCA takedown, or something alike.
+     *
+     * @return true if the beatmap has audio
+     */
     boolean hasAudioAvailable();
 }

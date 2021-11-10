@@ -1,11 +1,10 @@
-package nl.tijsbeek.internal.entities;
+package nl.tijsbeek.internal.entities.beatmap;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import nl.tijsbeek.api.entities.GameMode;
-import nl.tijsbeek.api.entities.beatmap.Beatmap;
-import nl.tijsbeek.api.entities.beatmap.BeatmapStatus;
+import nl.tijsbeek.api.entities.beatmap.*;
 import nl.tijsbeek.internal.jackson.NumericBooleanDeserializer;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public record BeatmapImpl(
-        BeatmapStatus approved,
+        BeatmapStatus status,
 
         String submitDateString,
         String approvedDateString,
@@ -28,20 +27,14 @@ public record BeatmapImpl(
         double bpm,
 
         String creatorName,
-        String creatorId,
+        long creatorId,
 
-        double difficultyRating,
-        double diffAim,
-        double diffSpeed,
-        double diffSize,
-        double diffOverall,
-        double diffApproach,
-        double diffDrain,
+        BeatmapDifficulty difficulty,
 
         int hitLength,
         String source,
-        int genreId,
-        int languageId,
+        BeatmapGenre genre,
+        BeatmapLanguage language,
         String title,
         int totalLength,
         String version,
@@ -141,15 +134,15 @@ public record BeatmapImpl(
             @JsonProperty("audio_unavailable")
                     boolean audioIsUnavailable
     ) {
-        this(BeatmapStatus.getByIndex(approved), submitDate,
+        this(BeatmapStatus.getById(approved), submitDate,
                 approvedDate, lastUpdate, artist,
                 beatmapId, beatmapSetId, bpm,
-                creatorName, creatorId, difficultyRating,
-                diffAim, diffSpeed, diffSize,
-                diffOverall, diffApproach, diffDrain,
-                hitLength, source, genreId,
-                languageId, title, totalLength,
-                version, fileMd5, GameMode.getByIndex(mode),
+                creatorName, Long.parseLong(creatorId), new BeatmapDifficultyImpl(difficultyRating,
+                        diffAim, diffSpeed, diffSize,
+                        diffOverall, diffApproach, diffDrain),
+                hitLength, source, BeatmapGenre.getById(genreId),
+                BeatmapLanguage.getById(languageId), title, totalLength,
+                version, fileMd5, GameMode.getById(mode),
                 List.of(TAGS_PATTERN.split(tags)),
                 favouriteCount, rating, playCount,
                 passCount, countNormal, countSlider,

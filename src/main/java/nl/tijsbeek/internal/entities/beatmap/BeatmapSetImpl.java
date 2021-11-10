@@ -1,7 +1,6 @@
-package nl.tijsbeek.internal.entities;
+package nl.tijsbeek.internal.entities.beatmap;
 
-import nl.tijsbeek.api.entities.beatmap.Beatmap;
-import nl.tijsbeek.api.entities.beatmap.BeatmapStatus;
+import nl.tijsbeek.api.entities.beatmap.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -11,21 +10,21 @@ import java.util.*;
 
 public record BeatmapSetImpl(List<Beatmap> beatmaps,
 
-                             BeatmapStatus approved,
+                             BeatmapStatus status,
 
                              String submitDateString,
                              String approvedDateString,
                              String lastUpdateString,
 
                              String artist,
-                             long id,
+                             long beatmapSetId,
 
                              String creatorName,
-                             String creatorId,
+                             long creatorId,
 
                              String source,
-                             int genreId,
-                             int languageId,
+                             BeatmapGenre genre,
+                             BeatmapLanguage language,
 
                              String title,
                              String name,
@@ -79,17 +78,17 @@ public record BeatmapSetImpl(List<Beatmap> beatmaps,
         this(List.of(), null, null,
                 null, null,
                 null, 0L, null,
-                null, null, 0,
-                0, null, null,
+                0L, null, null,
+                null, null, null,
                 null, 0, 0.0D);
     }
 
     private BeatmapSetImpl(@NotNull List<? extends Beatmap> beatmaps, @NotNull Beatmap beatmap) {
-        this(Collections.unmodifiableList(beatmaps), beatmap.approved(), beatmap.submitDateString(),
+        this(Collections.unmodifiableList(beatmaps), beatmap.status(), beatmap.submitDateString(),
                 beatmap.approvedDateString(), beatmap.lastUpdateString(),
                 beatmap.artist(), beatmap.beatmapSetId(), beatmap.creatorName(),
-                beatmap.creatorId(), beatmap.source(), beatmap.genreId(),
-                beatmap.languageId(), beatmap.title(), beatmap.title(),
+                beatmap.creatorId(), beatmap.source(), beatmap.genre(),
+                beatmap.language(), beatmap.title(), beatmap.title(),
                 beatmap.tags(), beatmap.favouriteCount(), beatmap.rating());
     }
 

@@ -8,34 +8,34 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * The interface for caches containing items by their ID
+ * The interface for caches containing items by their id
  *
  * @param <T> the {@link nl.tijsbeek.api.entities.IdHolder}
  */
 public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
 
     /**
-     * Gets the {@link nl.tijsbeek.api.entities.IdHolder} by their ID
+     * Gets the {@link nl.tijsbeek.api.entities.IdHolder} by their id
      *
-     * @param id the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} ID
+     * @param id the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} id
      * @return the {@link nl.tijsbeek.api.entities.IdHolder}
      */
     @Nullable T getItemById(long id);
 
 
     /**
-     * Get the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their IDs
+     * Get the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their ids
      *
-     * @param ids the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their ID
+     * @param ids the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their id
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
     @NotNull Collection<T> getItemsById(@NotNull Iterable<Long> ids);
 
 
     /**
-     * Get the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their IDs
+     * Get the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their ids
      *
-     * @param ids the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their ID
+     * @param ids the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their id
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
     default @NotNull Collection<T> getItemsById(long @NotNull ... ids) {
@@ -47,9 +47,9 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
     }
 
     /**
-     * Get the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their IDs
+     * Get the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their ids
      *
-     * @param ids the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their ID
+     * @param ids the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their id
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
     default @NotNull Collection<T> getItemsById(String @NotNull ... ids) {
@@ -61,9 +61,9 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
     }
 
     /**
-     * Gets the {@link nl.tijsbeek.api.entities.IdHolder} by their ID
+     * Gets the {@link nl.tijsbeek.api.entities.IdHolder} by their id
      *
-     * @param id the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} ID
+     * @param id the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} id
      * @return the {@link nl.tijsbeek.api.entities.IdHolder}
      */
     default @Nullable T getItemById(@NotNull String id) {

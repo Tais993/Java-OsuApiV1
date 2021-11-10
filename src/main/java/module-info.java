@@ -26,4 +26,5 @@ module Java.OsuApiV1.main {
     opens nl.tijsbeek.internal.entities to com.fasterxml.jackson.databind;
     opens nl.tijsbeek.internal.jackson to com.fasterxml.jackson.databind;
     opens nl.tijsbeek.api.entities.beatmap to com.fasterxml.jackson.databind;
+    opens nl.tijsbeek.internal.entities.beatmap to com.fasterxml.jackson.databind;
 }

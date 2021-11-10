@@ -33,7 +33,7 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
 
     @Nullable
     @Override
-    public final T getItemById(long id) {
+    public T getItemById(long id) {
         return idEntityCache.getItemById(id);
     }
 
@@ -46,7 +46,7 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
 
     @Nullable
     @Override
-    public final T getItemByName(String name) {
+    public T getItemByName(String name) {
         return nameEntityCache.getItemByName(name);
     }
 
@@ -57,25 +57,25 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     }
 
 
-    public final void addItem(@NotNull T idHolder) {
+    public void addItem(@NotNull T idHolder) {
         idEntityCache.addItem(idHolder);
         nameEntityCache.addItem(idHolder);
     }
 
 
-    public final void removeItem(@NotNull T idHolder) {
+    public void removeItem(@NotNull T idHolder) {
         idEntityCache.removeItem(idHolder);
         nameEntityCache.removeItem(idHolder);
     }
 
-    public final void removeItemById(long id) {
+    public void removeItemById(long id) {
         T holder = idEntityCache.getItemById(id);
         if (null != holder) {
             removeItem(holder);
         }
     }
 
-    public final void removeItemByName(String name) {
+    public void removeItemByName(String name) {
         T holder = nameEntityCache.getItemByName(name);
         if (null != holder) {
             removeItem(holder);
@@ -112,7 +112,7 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
 
     @NotNull
     @Override
-    public final Iterator<T> iterator() {
+    public Iterator<T> iterator() {
         return idEntityCache.iterator();
     }
 
@@ -136,11 +136,11 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
         return result;
     }
 
-    @Contract(pure = true)
-    @SuppressWarnings("MagicCharacter")
     @NotNull
     @Override
-    public final String toString() {
+    @Contract(pure = true)
+    @SuppressWarnings("MagicCharacter")
+    public String toString() {
         return "IdNameCacheImpl{" +
                 "idEntityCache=" + idEntityCache +
                 ", nameEntityCache=" + nameEntityCache +

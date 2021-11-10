@@ -15,6 +15,11 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 
+/**
+ * A request for {@link nl.tijsbeek.api.entities.beatmap.Beatmap Beatmap's} or {@link nl.tijsbeek.api.entities.beatmap.BeatmapSet BeatmapSet's}.
+ * <p>
+ * Creation of a request can be done using {@link BeatmapSetRequestBuilder}
+ */
 public record BeatmapSetRequest(
         LocalDateTime since,
         long beatmapSetId,

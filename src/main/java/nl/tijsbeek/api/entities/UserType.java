@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Used with the {@link UserRequestBuilder}
  * <p>
- * If no user-type is given, a username might be interpreted as an ID
+ * If no user-type is given, a username might be interpreted as an id
  * To fix this, the user can manually define what type the given user is.
  * <p>
  * The user may also use the {@link UserRequestBuilder#setUserName(String)} or {@link UserRequestBuilder#setUserId(String)} method instead

@@ -25,16 +25,16 @@ public interface NameCache<T extends NameHolder> extends CustomCacheStream<T> {
     /**
      * Get the {@link nl.tijsbeek.api.entities.NameHolder NameHolder's} by their names
      *
-     * @param names the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their ID
+     * @param names the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their id
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List< nl.tijsbeek.api.entities.IdHolder >}
      */
     @NotNull Collection<T> getItemsByName(@NotNull Iterable<String> names);
 
 
     /**
-     * Gets the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their ID
+     * Gets the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their id
      *
-     * @param names the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their ID
+     * @param names the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their id
      * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List< nl.tijsbeek.api.entities.IdHolder >}
      */
     default @NotNull Collection<T> getItemsByName(String @NotNull ... names) {

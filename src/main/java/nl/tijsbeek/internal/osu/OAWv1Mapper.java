@@ -1,9 +1,9 @@
 package nl.tijsbeek.internal.osu;
 
 import nl.tijsbeek.api.entities.beatmap.Beatmap;
-import nl.tijsbeek.internal.entities.BeatmapImpl;
-import nl.tijsbeek.internal.entities.BeatmapSet;
-import nl.tijsbeek.internal.entities.BeatmapSetImpl;
+import nl.tijsbeek.api.entities.beatmap.BeatmapSet;
+import nl.tijsbeek.internal.entities.beatmap.BeatmapImpl;
+import nl.tijsbeek.internal.entities.beatmap.BeatmapSetImpl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

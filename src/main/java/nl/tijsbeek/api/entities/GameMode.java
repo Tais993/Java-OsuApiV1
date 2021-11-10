@@ -3,6 +3,7 @@ package nl.tijsbeek.api.entities;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 /**
  * See <a href="https://osu.ppy.sh/wiki/en/Game_mode">osu-wiki, game modes</a>
@@ -36,15 +37,16 @@ public enum GameMode {
      */
     MANIA(3);
 
+    @NotNull
     @Contract(pure = true)
-    public static GameMode getByIndex(int index) {
-        return switch (index) {
-            case 0 -> OSU;
-            case 1 -> TAIKO;
-            case 2 -> CTB;
-            case 3 -> MANIA;
-            default -> throw new IndexOutOfBoundsException(index);
-        };
+    public static GameMode getById(@Range(from = 0, to = 3) int id) {
+        for (GameMode gameMode : values()) {
+            if (gameMode.getMode() == id) {
+                return gameMode;
+            }
+        }
+
+        throw new IllegalArgumentException("No game mode with id " + id);
     }
 
 

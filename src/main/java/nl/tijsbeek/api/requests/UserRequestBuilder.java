@@ -5,35 +5,48 @@ import nl.tijsbeek.api.entities.UserType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Builder for a {@link UserRequest}
+ * Builder for {@link UserRequest UserRequests}.
  */
-public class UserRequestBuilder {
+public class UserRequestBuilder implements RequestBuilder<UserRequest> {
     private static final Logger logger = LoggerFactory.getLogger(UserRequestBuilder.class);
 
+    /**
+     * Maximum amount of allowed event days
+     */
     private static final int MAX_ALLOWED_EVENTS_DAYS = 31;
+
+    /**
+     * Minimum amount of allowed event days
+     */
     private static final int MIN_ALLOWED_EVENTS_DAYS = 1;
+
+    /**
+     * Default amount of event days
+     */
+    private static final int DEFAULT_EVENT_DAYS = 1;
 
     private String user;
     private UserType userType;
     private GameMode gameMode;
-    private int eventDays = 1;
+    private int eventDays = DEFAULT_EVENT_DAYS;
 
     /**
-     * Constructs the builder
+     * Constructs the builder.
      */
     @Contract(pure = true)
     public UserRequestBuilder() {
     }
 
     /**
-     * Sets the user for the request
+     * Sets the user for the request.
      *
      * @param userName the user's name
-     * @return the builder
+     * @return this builder
      * @see #setUserId(String)
      * @see #setUser(String, UserType)
      */
@@ -44,10 +57,10 @@ public class UserRequestBuilder {
     }
 
     /**
-     * Sets the user for the request
+     * Sets the user for the request.
      *
-     * @param userId the user's ID
-     * @return the builder
+     * @param userId the user's id
+     * @return this builder
      * @see #setUserName(String)
      * @see #setUser(String, UserType)
      */
@@ -64,13 +77,12 @@ public class UserRequestBuilder {
      *
      * @param user     the username/id
      * @param userType the {@link UserType}
-     * @return the builder
+     * @return this builder
      * @see #setUser(String)
      * @see #setUserId(String)
      * @see #setUserName(String)
      */
     @NotNull
-    @SuppressWarnings("ParameterHidesMemberVariable")
     @Contract(value = "_, _ -> this", mutates = "this")
     public UserRequestBuilder setUser(@NotNull String user, @NotNull UserType userType) {
         this.user = user;
@@ -85,7 +97,7 @@ public class UserRequestBuilder {
      * This might fail when the username is only numbers. </b>
      *
      * @param user the user's name/id
-     * @return the builder
+     * @return this builder
      * @see #setUser(String, UserType)
      */
     @NotNull
@@ -99,7 +111,7 @@ public class UserRequestBuilder {
      * Sets the game mode, default is {@link GameMode#OSU}
      *
      * @param gameMode the game mode
-     * @return the builder
+     * @return this builder
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
@@ -114,12 +126,12 @@ public class UserRequestBuilder {
      * Has to be between 1-31, default is 1
      *
      * @param eventDays amount of days to request
-     * @return the builder
+     * @return this builder
      * @throws IllegalArgumentException if eventDays isn't between 1 and 31
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setEventDays(int eventDays) {
+    public UserRequestBuilder setEventDays(@Range(from = MIN_ALLOWED_EVENTS_DAYS, to = MAX_ALLOWED_EVENTS_DAYS) int eventDays) {
         if (MAX_ALLOWED_EVENTS_DAYS < eventDays || MIN_ALLOWED_EVENTS_DAYS > eventDays) {
             throw new IllegalArgumentException("eventDays isn't range of %s-%s"
                     .formatted(MIN_ALLOWED_EVENTS_DAYS, MAX_ALLOWED_EVENTS_DAYS));
@@ -129,14 +141,10 @@ public class UserRequestBuilder {
         return this;
     }
 
-    /**
-     * Builds the {@link UserRequest} so all the variables are final
-     *
-     * @return {@link UserRequest} based of the builders variables
-     */
+
     @NotNull
-    @Contract(" -> new")
-    public UserRequest createUserRequest() {
+    @Override
+    public UserRequest create() {
         if (null == user) {
             throw new IllegalStateException("user can't be null!");
         }
@@ -148,7 +156,6 @@ public class UserRequestBuilder {
     @NotNull
     @Override
     @Contract(pure = true)
-    @SuppressWarnings("DuplicateStringLiteralInspection")
     public String toString() {
         return "UserRequestBuilder{" +
                 "user='" + user + '\'' +

@@ -87,7 +87,7 @@ public final class CachingPolicyBuilder {
     /**
      * Builds the {@link CachingPolicy}
      *
-     * @return a newly created {@link CachingPolicy} based off the settings on the set on the Builder
+     * @return a newly created {@link CachingPolicy} based off the settings on the set on this builder
      */
     @Contract(" -> new")
     @NotNull

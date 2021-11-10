@@ -57,8 +57,8 @@ public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T
         logger.debug("Removed id-holder:{} from cache", id);
     }
 
-    @Contract(value = NULL_FALSE, pure = true)
     @Override
+    @Contract(value = NULL_FALSE, pure = true)
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;
@@ -72,10 +72,10 @@ public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T
         return Objects.hash(super.hashCode(), cache);
     }
 
-    @Contract(pure = true)
     @NotNull
-    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override
+    @Contract(pure = true)
+    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     public String toString() {
         return "IdCacheImpl{" +
                 "cache=" + cache +
