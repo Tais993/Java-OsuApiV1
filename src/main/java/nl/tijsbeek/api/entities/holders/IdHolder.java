@@ -1,24 +1,26 @@
-package nl.tijsbeek.api.entities;
+package nl.tijsbeek.api.entities.holders;
 
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Functional interface for all entities with an ID
+ * Functional interface for all entities with an id
  */
 @FunctionalInterface
 public interface IdHolder {
 
     /**
-     * Returns the ID as an {@link java.lang.Long}
+     * Returns the id as an {@link Long}
      *
      * @return id
+     * @see #idString()
      */
     long id();
 
     /**
-     * Returns the ID as a {@link java.lang.String}
+     * Returns the id as a {@link String}
      *
      * @return id
+     * @see #id()
      */
     @NotNull
     default String idString() {

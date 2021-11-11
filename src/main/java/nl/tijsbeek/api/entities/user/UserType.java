@@ -1,4 +1,4 @@
-package nl.tijsbeek.api.entities;
+package nl.tijsbeek.api.entities.user;
 
 import nl.tijsbeek.api.requests.UserRequestBuilder;
 import org.jetbrains.annotations.Contract;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Used with the {@link UserRequestBuilder}
  * <p>
- * If no user-type is given, a username might be interpreted as an ID
+ * If no user-type is given, a username might be interpreted as an id
  * To fix this, the user can manually define what type the given user is.
  * <p>
  * The user may also use the {@link UserRequestBuilder#setUserName(String)} or {@link UserRequestBuilder#setUserId(String)} method instead
@@ -19,11 +19,11 @@ public enum UserType {
     /**
      * Sets the given user to be handled as an username
      */
-    USERNAME("string"),
+    NAME("string"),
     /**
      * Sets the given user to be handled as an user-id
      */
-    USER_ID("id");
+    ID("id");
 
     @NotNull
     private final String type;

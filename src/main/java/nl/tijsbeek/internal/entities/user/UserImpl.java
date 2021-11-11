@@ -1,7 +1,7 @@
-package nl.tijsbeek.internal.entities;
+package nl.tijsbeek.internal.entities.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import nl.tijsbeek.api.entities.User;
+import nl.tijsbeek.api.entities.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +9,7 @@ import java.util.Set;
 
 public record UserImpl(@JsonProperty("user_id") long id,
                        @JsonProperty("username") String name,
-                       @JsonProperty("join_date") String joinTime,
+                       @JsonProperty("join_date") String joinTimeString,
                        int count300,
                        int count100,
                        int count50,

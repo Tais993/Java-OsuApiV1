@@ -33,7 +33,7 @@ public final class OAWv1Builder {
      * Creates the OAWv1Builder with the given token
      *
      * @param token api token
-     * @return the builder
+     * @return this builder
      */
     @NotNull
     @Contract("_ -> new")
@@ -45,7 +45,7 @@ public final class OAWv1Builder {
      * Replaces the token
      *
      * @param token api token
-     * @return the builder
+     * @return this builder
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
@@ -60,7 +60,7 @@ public final class OAWv1Builder {
      * When creating a default caching policy, use {@link CachingPolicyBuilder#defaultPolicy()}
      *
      * @param cachingPolicy the {@link CachingPolicy}
-     * @return the builder
+     * @return this builder
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
@@ -75,7 +75,7 @@ public final class OAWv1Builder {
      * Use {@link CachingPolicyBuilder#fromEntity(CachingPolicyEntity)} for creation of {@link CachingPolicy CachingPolicies}
      *
      * @param cachingPolicy the {@link CachingPolicy} to add
-     * @return the builder
+     * @return this builder
      * @throws IllegalStateException when a default caching policy has been given.
      */
     @NotNull
@@ -115,7 +115,6 @@ public final class OAWv1Builder {
     @NotNull
     @Override
     @Contract(pure = true)
-    @SuppressWarnings("DuplicateStringLiteralInspection")
     public String toString() {
         return "OAWv1Builder{" +
                 "token='" + token + '\'' +

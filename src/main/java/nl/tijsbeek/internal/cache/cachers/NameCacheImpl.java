@@ -4,8 +4,9 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import nl.tijsbeek.api.cache.cachers.NameCache;
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
-import nl.tijsbeek.api.entities.NameHolder;
+import nl.tijsbeek.api.entities.holders.NameHolder;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -14,9 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.Objects;
 
-import static nl.tijsbeek.internal.Constants.NULL_FALSE;
-
-public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T> implements NameCache<T> {
+public class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T> implements NameCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(NameCacheImpl.class);
 
     @NotNull
@@ -58,8 +57,8 @@ public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<Str
         logger.debug("Removed name-holder:{} from cache", name);
     }
 
-    @Contract(value = NULL_FALSE, pure = true)
     @Override
+    @Contract(value = "null -> false", pure = true)
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;
@@ -76,10 +75,10 @@ public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<Str
     }
 
 
-    @Contract(pure = true)
+    @NonNls
     @NotNull
-    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     @Override
+    @Contract(pure = true)
     public String toString() {
         return "NameCacheImpl{" +
                 "cache=" + cache +

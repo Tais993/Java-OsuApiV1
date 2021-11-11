@@ -3,6 +3,7 @@ package nl.tijsbeek.api.entities;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 /**
  * See <a href="https://osu.ppy.sh/wiki/en/Game_mode">osu-wiki, game modes</a>
@@ -36,6 +37,26 @@ public enum GameMode {
      */
     MANIA(3);
 
+
+    /**
+     * Returns a gamemode based on the given id.
+     *
+     * @param id the id of the gamemode
+     * @return the gamemode with the given id
+     */
+    @NotNull
+    @Contract(pure = true)
+    public static GameMode getById(@Range(from = 0, to = 3) int id) {
+        for (GameMode gameMode : values()) {
+            if (gameMode.getMode() == id) {
+                return gameMode;
+            }
+        }
+
+        throw new IllegalArgumentException("No game mode with id " + id);
+    }
+
+
     private final int mode;
 
     @Contract(pure = true)
@@ -52,6 +73,7 @@ public enum GameMode {
     public int getMode() {
         return mode;
     }
+
 
     @NonNls
     @NotNull

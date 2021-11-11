@@ -1,4 +1,4 @@
-package nl.tijsbeek.api.entities;
+package nl.tijsbeek.api.entities.holders;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 public interface NameHolder {
 
     /**
-     * Returns the name as a {@link java.lang.String}
+     * Returns the name as a {@link String}
      *
      * @return name
      */

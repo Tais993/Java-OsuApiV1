@@ -44,7 +44,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
 
     /**
      * Collects all cached entities into a single Collection using the provided
-     * {@link java.util.stream.Collector Collector}.
+     * {@link Collector Collector}.
      * Shortcut for {@code stream().collect(collector)}.
      *
      * <p></p>
@@ -59,7 +59,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * @param <R>       The output type
      * @param <A>       The accumulator type
      * @return Resulting collections
-     * @throws java.lang.IllegalArgumentException If the provided collector is {@code null}
+     * @throws IllegalArgumentException If the provided collector is {@code null}
      */
     default <R, A> R collect(@NotNull Collector<? super T, A, R> collector) {
         return stream().collect(collector);
