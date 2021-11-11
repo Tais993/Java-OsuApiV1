@@ -1,7 +1,8 @@
 package nl.tijsbeek.api.requests;
 
 import nl.tijsbeek.api.entities.GameMode;
-import nl.tijsbeek.api.entities.UserType;
+import nl.tijsbeek.api.entities.user.User;
+import nl.tijsbeek.api.entities.user.UserType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriBuilder;
 
 /**
- * A request for {@link nl.tijsbeek.api.entities.User User's}
+ * A request for {@link User User's}
  * <p>
  * Creation of a request can be done using {@link UserRequestBuilder}
  */
@@ -41,7 +42,6 @@ public record UserRequest(String user, UserType userType, GameMode gameMode,
     @NotNull
     @Override
     @Contract(pure = true)
-    @SuppressWarnings("DuplicateStringLiteralInspection")
     public String toString() {
         return "UserRequest{" +
                 "user='" + user + '\'' +

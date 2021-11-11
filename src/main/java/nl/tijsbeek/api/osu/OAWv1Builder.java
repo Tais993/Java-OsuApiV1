@@ -115,7 +115,6 @@ public final class OAWv1Builder {
     @NotNull
     @Override
     @Contract(pure = true)
-    @SuppressWarnings("DuplicateStringLiteralInspection")
     public String toString() {
         return "OAWv1Builder{" +
                 "token='" + token + '\'' +

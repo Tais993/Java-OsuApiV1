@@ -1,5 +1,7 @@
-package nl.tijsbeek.api.entities;
+package nl.tijsbeek.api.entities.user;
 
+import nl.tijsbeek.api.entities.holders.IdHolder;
+import nl.tijsbeek.api.entities.holders.NameHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;

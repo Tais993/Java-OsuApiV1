@@ -2,18 +2,19 @@ package nl.tijsbeek.internal.osu;
 
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.cache.policy.CachingPolicyBuilder;
-import nl.tijsbeek.api.entities.User;
 import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.api.entities.beatmap.BeatmapSet;
+import nl.tijsbeek.api.entities.user.User;
 import nl.tijsbeek.api.osu.OAWv1;
 import nl.tijsbeek.api.requests.BeatmapSetRequest;
 import nl.tijsbeek.api.requests.Request;
 import nl.tijsbeek.api.requests.UserRequest;
 import nl.tijsbeek.internal.cache.CacheUtils;
 import nl.tijsbeek.internal.cache.handler.CacheHandlerImpl;
-import nl.tijsbeek.internal.entities.UserImpl;
 import nl.tijsbeek.internal.entities.beatmap.BeatmapImpl;
+import nl.tijsbeek.internal.entities.user.UserImpl;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ import java.util.Map;
 import java.util.Optional;
 
 
-public final class OAWv1Impl implements OAWv1 {
+public class OAWv1Impl implements OAWv1 {
     private static final Logger logger = LoggerFactory.getLogger(OAWv1Impl.class);
 
     private final String token;
@@ -70,8 +71,7 @@ public final class OAWv1Impl implements OAWv1 {
     @Override
     public @NotNull Mono<? extends User> retrieveUser(@NotNull UserRequest userRequest) {
         return createResponse(userRequest, "get_user")
-                .bodyToMono(new ParameterizedTypeReference<List<UserImpl>>() {
-                })
+                .bodyToMono(new UserImplListType())
                 .map(users -> users.get(0))
                 .doOnSuccess(cacheUtils::cacheUser);
     }
@@ -120,10 +120,10 @@ public final class OAWv1Impl implements OAWv1 {
     }
 
 
+    @NonNls
     @NotNull
     @Override
     @Contract(pure = true)
-    @SuppressWarnings("MagicCharacter")
     public String toString() {
         return "OAWv1Impl{" +
                 "token='" + token + '\'' +
@@ -134,4 +134,6 @@ public final class OAWv1Impl implements OAWv1 {
     }
 
     private static class BeatmapImplListType extends ParameterizedTypeReference<List<BeatmapImpl>> {}
+
+    private static class UserImplListType extends ParameterizedTypeReference<List<UserImpl>> {}
 }

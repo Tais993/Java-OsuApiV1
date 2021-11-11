@@ -2,7 +2,7 @@ package nl.tijsbeek.api.requests;
 
 import nl.tijsbeek.api.entities.GameMode;
 import nl.tijsbeek.api.entities.Mod;
-import nl.tijsbeek.api.entities.UserType;
+import nl.tijsbeek.api.entities.user.UserType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -16,7 +16,8 @@ import java.util.EnumSet;
 import java.util.Set;
 
 /**
- * A request for {@link nl.tijsbeek.api.entities.beatmap.Beatmap Beatmap's} or {@link nl.tijsbeek.api.entities.beatmap.BeatmapSet BeatmapSet's}.
+ * A request for {@link nl.tijsbeek.api.entities.beatmap.Beatmap Beatmap's} or
+ * {@link nl.tijsbeek.api.entities.beatmap.BeatmapSet BeatmapSet's}.
  * <p>
  * Creation of a request can be done using {@link BeatmapSetRequestBuilder}
  */

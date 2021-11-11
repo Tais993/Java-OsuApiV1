@@ -1,4 +1,4 @@
-package nl.tijsbeek.api.entities;
+package nl.tijsbeek.api.entities.user;
 
 import nl.tijsbeek.api.requests.UserRequestBuilder;
 import org.jetbrains.annotations.Contract;

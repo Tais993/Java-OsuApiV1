@@ -46,7 +46,8 @@ public class AbstractCache<K, T> implements CustomCache<T> {
      * @return the {@link Cache} given in the constructor
      */
     @NotNull
-    protected Cache<K, T> getCache() {
+    @Contract(pure = true)
+    protected final Cache<K, T> getCache() {
         return cache;
     }
 
@@ -106,7 +107,6 @@ public class AbstractCache<K, T> implements CustomCache<T> {
     @NonNls
     @NotNull
     @Override
-    @SuppressWarnings("DuplicateStringLiteralInspection")
     public String toString() {
         return "AbstractCache{" +
                 "cache=" + cache +

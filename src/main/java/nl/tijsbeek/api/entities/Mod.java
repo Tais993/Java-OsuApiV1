@@ -237,7 +237,6 @@ public enum Mod {
         Set<Mod> mods = EnumSet.noneOf(Mod.class);
 
         AtomicInteger bitwise = new AtomicInteger(bitwiseInt);
-        //noinspection MethodCallInLoopCondition
         while (bitwise.get() != 0) {
 
             for (Mod reversedMod : reversedMods) {

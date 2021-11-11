@@ -1,8 +1,8 @@
 package nl.tijsbeek.api.entities.beatmap;
 
 import nl.tijsbeek.api.entities.GameMode;
-import nl.tijsbeek.api.entities.IdHolder;
-import nl.tijsbeek.api.entities.NameHolder;
+import nl.tijsbeek.api.entities.holders.IdHolder;
+import nl.tijsbeek.api.entities.holders.NameHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +15,8 @@ import java.util.List;
  * This beatmap contains information about the map, such as the slider count, gamemode,  and more.
  *
  * <p>
- * Examples are <a href="https://osu.ppy.sh/beatmapsets/1540868#taiko/3254237">osu!mania</a> and <a href="https://osu.ppy.sh/beatmapsets/1360496">osu!standard</a>.
+ * Examples are <a href="https://osu.ppy.sh/beatmapsets/1540868#taiko/3254237">osu!mania</a>
+ * and <a href="https://osu.ppy.sh/beatmapsets/1360496">osu!standard</a>.
  *
  * @see <a href="https://osu.ppy.sh/help/wiki/Beatmaps">osu! wiki on beatmaps</a>
  * @see <a href="https://github.com/ppy/osu-api/wiki#beatmap">osu! API on beatmaps</a>
@@ -194,12 +195,10 @@ public interface Beatmap extends IdHolder, NameHolder {
      */
     int hitLength();
 
-    // TODO: figure out what this means
-
     /**
-     * Unsure
+     * The source from the beatmap
      *
-     * @return a
+     * @return the source
      */
     @NotNull String source();
 
@@ -282,12 +281,10 @@ public interface Beatmap extends IdHolder, NameHolder {
      */
     int favouriteCount();
 
-    // TODO: figure out what this means
-
     /**
-     * Unsure
+     * The beatmap's rating
      *
-     * @return a
+     * @return the rating
      */
     double rating();
 

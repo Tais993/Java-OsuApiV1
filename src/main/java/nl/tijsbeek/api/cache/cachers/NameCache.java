@@ -1,6 +1,7 @@
 package nl.tijsbeek.api.cache.cachers;
 
-import nl.tijsbeek.api.entities.NameHolder;
+import nl.tijsbeek.api.entities.holders.IdHolder;
+import nl.tijsbeek.api.entities.holders.NameHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,32 +11,34 @@ import java.util.Collection;
 /**
  * The interface for caches containing items by their name
  *
- * @param <T> the {@link nl.tijsbeek.api.entities.NameHolder}
+ * @param <T> the {@link NameHolder}
  */
 public interface NameCache<T extends NameHolder> extends CustomCacheStream<T> {
 
     /**
-     * Gets the {@link nl.tijsbeek.api.entities.NameHolder} by their name
+     * Gets the {@link NameHolder} by their name
      *
-     * @param name the {@link nl.tijsbeek.api.entities.NameHolder NameHolder's} name
-     * @return the {@link nl.tijsbeek.api.entities.NameHolder}
+     * @param name the {@link NameHolder NameHolder's} name
+     * @return the {@link NameHolder}
      */
     @Nullable T getItemByName(String name);
 
     /**
-     * Get the {@link nl.tijsbeek.api.entities.NameHolder NameHolder's} by their names
+     * Get the {@link NameHolder NameHolder's} by their names
      *
-     * @param names the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their id
-     * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List< nl.tijsbeek.api.entities.IdHolder >}
+     * @param names the {@link IdHolder IdHolder's} their id
+     * @return the {@link IdHolder IdHolder's} in a
+     * {@link java.util.List< IdHolder >}
      */
     @NotNull Collection<T> getItemsByName(@NotNull Iterable<String> names);
 
 
     /**
-     * Gets the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} by their id
+     * Gets the {@link IdHolder IdHolder's} by their id
      *
-     * @param names the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} their id
-     * @return the {@link nl.tijsbeek.api.entities.IdHolder IdHolder's} in a {@link java.util.List< nl.tijsbeek.api.entities.IdHolder >}
+     * @param names the {@link IdHolder IdHolder's} their id
+     * @return the {@link IdHolder IdHolder's} in a
+     * {@link java.util.List< IdHolder >}
      */
     default @NotNull Collection<T> getItemsByName(String @NotNull ... names) {
         return getItemsByName(

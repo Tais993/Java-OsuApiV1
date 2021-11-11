@@ -2,7 +2,7 @@ package nl.tijsbeek.api.requests;
 
 import nl.tijsbeek.api.entities.GameMode;
 import nl.tijsbeek.api.entities.Mod;
-import nl.tijsbeek.api.entities.UserType;
+import nl.tijsbeek.api.entities.user.UserType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;

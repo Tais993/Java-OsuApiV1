@@ -1,9 +1,9 @@
 package nl.tijsbeek.api.osu;
 
 import nl.tijsbeek.api.cache.handler.CacheHandler;
-import nl.tijsbeek.api.entities.User;
 import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.api.entities.beatmap.BeatmapSet;
+import nl.tijsbeek.api.entities.user.User;
 import nl.tijsbeek.api.requests.BeatmapSetRequest;
 import nl.tijsbeek.api.requests.UserRequest;
 import org.jetbrains.annotations.NotNull;
@@ -16,9 +16,9 @@ import java.util.Optional;
 
 /**
  * The of the wrapper.
- * This class contains all retrieve methods, as example {@link #retrieveUser(nl.tijsbeek.api.requests.UserRequest)}.
+ * This class contains all retrieve methods, as example {@link #retrieveUser(UserRequest)}.
  *
- * @see nl.tijsbeek.api.osu.OAWv1Builder
+ * @see OAWv1Builder
  */
 public interface OAWv1 {
 
@@ -26,7 +26,7 @@ public interface OAWv1 {
      * Retrieve a user based on the Request created
      *
      * @param userRequest the request
-     * @return A {@link Mono<User>} of {@link nl.tijsbeek.api.entities.User}
+     * @return A {@link Mono<User>} of {@link User}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_user">osu-wiki get_user</a>
      */
     @NotNull

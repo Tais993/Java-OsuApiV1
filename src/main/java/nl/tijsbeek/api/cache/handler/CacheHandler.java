@@ -1,8 +1,8 @@
 package nl.tijsbeek.api.cache.handler;
 
 import nl.tijsbeek.api.cache.cachers.IdNameCache;
-import nl.tijsbeek.api.entities.User;
 import nl.tijsbeek.api.entities.beatmap.Beatmap;
+import nl.tijsbeek.api.entities.user.User;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -13,14 +13,14 @@ public interface CacheHandler {
     /**
      * The cacher for {@link User users}
      *
-     * @return {@link nl.tijsbeek.api.cache.cachers.IdNameCache} instance for the user cache
+     * @return {@link IdNameCache} instance for the user cache
      */
     @NotNull IdNameCache<User> getUserCache();
 
     /**
      * The cacher for {@link Beatmap beatmaps}
      *
-     * @return {@link nl.tijsbeek.api.cache.cachers.IdNameCache} instance for the beatmap cache
+     * @return {@link IdNameCache} instance for the beatmap cache
      */
     @NotNull IdNameCache<Beatmap> getBeatmapCache();
 }

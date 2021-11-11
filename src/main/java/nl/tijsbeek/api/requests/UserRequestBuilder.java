@@ -1,7 +1,7 @@
 package nl.tijsbeek.api.requests;
 
 import nl.tijsbeek.api.entities.GameMode;
-import nl.tijsbeek.api.entities.UserType;
+import nl.tijsbeek.api.entities.user.UserType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -132,6 +132,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
     public UserRequestBuilder setEventDays(@Range(from = MIN_ALLOWED_EVENTS_DAYS, to = MAX_ALLOWED_EVENTS_DAYS) int eventDays) {
+        //noinspection ConstantConditions
         if (MAX_ALLOWED_EVENTS_DAYS < eventDays || MIN_ALLOWED_EVENTS_DAYS > eventDays) {
             throw new IllegalArgumentException("eventDays isn't range of %s-%s"
                     .formatted(MIN_ALLOWED_EVENTS_DAYS, MAX_ALLOWED_EVENTS_DAYS));

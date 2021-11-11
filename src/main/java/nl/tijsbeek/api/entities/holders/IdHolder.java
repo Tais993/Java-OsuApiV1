@@ -1,4 +1,4 @@
-package nl.tijsbeek.api.entities;
+package nl.tijsbeek.api.entities.holders;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 public interface IdHolder {
 
     /**
-     * Returns the id as an {@link java.lang.Long}
+     * Returns the id as an {@link Long}
      *
      * @return id
      * @see #idString()
@@ -17,7 +17,7 @@ public interface IdHolder {
     long id();
 
     /**
-     * Returns the id as a {@link java.lang.String}
+     * Returns the id as a {@link String}
      *
      * @return id
      * @see #id()

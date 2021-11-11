@@ -2,9 +2,10 @@ package nl.tijsbeek.internal.cache.cachers;
 
 import nl.tijsbeek.api.cache.cachers.IdNameCache;
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
-import nl.tijsbeek.api.entities.IdHolder;
-import nl.tijsbeek.api.entities.NameHolder;
+import nl.tijsbeek.api.entities.holders.IdHolder;
+import nl.tijsbeek.api.entities.holders.NameHolder;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -136,10 +137,10 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
         return result;
     }
 
+    @NonNls
     @NotNull
     @Override
     @Contract(pure = true)
-    @SuppressWarnings("MagicCharacter")
     public String toString() {
         return "IdNameCacheImpl{" +
                 "idEntityCache=" + idEntityCache +

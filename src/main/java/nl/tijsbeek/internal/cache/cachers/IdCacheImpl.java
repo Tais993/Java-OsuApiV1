@@ -4,8 +4,9 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import nl.tijsbeek.api.cache.cachers.IdCache;
 import nl.tijsbeek.api.cache.policy.CachingPolicy;
-import nl.tijsbeek.api.entities.IdHolder;
+import nl.tijsbeek.api.entities.holders.IdHolder;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -16,7 +17,7 @@ import java.util.Objects;
 
 import static nl.tijsbeek.internal.Constants.NULL_FALSE;
 
-public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> implements IdCache<T> {
+public class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> implements IdCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(IdCacheImpl.class);
 
     @NotNull
@@ -72,10 +73,10 @@ public final class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T
         return Objects.hash(super.hashCode(), cache);
     }
 
+    @NonNls
     @NotNull
     @Override
     @Contract(pure = true)
-    @SuppressWarnings({"DuplicateStringLiteralInspection", "MagicCharacter"})
     public String toString() {
         return "IdCacheImpl{" +
                 "cache=" + cache +
