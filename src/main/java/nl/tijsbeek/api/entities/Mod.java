@@ -102,6 +102,8 @@ public enum Mod {
     TARGET(1 << 24, "Target Practice", "TP", "Target_Practice",
             EnumSet.of(GameMode.OSU));
 
+    private static final String BASE_URL = "https://osu.ppy.sh/wiki/en/Game_modifier/";
+
 
     private final int bitwise;
     private final EnumSet<GameMode> gameModes;
@@ -127,31 +129,54 @@ public enum Mod {
         this(bitwise, displayName, displayName, url, gameModes);
     }
 
+    /**
+     * The bitwise value of this mod.
+     *
+     * @return the bitwise value.
+     */
     @Contract(pure = true)
     public int getBitwise() {
         return bitwise;
     }
 
+    /**
+     * The display name of this mod.
+     *
+     * @return the display name.
+     */
     @NotNull
     @Contract(pure = true)
     public String getDisplayName() {
         return displayName;
     }
 
+    /**
+     * The abbreviation of this mod.
+     *
+     * @return the abbreviation.
+     */
     @NotNull
     @Contract(pure = true)
     public String getAbbreviation() {
         return abbreviation;
     }
 
+    /**
+     * The Wiki URL of this mod.
+     *
+     * @return the wiki URL.
+     * @see #BASE_URL
+     */
     @NotNull
     @Contract(pure = true)
     public String getUrl() {
-        return url;
+        return BASE_URL + url;
     }
 
     /**
-     * @return
+     * The game modes this mod is available in.
+     *
+     * @return the game modes.
      * @see #worksWithGivenMod(GameMode)
      */
     @NotNull
@@ -161,24 +186,51 @@ public enum Mod {
         return Collections.unmodifiableSet(gameModes);
     }
 
+    /**
+     * Checks if this mod is available in the given game mode.
+     *
+     * @param gameMode the game mode to check.
+     * @return {@code true} if this mod is available in the given game mode.
+     * @see #getGameModes()
+     */
     @Contract(pure = true)
     public boolean worksWithGivenMod(GameMode gameMode) {
         return gameModes.contains(gameMode);
     }
 
-
-    public static int modsToBitwise(Mod @NotNull ... mods) {
-        return modsToBitwise(List.of(mods));
+    /**
+     * Converts the given mods to a bitwise value.
+     *
+     * @param mods the mods to convert.
+     * @return the mods converted to a bitwise value.
+     * @see #fromBitwise(int)
+     */
+    public static int toBitwise(Mod @NotNull ... mods) {
+        return toBitwise(List.of(mods));
     }
 
-    public static int modsToBitwise(@NotNull Collection<Mod> mods) {
+    /**
+     * Converts the given mods to a bitwise value.
+     *
+     * @param mods the mods to convert.
+     * @return the mods converted to a bitwise value.
+     * @see #fromBitwise(int)
+     */
+    public static int toBitwise(@NotNull Collection<Mod> mods) {
         return mods.stream()
                 .mapToInt(Mod::getBitwise)
                 .sum();
     }
 
+    /**
+     * Converts the given bitwise value to a {@link Set} of mods.
+     *
+     * @param bitwiseInt the bitwise value to convert.
+     * @return the mods converted from the bitwise value.
+     * @see #toBitwise(Collection)
+     */
     @NotNull
-    public static Set<Mod> getByBitwise(int bitwiseInt) {
+    public static Set<Mod> fromBitwise(int bitwiseInt) {
         List<Mod> reversedMods = new ArrayList<>(List.of(Mod.values()));
         Collections.reverse(reversedMods);
 

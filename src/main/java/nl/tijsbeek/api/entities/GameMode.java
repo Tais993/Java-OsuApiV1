@@ -37,6 +37,13 @@ public enum GameMode {
      */
     MANIA(3);
 
+
+    /**
+     * Returns a gamemode based on the given id.
+     *
+     * @param id the id of the gamemode
+     * @return the gamemode with the given id
+     */
     @NotNull
     @Contract(pure = true)
     public static GameMode getById(@Range(from = 0, to = 3) int id) {

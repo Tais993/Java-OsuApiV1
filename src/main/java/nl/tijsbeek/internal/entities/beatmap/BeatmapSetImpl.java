@@ -3,6 +3,7 @@ package nl.tijsbeek.internal.entities.beatmap;
 import nl.tijsbeek.api.entities.beatmap.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.UnmodifiableView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,6 +91,14 @@ public record BeatmapSetImpl(List<Beatmap> beatmaps,
                 beatmap.creatorId(), beatmap.source(), beatmap.genre(),
                 beatmap.language(), beatmap.title(), beatmap.title(),
                 beatmap.tags(), beatmap.favouriteCount(), beatmap.rating());
+    }
+
+    @Override
+    @NotNull
+    @UnmodifiableView
+    @Contract(pure = true)
+    public List<Beatmap> beatmaps() {
+        return Collections.unmodifiableList(beatmaps);
     }
 
     @NotNull

@@ -86,7 +86,7 @@ public record BeatmapSetRequest(
         }
 
         if (mods != null) {
-            uriBuilder.queryParam("mods", Mod.modsToBitwise(mods));
+            uriBuilder.queryParam("mods", Mod.toBitwise(mods));
         }
 
         return uriBuilder;

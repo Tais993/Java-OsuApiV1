@@ -5,6 +5,9 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
+/**
+ * The "approved" / "ranked" state of the beatmap
+ */
 public enum BeatmapStatus {
     GRAVEYARD("graveyard", -2),
     WIP("WIP", -1),
@@ -14,6 +17,12 @@ public enum BeatmapStatus {
     QUALIFIED("qualified", 3),
     LOVED("loved", 4);
 
+    /**
+     * Returns a status based on the given id.
+     *
+     * @param id the id of the status
+     * @return the status with the given id
+     */
     @NotNull
     @Contract(pure = true)
     public static BeatmapStatus getById(@Range(from = -2, to = 4) int id) {
@@ -27,21 +36,31 @@ public enum BeatmapStatus {
     }
 
 
-    private final String readableName;
+    private final String displayName;
     private final int id;
 
     @Contract(pure = true)
-    BeatmapStatus(@NotNull String readableName, int id) {
-        this.readableName = readableName;
+    BeatmapStatus(@NotNull String displayName, int id) {
+        this.displayName = displayName;
         this.id = id;
     }
 
+    /**
+     * Returns the display name of the status.
+     *
+     * @return the display name
+     */
     @NotNull
     @Contract(pure = true)
-    public String getReadableName() {
-        return readableName;
+    public String getDisplayName() {
+        return displayName;
     }
 
+    /**
+     * Returns the id of the status.
+     *
+     * @return the id
+     */
     @Contract(pure = true)
     public int getId() {
         return id;
@@ -53,7 +72,7 @@ public enum BeatmapStatus {
     @Contract(pure = true)
     public String toString() {
         return "BeatmapStatus{" +
-                "readableName='" + readableName + '\'' +
+                "readableName='" + displayName + '\'' +
                 ", id=" + id +
                 '}';
     }

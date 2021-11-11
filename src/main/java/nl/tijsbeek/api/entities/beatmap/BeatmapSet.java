@@ -5,6 +5,7 @@ import nl.tijsbeek.api.entities.NameHolder;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnmodifiableView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +23,13 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
     @Contract(pure = true)
     Iterator<Beatmap> iterator();
 
-    List<Beatmap> beatmaps();
+    /**
+     * All the beatmaps within this set
+     *
+     * @return a {@link List} of {@link Beatmap}
+     */
+    @UnmodifiableView
+    @NotNull List<Beatmap> beatmaps();
 
 
     /**
@@ -32,6 +39,14 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
      */
     @NotNull BeatmapStatus status();
 
+    /**
+     * The beatmap's submit date
+     * <p>
+     * Format is: "yyyy-MM-dd HH:mm:ss"
+     *
+     * @return UTC submit date
+     * @see #submitDate()
+     */
     @Nullable String submitDateString();
 
     /**
@@ -52,7 +67,14 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
         );
     }
 
-
+    /**
+     * The beatmap's approve date
+     * <p>
+     * Format is: "yyyy-MM-dd HH:mm:ss"
+     *
+     * @return UTC approve date
+     * @see #approvedDate()
+     */
     @Nullable String approvedDateString();
 
     /**
@@ -73,7 +95,14 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
         );
     }
 
-
+    /**
+     * The beatmap's last update date
+     * <p>
+     * Format is: "yyyy-MM-dd HH:mm:ss"
+     *
+     * @return UTC last update date
+     * @see #lastUpdate()
+     */
     @NotNull String lastUpdateString();
 
     /**
