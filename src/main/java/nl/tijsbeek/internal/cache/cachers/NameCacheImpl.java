@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.Objects;
 
-import static nl.tijsbeek.internal.Constants.NULL_FALSE;
-
 public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T> implements NameCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(NameCacheImpl.class);
 
@@ -58,8 +56,8 @@ public final class NameCacheImpl<T extends NameHolder> extends AbstractCache<Str
         logger.debug("Removed name-holder:{} from cache", name);
     }
 
-    @Contract(value = NULL_FALSE, pure = true)
     @Override
+    @Contract(value = "null -> false", pure = true)
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;
