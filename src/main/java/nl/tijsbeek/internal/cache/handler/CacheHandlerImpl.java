@@ -60,6 +60,7 @@ public class CacheHandlerImpl implements CacheHandler {
     }
 
     @NotNull
+    @Override
     public IdNameCache<BeatmapSet> getBeatmapSetCache() {
         return beatmapSetCache;
     }

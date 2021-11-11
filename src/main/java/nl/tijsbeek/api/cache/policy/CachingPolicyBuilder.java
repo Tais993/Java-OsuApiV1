@@ -18,10 +18,16 @@ import java.util.concurrent.TimeUnit;
 public final class CachingPolicyBuilder {
     private static final Logger logger = LoggerFactory.getLogger(CachingPolicyBuilder.class);
 
+
+    private static final long DEFAULT_SIZE = 0L;
+    private static final long DEFAULT_DURATION = 0L;
+    private static final TimeUnit DEFAULT_DURATION_TIMEUNIT = TimeUnit.SECONDS;
+
+
     private final @Nullable CachingPolicyEntity entity;
-    private long size;
-    private long duration;
-    private @NotNull TimeUnit timeUnit = TimeUnit.DAYS;
+    private long size = DEFAULT_SIZE;
+    private long duration = DEFAULT_DURATION;
+    private @NotNull TimeUnit timeUnit = DEFAULT_DURATION_TIMEUNIT;
 
     @Contract(pure = true)
     private CachingPolicyBuilder(@NotNull CachingPolicyEntity entity) {
@@ -58,6 +64,8 @@ public final class CachingPolicyBuilder {
 
     /**
      * Set's the max size of the cache
+     * <p>
+     * Default size is {@link #DEFAULT_SIZE}
      *
      * @param size the size
      * @return The CachingPolicyBuilder instance
@@ -71,6 +79,10 @@ public final class CachingPolicyBuilder {
 
     /**
      * Set's the duration of how long items should stay in the cache.
+     *
+     * <p>
+     * Default duration is {@link #DEFAULT_DURATION}
+     * Default time-unit is {@link #DEFAULT_DURATION_TIMEUNIT}
      *
      * @param duration duration
      * @param timeUnit the {@link TimeUnit} of the duration
@@ -95,10 +107,10 @@ public final class CachingPolicyBuilder {
         return new CachingPolicyImpl(entity, size, duration, timeUnit);
     }
 
-    @Contract(pure = true)
     @NonNls
     @NotNull
     @Override
+    @Contract(pure = true)
     public String toString() {
         return "CachingPolicyBuilder{" +
                 "entity=" + entity +
