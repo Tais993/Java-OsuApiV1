@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -42,6 +43,8 @@ public final class CachingPolicyBuilder {
 
     @Contract(pure = true)
     private CachingPolicyBuilder(@NotNull CachingPolicyEntity entity) {
+        Objects.requireNonNull(entity, "The given entity cannot be null");
+
         this.entity = entity;
     }
 
@@ -59,6 +62,8 @@ public final class CachingPolicyBuilder {
     @Contract(value = "_ -> new", pure = true)
     @NotNull
     public static CachingPolicyBuilder createFromEntity(@NotNull CachingPolicyEntity entity) {
+        Objects.requireNonNull(entity, "The given entity cannot be null");
+
         return new CachingPolicyBuilder(entity);
     }
 
@@ -103,7 +108,7 @@ public final class CachingPolicyBuilder {
     @NotNull
     public CachingPolicyBuilder setDuration(long duration, @NotNull TimeUnit timeUnit) {
         this.duration = duration;
-        this.timeUnit = timeUnit;
+        this.timeUnit = Objects.requireNonNull(timeUnit, "The given timeUnit cannot be null");
         return this;
     }
 

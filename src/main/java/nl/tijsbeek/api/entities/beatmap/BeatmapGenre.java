@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
+import java.util.Objects;
+
 public enum BeatmapGenre {
     ANY(0, "any"),
     UNSPECIFIED(1, "unspecified"),
@@ -30,14 +32,14 @@ public enum BeatmapGenre {
      */
     @NotNull
     @Contract(pure = true)
-    public static BeatmapGenre getById(@Range(from = -2, to = 4) int id) {
+    public static BeatmapGenre getById(@Range(from = 0, to = 14) int id) {
         for (BeatmapGenre beatmapGenre : values()) {
             if (beatmapGenre.getId() == id) {
                 return beatmapGenre;
             }
         }
 
-        throw new IllegalArgumentException("No BeatmapStatus with id " + id);
+        throw new IllegalArgumentException("Id " + id + " out of range (0 to 14)");
     }
 
     private final int id;
@@ -51,6 +53,8 @@ public enum BeatmapGenre {
      */
     @Contract(pure = true)
     BeatmapGenre(int id, @NotNull String name) {
+        Objects.requireNonNull(name, "The given name cannot be null");
+
         this.id = id;
         this.name = name;
     }

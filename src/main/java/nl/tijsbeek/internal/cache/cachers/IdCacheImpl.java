@@ -15,8 +15,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.Objects;
 
-import static nl.tijsbeek.internal.Constants.NULL_FALSE;
-
 public class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> implements IdCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(IdCacheImpl.class);
 
@@ -25,7 +23,10 @@ public class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> impl
 
     public IdCacheImpl(@NotNull CachingPolicy cachingPolicy) {
         super(Caffeine.newBuilder()
-                .maximumSize(cachingPolicy.size())
+                .maximumSize(
+                        Objects.requireNonNull(cachingPolicy,
+                                        "The given cachingPolicy cannot be null")
+                                .size())
                 .expireAfterAccess(cachingPolicy.duration(), cachingPolicy.timeUnit())
                 .build());
         cache = getCache();
@@ -40,16 +41,22 @@ public class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> impl
     @NotNull
     @Override
     public Collection<T> getItemsById(@NotNull Iterable<Long> ids) {
+        Objects.requireNonNull(ids, "The given ids cannot be null");
+
         return cache.getAllPresent(ids).values();
     }
 
 
     public void addItem(@NotNull T idHolder) {
+        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
+
         cache.put(idHolder.id(), idHolder);
         logger.debug("Added id-holder:{} to cache", idHolder.id());
     }
 
     public void removeItem(@NotNull T idHolder) {
+        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
+
         removeItemById(idHolder.id());
     }
 
@@ -59,7 +66,7 @@ public class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> impl
     }
 
     @Override
-    @Contract(value = NULL_FALSE, pure = true)
+    @Contract(value = "null -> false", pure = true)
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;

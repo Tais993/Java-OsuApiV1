@@ -14,8 +14,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
-import static nl.tijsbeek.internal.Constants.NULL_FALSE;
-
 /**
  * Handles a lot of the methods required for the {@link CustomCache}
  *
@@ -35,6 +33,8 @@ public class AbstractCache<K, T> implements CustomCache<T> {
      * @param cache the cache to wrap around
      */
     protected AbstractCache(@NotNull Cache<K, T> cache) {
+        Objects.requireNonNull(cache, "The given cache cannot be null");
+
         this.cache = cache;
         map = cache.asMap();
     }
@@ -71,6 +71,8 @@ public class AbstractCache<K, T> implements CustomCache<T> {
 
     @Override
     public boolean containsAll(@NotNull Collection<?> objects) {
+        Objects.requireNonNull(objects, "The given objects cannot be null");
+
         return objects.stream().anyMatch(o -> !map.containsValue(o));
     }
 
@@ -89,7 +91,7 @@ public class AbstractCache<K, T> implements CustomCache<T> {
 
 
     @Override
-    @Contract(value = NULL_FALSE, pure = true)
+    @Contract(value = "null -> false", pure = true)
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;

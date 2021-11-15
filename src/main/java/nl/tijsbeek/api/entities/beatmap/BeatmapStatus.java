@@ -32,7 +32,7 @@ public enum BeatmapStatus {
             }
         }
 
-        throw new IllegalArgumentException("No BeatmapStatus with id " + id);
+        throw new IllegalArgumentException("Id " + id + " out of range (-2 to 4)");
     }
 
 

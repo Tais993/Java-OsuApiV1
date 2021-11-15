@@ -53,7 +53,7 @@ public enum GameMode {
             }
         }
 
-        throw new IllegalArgumentException("No game mode with id " + id);
+        throw new IllegalArgumentException("Id " + id + " out of range (0 to 3)");
     }
 
 

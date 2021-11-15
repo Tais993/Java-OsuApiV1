@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
+import java.util.Objects;
+
 /**
  * // 0 = any, 1 = unspecified, 2 = english, 3 = japanese, 4 = chinese, 5 = instrumental, 6 = korean,
  * 7 = french, 8 = german, 9 = swedish, 10 = spanish, 11 = italian, 12 = russian, 13 = polish, 14 = other
@@ -41,7 +43,7 @@ public enum BeatmapLanguage {
             }
         }
 
-        throw new IllegalArgumentException("No language with id " + id);
+        throw new IllegalArgumentException("Id " + id + " out of range (0 to 14)");
     }
 
     private final int id;
@@ -55,6 +57,8 @@ public enum BeatmapLanguage {
      */
     @Contract(pure = true)
     BeatmapLanguage(int id, @NotNull String name) {
+        Objects.requireNonNull(name, "The given name cannot be null");
+
         this.id = id;
         this.name = name;
     }

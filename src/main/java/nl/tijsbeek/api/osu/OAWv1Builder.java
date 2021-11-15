@@ -7,13 +7,11 @@ import nl.tijsbeek.internal.osu.OAWv1Impl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Builds the {@link OAWv1}
@@ -25,7 +23,7 @@ public final class OAWv1Builder {
     private CachingPolicy defaultCachingPolicy;
     private final Collection<CachingPolicy> cachingPolicies = new ArrayList<>(CachingPolicyEntity.values().length);
 
-    private OAWv1Builder(String token) {
+    private OAWv1Builder(@Nullable String token) {
         this.token = token;
     }
 
@@ -37,7 +35,7 @@ public final class OAWv1Builder {
      */
     @NotNull
     @Contract("_ -> new")
-    public static OAWv1Builder createOsuBuilder(String token) {
+    public static OAWv1Builder createOsuBuilder(@Nullable String token) {
         return new OAWv1Builder(token);
     }
 
@@ -49,7 +47,7 @@ public final class OAWv1Builder {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public OAWv1Builder setToken(String token) {
+    public OAWv1Builder setToken(@Nullable String token) {
         this.token = token;
         return this;
     }
@@ -64,7 +62,7 @@ public final class OAWv1Builder {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public OAWv1Builder setDefaultCachingPolicy(CachingPolicy cachingPolicy) {
+    public OAWv1Builder setDefaultCachingPolicy(@Nullable CachingPolicy cachingPolicy) {
         defaultCachingPolicy = cachingPolicy;
         return this;
     }
@@ -81,9 +79,8 @@ public final class OAWv1Builder {
     @NotNull
     @Contract("_ -> this")
     public OAWv1Builder addCachingPolicy(@NotNull CachingPolicy cachingPolicy) {
-        if (null == cachingPolicy.entity()) {
-            throw new IllegalStateException("The entity can never be null of non-default caching policies!");
-        }
+        Objects.requireNonNull(cachingPolicy, "The given cachingPolicy cannot be null");
+        Objects.requireNonNull(cachingPolicy.entity(), "The given cachingPolicy.entity() cannot be null");
 
         cachingPolicies.add(cachingPolicy);
         return this;

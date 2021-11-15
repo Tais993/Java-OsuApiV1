@@ -117,6 +117,11 @@ public enum Mod {
     Mod(int bitwise, @NotNull String displayName, @NotNull String abbreviation,
         @NotNull String url, @NotNull EnumSet<GameMode> gameModes) {
 
+        Objects.requireNonNull(displayName, "The given displayName cannot be null");
+        Objects.requireNonNull(abbreviation, "The given abbreviation cannot be null");
+        Objects.requireNonNull(url, "The given url cannot be null");
+        Objects.requireNonNull(gameModes, "The given gameModes cannot be null");
+
         this.bitwise = bitwise;
         this.gameModes = gameModes;
         this.displayName = displayName;
@@ -193,7 +198,7 @@ public enum Mod {
      * @return {@code true} if this mod is available in the given game mode.
      * @see #getGameModes()
      */
-    @Contract(pure = true)
+    @Contract(value = "null -> false", pure = true)
     public boolean worksWithGivenMod(GameMode gameMode) {
         return gameModes.contains(gameMode);
     }
@@ -205,7 +210,9 @@ public enum Mod {
      * @return the mods converted to a bitwise value.
      * @see #fromBitwise(int)
      */
-    public static int toBitwise(Mod @NotNull ... mods) {
+    public static int toBitwise(@NotNull Mod... mods) {
+        Objects.requireNonNull(mods, "The given mods cannot be null");
+
         return toBitwise(List.of(mods));
     }
 
@@ -217,6 +224,8 @@ public enum Mod {
      * @see #fromBitwise(int)
      */
     public static int toBitwise(@NotNull Collection<Mod> mods) {
+        Objects.requireNonNull(mods, "The given mods cannot be null");
+
         return mods.stream()
                 .mapToInt(Mod::getBitwise)
                 .sum();

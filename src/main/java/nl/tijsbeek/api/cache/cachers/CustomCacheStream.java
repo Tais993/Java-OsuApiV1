@@ -2,10 +2,7 @@ package nl.tijsbeek.api.cache.cachers;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
@@ -38,6 +35,8 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      */
     @NotNull
     default Stream<T> filter(@NotNull Predicate<? super T> predicate) {
+        Objects.requireNonNull(predicate, "The given predicate cannot be null");
+
         return stream().filter(predicate);
     }
 
@@ -62,6 +61,8 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * @throws IllegalArgumentException If the provided collector is {@code null}
      */
     default <R, A> R collect(@NotNull Collector<? super T, A, R> collector) {
+        Objects.requireNonNull(collector, "The given collector cannot be null");
+
         return stream().collect(collector);
     }
 
@@ -80,7 +81,9 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * @return an array of T
      */
     @NotNull
-    default T @NotNull [] toArray(IntFunction<T[]> generator) {
+    default T @NotNull [] toArray(@NotNull IntFunction<T[]> generator) {
+        Objects.requireNonNull(generator, "The given generator cannot be null");
+
         return stream().toArray(generator);
     }
 
@@ -116,6 +119,5 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
     @NotNull
     default Set<T> toSet() {
         return stream().collect(Collectors.toCollection(HashSet::new));
-
     }
 }

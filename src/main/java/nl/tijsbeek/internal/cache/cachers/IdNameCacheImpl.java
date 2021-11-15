@@ -15,8 +15,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 
-import static nl.tijsbeek.internal.Constants.NULL_FALSE;
-
 public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(IdNameCacheImpl.class);
 
@@ -27,6 +25,8 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
 
 
     public IdNameCacheImpl(@NotNull CachingPolicy cachingPolicy) {
+        Objects.requireNonNull(cachingPolicy, "The given cachingPolicy cannot be null");
+
         idEntityCache = new IdCacheImpl<>(cachingPolicy);
         nameEntityCache = new NameCacheImpl<>(cachingPolicy);
     }
@@ -41,30 +41,40 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     @NotNull
     @Override
     public Collection<T> getItemsById(@NotNull Iterable<Long> ids) {
+        Objects.requireNonNull(ids, "The given ids cannot be null");
+
         return idEntityCache.getItemsById(ids);
     }
 
 
     @Nullable
     @Override
-    public T getItemByName(String name) {
+    public T getItemByName(@NotNull String name) {
+        Objects.requireNonNull(name, "The given name cannot be null");
+
         return nameEntityCache.getItemByName(name);
     }
 
     @NotNull
     @Override
     public Collection<T> getItemsByName(@NotNull Iterable<String> names) {
+        Objects.requireNonNull(names, "The given names cannot be null");
+
         return nameEntityCache.getItemsByName(names);
     }
 
 
     public void addItem(@NotNull T idHolder) {
+        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
+
         idEntityCache.addItem(idHolder);
         nameEntityCache.addItem(idHolder);
     }
 
 
     public void removeItem(@NotNull T idHolder) {
+        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
+
         idEntityCache.removeItem(idHolder);
         nameEntityCache.removeItem(idHolder);
     }
@@ -76,7 +86,9 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
         }
     }
 
-    public void removeItemByName(String name) {
+    public void removeItemByName(@NotNull String name) {
+        Objects.requireNonNull(name, "The given name cannot be null");
+
         T holder = nameEntityCache.getItemByName(name);
         if (null != holder) {
             removeItem(holder);
@@ -95,12 +107,14 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     }
 
     @Override
-    public boolean contains(Object object) {
+    public boolean contains(@Nullable Object object) {
         return idEntityCache.contains(object);
     }
 
     @Override
     public boolean containsAll(@NotNull Collection<?> objects) {
+        Objects.requireNonNull(objects, "The given objects cannot be null");
+
         return idEntityCache.containsAll(objects);
     }
 
@@ -117,9 +131,8 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
         return idEntityCache.iterator();
     }
 
-
-    @Contract(value = NULL_FALSE, pure = true)
     @Override
+    @Contract(value = "null -> false", pure = true)
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;

@@ -23,10 +23,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 public class OAWv1Impl implements OAWv1 {
@@ -40,8 +37,11 @@ public class OAWv1Impl implements OAWv1 {
     private final @NotNull WebClient webClient;
 
 
-    public OAWv1Impl(String token, @Nullable CachingPolicy argumentCachingPolicy,
-                     @NotNull Map<Class<?>, @NotNull CachingPolicy> cachingPolicyMap) {
+    public OAWv1Impl(@NotNull String token, @Nullable CachingPolicy argumentCachingPolicy,
+                     @NotNull Map<Class<?>, CachingPolicy> cachingPolicyMap) {
+
+        Objects.requireNonNull(token, "The given token cannot be null");
+        Objects.requireNonNull(cachingPolicyMap, "The given cachingPolicyMap cannot be null");
 
         this.token = token;
 
@@ -70,6 +70,8 @@ public class OAWv1Impl implements OAWv1 {
 
     @Override
     public @NotNull Mono<? extends User> retrieveUser(@NotNull UserRequest userRequest) {
+        Objects.requireNonNull(userRequest, "The given userRequest cannot be null");
+
         return createResponse(userRequest, "get_user")
                 .bodyToMono(new UserImplListType())
                 .map(users -> users.get(0))
@@ -78,7 +80,9 @@ public class OAWv1Impl implements OAWv1 {
 
 
     @Override
-    public Mono<Collection<BeatmapSet>> retrieveBeatmapSets(@NotNull BeatmapSetRequest beatmapSetRequest) {
+    public @NotNull Mono<Collection<BeatmapSet>> retrieveBeatmapSets(@NotNull BeatmapSetRequest beatmapSetRequest) {
+        Objects.requireNonNull(beatmapSetRequest, "The given beatmapSetRequest cannot be null");
+
         return createResponse(beatmapSetRequest, "get_beatmaps")
                 .bodyToMono(new BeatmapImplListType())
                 .map(OAWv1Mapper::mapToBeatmapSets)
@@ -86,7 +90,9 @@ public class OAWv1Impl implements OAWv1 {
     }
 
     @Override
-    public Mono<Optional<Beatmap>> retrieveBeatmap(@NotNull BeatmapSetRequest beatmapSetRequest) {
+    public @NotNull Mono<Optional<Beatmap>> retrieveBeatmap(@NotNull BeatmapSetRequest beatmapSetRequest) {
+        Objects.requireNonNull(beatmapSetRequest, "The given beatmapSetRequest cannot be null");
+
         return createResponse(beatmapSetRequest, "get_beatmaps")
                 .bodyToMono(new BeatmapImplListType())
                 .map(OAWv1Mapper::mapToBeatmap)
@@ -98,6 +104,8 @@ public class OAWv1Impl implements OAWv1 {
     @NotNull
     @Override
     public Mono<Optional<BeatmapSet>> retrieveBeatmapSet(@NotNull BeatmapSetRequest beatmapSetRequest) {
+        Objects.requireNonNull(beatmapSetRequest, "The given beatmapSetRequest cannot be null");
+
         return createResponse(beatmapSetRequest, "get_beatmaps")
                 .bodyToMono(new BeatmapImplListType())
                 .map(OAWv1Mapper::mapToBeatmapSet)
@@ -109,6 +117,8 @@ public class OAWv1Impl implements OAWv1 {
 
     @NotNull
     private WebClient.ResponseSpec createResponse(@NotNull Request request, @NotNull String path) {
+        Objects.requireNonNull(request, "The given request cannot be null");
+        Objects.requireNonNull(path, "The given path cannot be null");
 
         logger.info("Retrieving path {} with request {}", path, request);
 

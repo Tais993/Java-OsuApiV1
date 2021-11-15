@@ -29,8 +29,7 @@ public interface OAWv1 {
      * @return A {@link Mono<User>} of {@link User}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_user">osu-wiki get_user</a>
      */
-    @NotNull
-    Mono<? extends User> retrieveUser(@NotNull UserRequest userRequest);
+    @NotNull Mono<? extends User> retrieveUser(@NotNull UserRequest userRequest);
 
     /**
      * Retrieve all beatmapsets based on the Request created
@@ -39,7 +38,7 @@ public interface OAWv1 {
      * @return A {@link Flux<User>} of {@link Beatmap}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
      */
-    Mono<Collection<BeatmapSet>> retrieveBeatmapSets(@NotNull BeatmapSetRequest beatmapSetRequest);
+    @NotNull Mono<Collection<BeatmapSet>> retrieveBeatmapSets(@NotNull BeatmapSetRequest beatmapSetRequest);
 
     /**
      * Retrieve a beatmap based on the Request created <br />
@@ -49,7 +48,7 @@ public interface OAWv1 {
      * @return A {@link Flux<User>} of {@link Beatmap}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
      */
-    Mono<Optional<Beatmap>> retrieveBeatmap(@NotNull BeatmapSetRequest beatmapSetRequest);
+    @NotNull Mono<Optional<Beatmap>> retrieveBeatmap(@NotNull BeatmapSetRequest beatmapSetRequest);
 
     /**
      * Retrieve a beatmapset based on the Request created <br />
@@ -59,7 +58,7 @@ public interface OAWv1 {
      * @return A {@link Flux<User>} of {@link Beatmap}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
      */
-    Mono<Optional<BeatmapSet>> retrieveBeatmapSet(@NotNull BeatmapSetRequest beatmapSetRequest);
+    @NotNull Mono<Optional<BeatmapSet>> retrieveBeatmapSet(@NotNull BeatmapSetRequest beatmapSetRequest);
 
     /**
      * The {@link nl.tijsbeek.api.cache.handler.CacheHandler} to be used for getting cached items
