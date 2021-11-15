@@ -13,15 +13,26 @@ import java.util.concurrent.TimeUnit;
 /**
  * The builder to create {@link CachingPolicy CachingPolicies} with.
  * <p>
- * Use {@link #fromEntity(CachingPolicyEntity)} and {@link #defaultPolicy()} for getting a builder instance
+ * Use {@link #createFromEntity(CachingPolicyEntity)} and {@link #createDefaultPolicy()} for getting a builder instance
  */
 public final class CachingPolicyBuilder {
     private static final Logger logger = LoggerFactory.getLogger(CachingPolicyBuilder.class);
 
 
+    /**
+     * The default caching policy size
+     */
     private static final long DEFAULT_SIZE = 0L;
-    private static final long DEFAULT_DURATION = 0L;
-    private static final TimeUnit DEFAULT_DURATION_TIMEUNIT = TimeUnit.SECONDS;
+
+    /**
+     * The default duration of the caching policy
+     */
+    private static final long DEFAULT_DURATION = 10L;
+
+    /**
+     * The default time unit of the caching policy
+     */
+    private static final TimeUnit DEFAULT_DURATION_TIMEUNIT = TimeUnit.MINUTES;
 
 
     private final @Nullable CachingPolicyEntity entity;
@@ -47,7 +58,7 @@ public final class CachingPolicyBuilder {
      */
     @Contract(value = "_ -> new", pure = true)
     @NotNull
-    public static CachingPolicyBuilder fromEntity(@NotNull CachingPolicyEntity entity) {
+    public static CachingPolicyBuilder createFromEntity(@NotNull CachingPolicyEntity entity) {
         return new CachingPolicyBuilder(entity);
     }
 
@@ -58,7 +69,7 @@ public final class CachingPolicyBuilder {
      */
     @Contract(value = " -> new", pure = true)
     @NotNull
-    public static CachingPolicyBuilder defaultPolicy() {
+    public static CachingPolicyBuilder createDefaultPolicy() {
         return new CachingPolicyBuilder();
     }
 

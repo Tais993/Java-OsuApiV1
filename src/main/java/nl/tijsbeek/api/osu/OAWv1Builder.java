@@ -57,7 +57,7 @@ public final class OAWv1Builder {
     /**
      * Set's the default {@link CachingPolicy}
      * <p>
-     * When creating a default caching policy, use {@link CachingPolicyBuilder#defaultPolicy()}
+     * When creating a default caching policy, use {@link CachingPolicyBuilder#createDefaultPolicy()}
      *
      * @param cachingPolicy the {@link CachingPolicy}
      * @return this builder
@@ -72,7 +72,7 @@ public final class OAWv1Builder {
     /**
      * Adds a {@link CachingPolicy} to the list
      * <p>
-     * Use {@link CachingPolicyBuilder#fromEntity(CachingPolicyEntity)} for creation of {@link CachingPolicy CachingPolicies}
+     * Use {@link CachingPolicyBuilder#createFromEntity(CachingPolicyEntity)} for creation of {@link CachingPolicy CachingPolicies}
      *
      * @param cachingPolicy the {@link CachingPolicy} to add
      * @return this builder
