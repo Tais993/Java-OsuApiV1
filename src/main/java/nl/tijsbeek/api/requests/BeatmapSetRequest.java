@@ -37,9 +37,9 @@ public record BeatmapSetRequest(
         implements Request {
     private static final Logger logger = LoggerFactory.getLogger(BeatmapSetRequest.class);
 
-    BeatmapSetRequest(@Nullable LocalDateTime since, long beatmapSetId, long beatmapId,
-                      @Nullable String user, @Nullable UserType userType, @Nullable GameMode mode,
-                      boolean includeConverted, @Nullable String beatmapHash, int limit, @NotNull Collection<Mod> mods) {
+    BeatmapSetRequest(@Nullable final LocalDateTime since, final long beatmapSetId, final long beatmapId,
+                      @Nullable final String user, @Nullable final UserType userType, @Nullable final GameMode mode,
+                      final boolean includeConverted, @Nullable final String beatmapHash, final int limit, @NotNull final Collection<Mod> mods) {
 
         this(since, beatmapSetId, beatmapId,
                 user, userType, mode,
@@ -50,7 +50,7 @@ public record BeatmapSetRequest(
     @NotNull
     @Override
     @Contract(value = "_ -> param1", mutates = "param1")
-    public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
+    public UriBuilder setUriParams(@NotNull final UriBuilder uriBuilder) {
         Objects.requireNonNull(uriBuilder, "The given uriBuilder cannot be null");
 
         if (null != since) {

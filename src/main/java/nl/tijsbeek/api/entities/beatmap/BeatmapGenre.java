@@ -32,8 +32,8 @@ public enum BeatmapGenre {
      */
     @NotNull
     @Contract(pure = true)
-    public static BeatmapGenre getById(@Range(from = 0, to = 14) int id) {
-        for (BeatmapGenre beatmapGenre : values()) {
+    public static BeatmapGenre getById(@Range(from = 0, to = 14) final int id) {
+        for (final BeatmapGenre beatmapGenre : values()) {
             if (beatmapGenre.getId() == id) {
                 return beatmapGenre;
             }
@@ -52,7 +52,7 @@ public enum BeatmapGenre {
      * @param name the genre's name
      */
     @Contract(pure = true)
-    BeatmapGenre(int id, @NotNull String name) {
+    BeatmapGenre(final int id, @NotNull final String name) {
         Objects.requireNonNull(name, "The given name cannot be null");
 
         this.id = id;

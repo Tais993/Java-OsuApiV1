@@ -36,8 +36,8 @@ public enum BeatmapLanguage {
      */
     @NotNull
     @Contract(pure = true)
-    public static BeatmapLanguage getById(@Range(from = 0, to = 14) int id) {
-        for (BeatmapLanguage language : values()) {
+    public static BeatmapLanguage getById(@Range(from = 0, to = 14) final int id) {
+        for (final BeatmapLanguage language : values()) {
             if (language.getId() == id) {
                 return language;
             }
@@ -56,7 +56,7 @@ public enum BeatmapLanguage {
      * @param name the language's name
      */
     @Contract(pure = true)
-    BeatmapLanguage(int id, @NotNull String name) {
+    BeatmapLanguage(final int id, @NotNull final String name) {
         Objects.requireNonNull(name, "The given name cannot be null");
 
         this.id = id;

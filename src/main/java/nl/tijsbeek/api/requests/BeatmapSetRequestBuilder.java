@@ -70,7 +70,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setSince(@Nullable LocalDateTime since) {
+    public BeatmapSetRequestBuilder setSince(@Nullable final LocalDateTime since) {
         this.since = since;
         return this;
     }
@@ -83,7 +83,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setBeatmapSetId(long beatmapSetId) {
+    public BeatmapSetRequestBuilder setBeatmapSetId(final long beatmapSetId) {
         this.beatmapSetId = beatmapSetId;
         return this;
     }
@@ -96,7 +96,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setBeatmapId(long beatmapId) {
+    public BeatmapSetRequestBuilder setBeatmapId(final long beatmapId) {
         this.beatmapId = beatmapId;
         return this;
     }
@@ -111,7 +111,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setCreatorId(long userId) {
+    public BeatmapSetRequestBuilder setCreatorId(final long userId) {
         return setCreatorId(String.valueOf(userId));
     }
 
@@ -125,7 +125,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setCreatorId(@Nullable String creatorId) {
+    public BeatmapSetRequestBuilder setCreatorId(@Nullable final String creatorId) {
         this.creator = creatorId;
         this.userType = UserType.ID;
         return this;
@@ -140,7 +140,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setCreatorName(@Nullable String creatorName) {
+    public BeatmapSetRequestBuilder setCreatorName(@Nullable final String creatorName) {
         this.creator = creatorName;
         this.userType = UserType.NAME;
         return this;
@@ -155,7 +155,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setCreator(@Nullable String creator) {
+    public BeatmapSetRequestBuilder setCreator(@Nullable final String creator) {
         this.creator = creator;
         return this;
     }
@@ -171,7 +171,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_,_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setCreator(@Nullable String creator, @Nullable UserType userType) {
+    public BeatmapSetRequestBuilder setCreator(@Nullable final String creator, @Nullable final UserType userType) {
         this.creator = creator;
         this.userType = userType;
         return this;
@@ -185,7 +185,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setGameMode(@Nullable GameMode mode) {
+    public BeatmapSetRequestBuilder setGameMode(@Nullable final GameMode mode) {
         this.mode = mode;
         return this;
     }
@@ -200,7 +200,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder doesIncludeConverted(boolean includeConverted) {
+    public BeatmapSetRequestBuilder doesIncludeConverted(final boolean includeConverted) {
         this.includeConverted = includeConverted;
         return this;
     }
@@ -216,7 +216,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setBeatmapHash(@Nullable String beatmapHash) {
+    public BeatmapSetRequestBuilder setBeatmapHash(@Nullable final String beatmapHash) {
         this.beatmapHash = beatmapHash;
         return this;
     }
@@ -230,7 +230,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setLimit(@Range(from = MIN_LIMIT, to = MAX_LIMIT) int limit) {
+    public BeatmapSetRequestBuilder setLimit(@Range(from = MIN_LIMIT, to = MAX_LIMIT) final int limit) {
         //noinspection ConstantConditions
         if (MIN_LIMIT > limit || limit > MAX_LIMIT) {
             throw new IllegalArgumentException("Limit must be between %s and %s".formatted(MIN_LIMIT, MAX_LIMIT));
@@ -251,7 +251,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder addMods(@NotNull Mod... mods) {
+    public BeatmapSetRequestBuilder addMods(@NotNull final Mod... mods) {
         Objects.requireNonNull(mods, "The given mods cannot be null");
 
         return addMods(List.of(mods));
@@ -268,7 +268,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder addMods(@NotNull Collection<Mod> mods) {
+    public BeatmapSetRequestBuilder addMods(@NotNull final Collection<Mod> mods) {
         Objects.requireNonNull(mods, "The given mods cannot be null");
 
         this.mods.addAll(mods);
@@ -287,7 +287,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setMods(@NotNull Mod... mods) {
+    public BeatmapSetRequestBuilder setMods(@NotNull final Mod... mods) {
         Objects.requireNonNull(mods, "The given mods cannot be null");
 
         return setMods(List.of(mods));
@@ -305,7 +305,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setMods(@NotNull Collection<Mod> mods) {
+    public BeatmapSetRequestBuilder setMods(@NotNull final Collection<Mod> mods) {
         Objects.requireNonNull(mods, "The given mods cannot be null");
 
         this.mods.clear();

@@ -63,76 +63,76 @@ public record BeatmapImpl(
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public BeatmapImpl(
-            @JsonProperty("approved") int approved,
+            @JsonProperty("approved") final int approved,
 
-            @JsonProperty("submit_date") String submitDate,
-            @JsonProperty("approved_date") String approvedDate,
-            @JsonProperty("last_update") String lastUpdate,
+            @JsonProperty("submit_date") final String submitDate,
+            @JsonProperty("approved_date") final String approvedDate,
+            @JsonProperty("last_update") final String lastUpdate,
 
-            @JsonProperty("artist") String artist,
-            @JsonProperty("beatmap_id") long beatmapId,
-            @JsonProperty("beatmapset_id") long beatmapSetId,
+            @JsonProperty("artist") final String artist,
+            @JsonProperty("beatmap_id") final long beatmapId,
+            @JsonProperty("beatmapset_id") final long beatmapSetId,
 
-            @JsonProperty("bpm") double bpm,
+            @JsonProperty("bpm") final double bpm,
 
-            @JsonProperty("creator") String creatorName,
-            @JsonProperty("creator_id") String creatorId,
+            @JsonProperty("creator") final String creatorName,
+            @JsonProperty("creator_id") final String creatorId,
 
-            @JsonProperty("difficultyrating") double difficultyRating,
-            @JsonProperty("diff_aim") double diffAim,
-            @JsonProperty("diff_speed") double diffSpeed,
-            @JsonProperty("diff_size") double diffSize,
-            @JsonProperty("diff_overall") double diffOverall,
-            @JsonProperty("diff_approach") double diffApproach,
-            @JsonProperty("diff_drain") double diffDrain,
+            @JsonProperty("difficultyrating") final double difficultyRating,
+            @JsonProperty("diff_aim") final double diffAim,
+            @JsonProperty("diff_speed") final double diffSpeed,
+            @JsonProperty("diff_size") final double diffSize,
+            @JsonProperty("diff_overall") final double diffOverall,
+            @JsonProperty("diff_approach") final double diffApproach,
+            @JsonProperty("diff_drain") final double diffDrain,
 
-            @JsonProperty("hit_length") int hitLength,
+            @JsonProperty("hit_length") final int hitLength,
 
-            @JsonProperty("source") String source,
+            @JsonProperty("source") final String source,
 
-            @JsonProperty("genre_id") int genreId,
-            @JsonProperty("language_id") int languageId,
+            @JsonProperty("genre_id") final int genreId,
+            @JsonProperty("language_id") final int languageId,
 
-            @JsonProperty("title") String title,
+            @JsonProperty("title") final String title,
 
-            @JsonProperty("total_length") int totalLength,
+            @JsonProperty("total_length") final int totalLength,
 
-            @JsonProperty("version") String version,
+            @JsonProperty("version") final String version,
 
-            @JsonProperty("file_md5") String fileMd5,
+            @JsonProperty("file_md5") final String fileMd5,
 
-            @JsonProperty("mode") int mode,
+            @JsonProperty("mode") final int mode,
 
-            @JsonProperty("tags") @NotNull CharSequence tags,
+            @JsonProperty("tags") @NotNull final CharSequence tags,
 
-            @JsonProperty("favourite_count") int favouriteCount,
+            @JsonProperty("favourite_count") final int favouriteCount,
 
-            @JsonProperty("rating") double rating,
+            @JsonProperty("rating") final double rating,
 
-            @JsonProperty("playcount") long playCount,
-            @JsonProperty("pass_count") long passCount,
+            @JsonProperty("playcount") final long playCount,
+            @JsonProperty("pass_count") final long passCount,
 
-            @JsonProperty("count_normal") int countNormal,
-            @JsonProperty("count_slider") int countSlider,
-            @JsonProperty("count_spinner") int countSpinner,
+            @JsonProperty("count_normal") final int countNormal,
+            @JsonProperty("count_slider") final int countSlider,
+            @JsonProperty("count_spinner") final int countSpinner,
 
-            @JsonProperty("max_combo") int maxCombo,
-
-            @JsonDeserialize(using = NumericBooleanDeserializer.class)
-            @JsonProperty("storyboard")
-                    boolean hasStoryboard,
+            @JsonProperty("max_combo") final int maxCombo,
 
             @JsonDeserialize(using = NumericBooleanDeserializer.class)
-            @JsonProperty("video")
-                    boolean hasVideo,
+            @JsonProperty("storyboard") final
+            boolean hasStoryboard,
 
             @JsonDeserialize(using = NumericBooleanDeserializer.class)
-            @JsonProperty("download_unavailable")
-                    boolean downloadIsUnavailable,
+            @JsonProperty("video") final
+            boolean hasVideo,
 
             @JsonDeserialize(using = NumericBooleanDeserializer.class)
-            @JsonProperty("audio_unavailable")
-                    boolean audioIsUnavailable
+            @JsonProperty("download_unavailable") final
+            boolean downloadIsUnavailable,
+
+            @JsonDeserialize(using = NumericBooleanDeserializer.class)
+            @JsonProperty("audio_unavailable") final
+            boolean audioIsUnavailable
     ) {
         this(BeatmapStatus.getById(approved), submitDate,
                 approvedDate, lastUpdate, artist,

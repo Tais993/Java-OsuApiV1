@@ -32,7 +32,7 @@ public class AbstractCache<K, T> implements CustomCache<T> {
      *
      * @param cache the cache to wrap around
      */
-    protected AbstractCache(@NotNull Cache<K, T> cache) {
+    protected AbstractCache(@NotNull final Cache<K, T> cache) {
         Objects.requireNonNull(cache, "The given cache cannot be null!");
 
         this.cache = cache;
@@ -64,12 +64,12 @@ public class AbstractCache<K, T> implements CustomCache<T> {
 
 
     @Override
-    public boolean contains(@Nullable Object object) {
+    public boolean contains(@Nullable final Object object) {
         return map.containsValue(object);
     }
 
     @Override
-    public boolean containsAll(@NotNull Collection<?> objects) {
+    public boolean containsAll(@NotNull final Collection<?> objects) {
         Objects.requireNonNull(objects, "objects cannot be null!");
 
         return objects.stream().anyMatch(o -> !map.containsValue(o));
@@ -91,7 +91,7 @@ public class AbstractCache<K, T> implements CustomCache<T> {
 
     @Override
     @Contract(value = "null -> false", pure = true)
-    public boolean equals(@Nullable Object obj) {
+    public boolean equals(@Nullable final Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;
 

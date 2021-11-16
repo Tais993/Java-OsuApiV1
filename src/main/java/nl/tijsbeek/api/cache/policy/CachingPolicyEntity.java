@@ -68,7 +68,7 @@ public enum CachingPolicyEntity {
     private final Class<?> relatingClass;
 
     @Contract(pure = true)
-    CachingPolicyEntity(@NotNull Class<?> relatingClass) {
+    CachingPolicyEntity(@NotNull final Class<?> relatingClass) {
         Objects.requireNonNull(relatingClass, "The given relatingClass cannot be null");
 
         this.relatingClass = relatingClass;

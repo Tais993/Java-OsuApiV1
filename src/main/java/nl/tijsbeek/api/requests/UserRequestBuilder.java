@@ -51,7 +51,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setUserName(@Nullable String userName) {
+    public UserRequestBuilder setUserName(@Nullable final String userName) {
         return setUser(userName, UserType.NAME);
     }
 
@@ -65,7 +65,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setUserId(@Nullable String userId) {
+    public UserRequestBuilder setUserId(@Nullable final String userId) {
         return setUser(userId, UserType.ID);
     }
 
@@ -83,7 +83,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_, _ -> this", mutates = "this")
-    public UserRequestBuilder setUser(@Nullable String user, @Nullable UserType userType) {
+    public UserRequestBuilder setUser(@Nullable final String user, @Nullable final UserType userType) {
         this.user = user;
         this.userType = userType;
         return this;
@@ -101,7 +101,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setUser(@Nullable String user) {
+    public UserRequestBuilder setUser(@Nullable final String user) {
         this.user = user;
         return this;
     }
@@ -114,7 +114,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setGameMode(@Nullable GameMode gameMode) {
+    public UserRequestBuilder setGameMode(@Nullable final GameMode gameMode) {
         this.gameMode = gameMode;
         return this;
     }
@@ -130,7 +130,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setEventDays(@Range(from = MIN_ALLOWED_EVENTS_DAYS, to = MAX_ALLOWED_EVENTS_DAYS) int eventDays) {
+    public UserRequestBuilder setEventDays(@Range(from = MIN_ALLOWED_EVENTS_DAYS, to = MAX_ALLOWED_EVENTS_DAYS) final int eventDays) {
         //noinspection ConstantConditions
         if (MAX_ALLOWED_EVENTS_DAYS < eventDays || MIN_ALLOWED_EVENTS_DAYS > eventDays) {
             throw new IllegalArgumentException("eventDays isn't range of %s-%s"

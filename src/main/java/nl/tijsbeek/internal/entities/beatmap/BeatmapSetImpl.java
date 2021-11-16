@@ -46,13 +46,13 @@ public record BeatmapSetImpl(List<Beatmap> beatmaps,
 
     @NotNull
     @Contract("_ -> new")
-    public static BeatmapSet of(@NotNull Beatmap beatmap) {
+    public static BeatmapSet of(@NotNull final Beatmap beatmap) {
         return of(Collections.singletonList(beatmap));
     }
 
     @NotNull
     @Contract("_ -> new")
-    public static BeatmapSet of(@NotNull List<? extends Beatmap> beatmaps) {
+    public static BeatmapSet of(@NotNull final List<? extends Beatmap> beatmaps) {
         if (beatmaps.isEmpty()) {
             throw new IndexOutOfBoundsException("Beatmap list is empty");
         }
@@ -68,7 +68,7 @@ public record BeatmapSetImpl(List<Beatmap> beatmaps,
 
     @NotNull
     @Contract("_, _ -> new")
-    public static BeatmapSet merge(@NotNull BeatmapSet beatmapSet1, @NotNull BeatmapSet beatmapSet2) {
+    public static BeatmapSet merge(@NotNull final BeatmapSet beatmapSet1, @NotNull final BeatmapSet beatmapSet2) {
         List<Beatmap> beatmaps = new ArrayList<>(beatmapSet1.beatmaps());
         beatmaps.addAll(beatmapSet2.beatmaps());
 
@@ -84,7 +84,7 @@ public record BeatmapSetImpl(List<Beatmap> beatmaps,
                 null, 0, 0.0D);
     }
 
-    private BeatmapSetImpl(@NotNull List<? extends Beatmap> beatmaps, @NotNull Beatmap beatmap) {
+    private BeatmapSetImpl(@NotNull final List<? extends Beatmap> beatmaps, @NotNull final Beatmap beatmap) {
         this(Collections.unmodifiableList(beatmaps), beatmap.status(), beatmap.submitDateString(),
                 beatmap.approvedDateString(), beatmap.lastUpdateString(),
                 beatmap.artist(), beatmap.beatmapSetId(), beatmap.creatorName(),

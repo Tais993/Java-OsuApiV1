@@ -15,7 +15,7 @@ public record CachingPolicyImpl(@Nullable CachingPolicyEntity entity, long size,
         implements CachingPolicy {
     private static final Logger logger = LoggerFactory.getLogger(CachingPolicyImpl.class);
 
-    public CachingPolicyImpl(@Nullable CachingPolicyEntity entity, long size, long duration, @NotNull TimeUnit timeUnit) {
+    public CachingPolicyImpl(@Nullable final CachingPolicyEntity entity, final long size, final long duration, @NotNull final TimeUnit timeUnit) {
         this.entity = entity;
         this.size = size;
         this.duration = duration;

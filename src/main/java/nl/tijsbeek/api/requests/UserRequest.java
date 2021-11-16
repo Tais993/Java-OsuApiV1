@@ -22,7 +22,7 @@ public record UserRequest(@NotNull String user, @Nullable UserType userType, @Nu
                           int eventDays) implements Request {
     private static final Logger logger = LoggerFactory.getLogger(UserRequest.class);
 
-    public UserRequest(@NotNull String user, @Nullable UserType userType, @Nullable GameMode gameMode, int eventDays) {
+    public UserRequest(@NotNull final String user, @Nullable final UserType userType, @Nullable final GameMode gameMode, final int eventDays) {
         this.user = Objects.requireNonNull(user, "user cannot be null");
         this.userType = userType;
         this.gameMode = gameMode;
@@ -32,7 +32,7 @@ public record UserRequest(@NotNull String user, @Nullable UserType userType, @Nu
     @NotNull
     @Override
     @Contract(value = "_ -> param1", mutates = "param1")
-    public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
+    public UriBuilder setUriParams(@NotNull final UriBuilder uriBuilder) {
         Objects.requireNonNull(uriBuilder, "The given uriBuilder cannot be null");
 
         uriBuilder.queryParam("u", user);

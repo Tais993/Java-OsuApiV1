@@ -42,7 +42,7 @@ public final class CachingPolicyBuilder {
     private @NotNull TimeUnit timeUnit = DEFAULT_DURATION_TIMEUNIT;
 
     @Contract(pure = true)
-    private CachingPolicyBuilder(@NotNull CachingPolicyEntity entity) {
+    private CachingPolicyBuilder(@NotNull final CachingPolicyEntity entity) {
         Objects.requireNonNull(entity, "The given entity cannot be null");
 
         this.entity = entity;
@@ -61,7 +61,7 @@ public final class CachingPolicyBuilder {
      */
     @Contract(value = "_ -> new", pure = true)
     @NotNull
-    public static CachingPolicyBuilder createFromEntity(@NotNull CachingPolicyEntity entity) {
+    public static CachingPolicyBuilder createFromEntity(@NotNull final CachingPolicyEntity entity) {
         Objects.requireNonNull(entity, "The given entity cannot be null");
 
         return new CachingPolicyBuilder(entity);
@@ -88,7 +88,7 @@ public final class CachingPolicyBuilder {
      */
     @Contract(value = "_ -> this", mutates = "this")
     @NotNull
-    public CachingPolicyBuilder setSize(long size) {
+    public CachingPolicyBuilder setSize(final long size) {
         this.size = size;
         return this;
     }
@@ -106,7 +106,7 @@ public final class CachingPolicyBuilder {
      */
     @Contract(value = "_, _ -> this", mutates = "this")
     @NotNull
-    public CachingPolicyBuilder setDuration(long duration, @NotNull TimeUnit timeUnit) {
+    public CachingPolicyBuilder setDuration(final long duration, @NotNull final TimeUnit timeUnit) {
         this.duration = duration;
         this.timeUnit = Objects.requireNonNull(timeUnit, "The given timeUnit cannot be null");
         return this;

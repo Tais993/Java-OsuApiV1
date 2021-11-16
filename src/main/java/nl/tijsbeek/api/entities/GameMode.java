@@ -46,8 +46,8 @@ public enum GameMode {
      */
     @NotNull
     @Contract(pure = true)
-    public static GameMode getById(@Range(from = 0, to = 3) int id) {
-        for (GameMode gameMode : values()) {
+    public static GameMode getById(@Range(from = 0, to = 3) final int id) {
+        for (final GameMode gameMode : values()) {
             if (gameMode.getMode() == id) {
                 return gameMode;
             }
@@ -60,7 +60,7 @@ public enum GameMode {
     private final int mode;
 
     @Contract(pure = true)
-    GameMode(int mode) {
+    GameMode(final int mode) {
         this.mode = mode;
     }
 

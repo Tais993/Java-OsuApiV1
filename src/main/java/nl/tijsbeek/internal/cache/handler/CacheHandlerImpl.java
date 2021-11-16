@@ -31,8 +31,8 @@ public class CacheHandlerImpl implements CacheHandler {
     @NotNull
     private final IdNameCache<BeatmapSet> beatmapSetCache;
 
-    public CacheHandlerImpl(@NotNull CachingPolicy defaultCachingPolicy,
-                            @NotNull Map<Class<?>, CachingPolicy> cachingPolicies) {
+    public CacheHandlerImpl(@NotNull final CachingPolicy defaultCachingPolicy,
+                            @NotNull final Map<Class<?>, CachingPolicy> cachingPolicies) {
         Objects.requireNonNull(defaultCachingPolicy, "The given defaultCachingPolicy cannot be null");
         Objects.requireNonNull(cachingPolicies, "The given cachingPolicies cannot be null");
 

@@ -34,7 +34,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * @return a new stream
      */
     @NotNull
-    default Stream<T> filter(@NotNull Predicate<? super T> predicate) {
+    default Stream<T> filter(@NotNull final Predicate<? super T> predicate) {
         Objects.requireNonNull(predicate, "The given predicate cannot be null");
 
         return stream().filter(predicate);
@@ -60,7 +60,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * @return Resulting collections
      * @throws IllegalArgumentException If the provided collector is {@code null}
      */
-    default <R, A> R collect(@NotNull Collector<? super T, A, R> collector) {
+    default <R, A> R collect(@NotNull final Collector<? super T, A, R> collector) {
         Objects.requireNonNull(collector, "The given collector cannot be null");
 
         return stream().collect(collector);
@@ -81,7 +81,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * @return an array of T
      */
     @NotNull
-    default T[] toArray(@NotNull IntFunction<T[]> generator) {
+    default T[] toArray(@NotNull final IntFunction<T[]> generator) {
         Objects.requireNonNull(generator, "The given generator cannot be null");
 
         return stream().toArray(generator);

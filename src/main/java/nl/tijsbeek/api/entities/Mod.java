@@ -111,8 +111,8 @@ public enum Mod {
 
 
     @Contract(pure = true)
-    Mod(int bitwise, @NotNull String displayName, @NotNull String abbreviation,
-        @NotNull String url, @NotNull EnumSet<GameMode> gameModes) {
+    Mod(final int bitwise, @NotNull final String displayName, @NotNull final String abbreviation,
+        @NotNull final String url, @NotNull final EnumSet<GameMode> gameModes) {
         Objects.requireNonNull(displayName, "The given displayName cannot be null");
         Objects.requireNonNull(abbreviation, "The given abbreviation cannot be null");
         Objects.requireNonNull(url, "The given url cannot be null");
@@ -126,7 +126,7 @@ public enum Mod {
     }
 
     @Contract(pure = true)
-    Mod(int bitwise, @NotNull String displayName, @NotNull String url, @NotNull EnumSet<GameMode> gameModes) {
+    Mod(final int bitwise, @NotNull final String displayName, @NotNull final String url, @NotNull final EnumSet<GameMode> gameModes) {
         this(bitwise, displayName, displayName, url, gameModes);
     }
 
@@ -195,7 +195,7 @@ public enum Mod {
      * @see #getGameModes()
      */
     @Contract(value = "null -> false", pure = true)
-    public boolean worksWithGivenMod(@Nullable GameMode gameMode) {
+    public boolean worksWithGivenMod(@Nullable final GameMode gameMode) {
         return gameModes.contains(gameMode);
     }
 
@@ -206,7 +206,7 @@ public enum Mod {
      * @return the mods converted to a bitwise value.
      * @see #fromBitwise(int)
      */
-    public static int toBitwise(@NotNull Mod... mods) {
+    public static int toBitwise(@NotNull final Mod... mods) {
         Objects.requireNonNull(mods, "The given mods cannot be null");
 
         return toBitwise(List.of(mods));
@@ -219,7 +219,7 @@ public enum Mod {
      * @return the mods converted to a bitwise value.
      * @see #fromBitwise(int)
      */
-    public static int toBitwise(@NotNull Collection<Mod> mods) {
+    public static int toBitwise(@NotNull final Collection<Mod> mods) {
         Objects.requireNonNull(mods, "The given mods cannot be null");
 
         return mods.stream()
@@ -235,7 +235,7 @@ public enum Mod {
      * @see #toBitwise(Collection)
      */
     @NotNull
-    public static Set<Mod> fromBitwise(int bitwiseInt) {
+    public static Set<Mod> fromBitwise(final int bitwiseInt) {
         List<Mod> reversedMods = new ArrayList<>(List.of(Mod.values()));
         Collections.reverse(reversedMods);
 
@@ -244,7 +244,7 @@ public enum Mod {
         AtomicInteger bitwise = new AtomicInteger(bitwiseInt);
         while (bitwise.get() != 0) {
 
-            for (Mod reversedMod : reversedMods) {
+            for (final Mod reversedMod : reversedMods) {
                 if (bitwise.get() >= reversedMod.getBitwise()) {
                     mods.add(reversedMod);
                     bitwise.set(bitwise.get() - reversedMod.getBitwise());

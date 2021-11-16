@@ -21,7 +21,7 @@ public class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T
     @NotNull
     private final Cache<String, T> cache;
 
-    public NameCacheImpl(@NotNull CachingPolicy cachingPolicy) {
+    public NameCacheImpl(@NotNull final CachingPolicy cachingPolicy) {
         super(Caffeine.newBuilder()
                 .maximumSize(
                         Objects.requireNonNull(cachingPolicy,
@@ -35,7 +35,7 @@ public class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T
 
     @Nullable
     @Override
-    public T getItemByName(@NotNull String name) {
+    public T getItemByName(@NotNull final String name) {
         Objects.requireNonNull(name, "The given name cannot be null");
 
         return cache.getIfPresent(name);
@@ -43,27 +43,27 @@ public class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T
 
     @NotNull
     @Override
-    public Collection<T> getItemsByName(@NotNull Iterable<String> names) {
+    public Collection<T> getItemsByName(@NotNull final Iterable<String> names) {
         Objects.requireNonNull(names, "The given names cannot be null");
 
         return cache.getAllPresent(names).values();
     }
 
 
-    public void addItem(@NotNull T nameHolder) {
+    public void addItem(@NotNull final T nameHolder) {
         Objects.requireNonNull(nameHolder, "The given nameHolder cannot be null");
 
         cache.put(nameHolder.name(), nameHolder);
         logger.debug("Added name-holder:{} to cache", nameHolder.name());
     }
 
-    public void removeItem(@NotNull T nameHolder) {
+    public void removeItem(@NotNull final T nameHolder) {
         Objects.requireNonNull(nameHolder, "The given nameHolder cannot be null");
 
         removeItemByName(nameHolder.name());
     }
 
-    public void removeItemByName(@NotNull String name) {
+    public void removeItemByName(@NotNull final String name) {
         Objects.requireNonNull(name, "The given name cannot be null");
 
         cache.invalidate(name);
@@ -72,7 +72,7 @@ public class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T
 
     @Override
     @Contract(value = "null -> false", pure = true)
-    public boolean equals(@Nullable Object obj) {
+    public boolean equals(@Nullable final Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;
 

@@ -23,7 +23,7 @@ public final class OAWv1Builder {
     private CachingPolicy defaultCachingPolicy;
     private final Collection<CachingPolicy> cachingPolicies = new ArrayList<>(CachingPolicyEntity.values().length);
 
-    private OAWv1Builder(@Nullable String token) {
+    private OAWv1Builder(@Nullable final String token) {
         this.token = token;
     }
 
@@ -35,7 +35,7 @@ public final class OAWv1Builder {
      */
     @NotNull
     @Contract("_ -> new")
-    public static OAWv1Builder createOsuBuilder(@Nullable String token) {
+    public static OAWv1Builder createOsuBuilder(@Nullable final String token) {
         return new OAWv1Builder(token);
     }
 
@@ -47,7 +47,7 @@ public final class OAWv1Builder {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public OAWv1Builder setToken(@Nullable String token) {
+    public OAWv1Builder setToken(@Nullable final String token) {
         this.token = token;
         return this;
     }
@@ -62,7 +62,7 @@ public final class OAWv1Builder {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public OAWv1Builder setDefaultCachingPolicy(@Nullable CachingPolicy cachingPolicy) {
+    public OAWv1Builder setDefaultCachingPolicy(@Nullable final CachingPolicy cachingPolicy) {
         defaultCachingPolicy = cachingPolicy;
         return this;
     }
@@ -78,7 +78,7 @@ public final class OAWv1Builder {
      */
     @NotNull
     @Contract("_ -> this")
-    public OAWv1Builder addCachingPolicy(@NotNull CachingPolicy cachingPolicy) {
+    public OAWv1Builder addCachingPolicy(@NotNull final CachingPolicy cachingPolicy) {
         Objects.requireNonNull(cachingPolicy, "The given cachingPolicy cannot be null");
         Objects.requireNonNull(cachingPolicy.entity(), "The given cachingPolicy.entity() cannot be null");
 

@@ -15,7 +15,7 @@ import java.util.Objects;
 public record CacheUtils(CacheHandlerImpl cacheHandlerImpl) {
     private static final Logger logger = LoggerFactory.getLogger(CacheUtils.class);
 
-    public void cacheBeatmapSets(@NotNull Iterable<? extends BeatmapSet> beatmapSets) {
+    public void cacheBeatmapSets(@NotNull final Iterable<? extends BeatmapSet> beatmapSets) {
         Objects.requireNonNull(beatmapSets, "The given beatmapSets cannot be null");
 
         beatmapSets.forEach(beatmapSet -> {
@@ -24,28 +24,28 @@ public record CacheUtils(CacheHandlerImpl cacheHandlerImpl) {
         });
     }
 
-    public void cacheBeatmapSets(@NotNull BeatmapSet... beatmapSets) {
+    public void cacheBeatmapSets(@NotNull final BeatmapSet... beatmapSets) {
         Objects.requireNonNull(beatmapSets, "The given beatmapSets cannot be null");
 
         cacheBeatmapSets(List.of(beatmapSets));
     }
 
 
-    public void cacheUser(@NotNull User user) {
+    public void cacheUser(@NotNull final User user) {
         Objects.requireNonNull(user, "The given user cannot be null");
 
         IdNameCacheImpl<User> userCache = (IdNameCacheImpl<User>) cacheHandlerImpl.getUserCache();
         userCache.addItem(user);
     }
 
-    public void cacheBeatmapSet(@NotNull BeatmapSet beatmapSet) {
+    public void cacheBeatmapSet(@NotNull final BeatmapSet beatmapSet) {
         Objects.requireNonNull(beatmapSet, "The given beatmapSet cannot be null");
 
         IdNameCacheImpl<BeatmapSet> beatmapSetCache = (IdNameCacheImpl<BeatmapSet>) cacheHandlerImpl.getBeatmapSetCache();
         beatmapSetCache.addItem(beatmapSet);
     }
 
-    public void cacheBeatmap(@NotNull Beatmap beatmap) {
+    public void cacheBeatmap(@NotNull final Beatmap beatmap) {
         Objects.requireNonNull(beatmap, "The given beatmap cannot be null");
 
         IdNameCacheImpl<Beatmap> beatmapCache = (IdNameCacheImpl<Beatmap>) cacheHandlerImpl.getBeatmapCache();

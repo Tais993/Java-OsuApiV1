@@ -39,7 +39,7 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * @param ids the {@link IdHolder IdHolder's} their id
      * @return the {@link IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
-    default @NotNull Collection<T> getItemsById(long... ids) {
+    default @NotNull Collection<T> getItemsById(final long... ids) {
         return getItemsById(
                 Arrays.stream(ids)
                         .boxed()
@@ -53,7 +53,7 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * @param ids the {@link IdHolder IdHolder's} their id
      * @return the {@link IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
-    default @NotNull Collection<T> getItemsById(@NotNull String... ids) {
+    default @NotNull Collection<T> getItemsById(@NotNull final String... ids) {
         Objects.requireNonNull(ids, "The given ID's cannot be null");
 
         return getItemsById(
@@ -69,7 +69,7 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * @param id the {@link IdHolder IdHolder's} id
      * @return the {@link IdHolder}
      */
-    default @Nullable T getItemById(@NotNull String id) {
+    default @Nullable T getItemById(@NotNull final String id) {
         Objects.requireNonNull(id, "The given ID cannot be null");
 
         return getItemById(Long.parseLong(id));

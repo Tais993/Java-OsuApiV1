@@ -27,8 +27,8 @@ public enum BeatmapStatus {
      */
     @NotNull
     @Contract(pure = true)
-    public static BeatmapStatus getById(@Range(from = -2, to = 4) int id) {
-        for (BeatmapStatus beatmapStatus : values()) {
+    public static BeatmapStatus getById(@Range(from = -2, to = 4) final int id) {
+        for (final BeatmapStatus beatmapStatus : values()) {
             if (beatmapStatus.getId() == id) {
                 return beatmapStatus;
             }
@@ -42,7 +42,7 @@ public enum BeatmapStatus {
     private final int id;
 
     @Contract(pure = true)
-    BeatmapStatus(@NotNull String displayName, int id) {
+    BeatmapStatus(@NotNull final String displayName, final int id) {
         Objects.requireNonNull(displayName, "displayName cannot be null");
 
         this.displayName = displayName;
