@@ -49,7 +49,7 @@ public interface Beatmap extends IdHolder, NameHolder {
     default @Nullable LocalDateTime submitDate() {
         String submitDateString = submitDateString();
 
-        if (submitDateString == null) {
+        if (null == submitDateString) {
             return null;
         }
 
@@ -77,7 +77,7 @@ public interface Beatmap extends IdHolder, NameHolder {
     default @Nullable LocalDateTime approvedDate() {
         String approvedDateString = approvedDateString();
 
-        if (approvedDateString == null) {
+        if (null == approvedDateString) {
             return null;
         }
 

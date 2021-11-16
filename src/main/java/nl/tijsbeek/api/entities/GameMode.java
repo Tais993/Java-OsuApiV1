@@ -48,12 +48,12 @@ public enum GameMode {
     @Contract(pure = true)
     public static GameMode getById(@Range(from = 0, to = 3) int id) {
         for (GameMode gameMode : values()) {
-            if (gameMode.getMode() == id) {
+            if (gameMode.mode == id) {
                 return gameMode;
             }
         }
 
-        throw new IllegalArgumentException("No game mode with id " + id);
+        throw new IllegalArgumentException("No game mode with id %s".formatted(id));
     }
 
 

@@ -2,12 +2,11 @@ package nl.tijsbeek.api.requests;
 
 import nl.tijsbeek.api.entities.GameMode;
 import nl.tijsbeek.api.entities.user.UserType;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
+import org.jetbrains.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 /**
  * Builder for {@link UserRequest UserRequests}.
@@ -52,7 +51,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setUserName(@NotNull String userName) {
+    public UserRequestBuilder setUserName(@Nullable String userName) {
         return setUser(userName, UserType.NAME);
     }
 
@@ -66,7 +65,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setUserId(@NotNull String userId) {
+    public UserRequestBuilder setUserId(@Nullable String userId) {
         return setUser(userId, UserType.ID);
     }
 
@@ -84,7 +83,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_, _ -> this", mutates = "this")
-    public UserRequestBuilder setUser(@NotNull String user, @NotNull UserType userType) {
+    public UserRequestBuilder setUser(@Nullable String user, @Nullable UserType userType) {
         this.user = user;
         this.userType = userType;
         return this;
@@ -102,7 +101,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setUser(@NotNull String user) {
+    public UserRequestBuilder setUser(@Nullable String user) {
         this.user = user;
         return this;
     }
@@ -115,7 +114,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public UserRequestBuilder setGameMode(@NotNull GameMode gameMode) {
+    public UserRequestBuilder setGameMode(@Nullable GameMode gameMode) {
         this.gameMode = gameMode;
         return this;
     }
@@ -146,9 +145,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
     @NotNull
     @Override
     public UserRequest create() {
-        if (null == user) {
-            throw new IllegalStateException("user can't be null!");
-        }
+        Objects.requireNonNull(user, "The user has to be set!");
 
         return new UserRequest(user, userType, gameMode, eventDays);
     }

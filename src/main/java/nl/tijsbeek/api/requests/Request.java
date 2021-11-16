@@ -20,5 +20,5 @@ public interface Request {
      */
     @NotNull
     @Contract(value = "_ -> param1", mutates = "param1")
-    UriBuilder setUriParams(UriBuilder uriBuilder);
+    UriBuilder setUriParams(@NotNull UriBuilder uriBuilder);
 }

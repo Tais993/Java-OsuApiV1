@@ -80,7 +80,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * @return an array of T
      */
     @NotNull
-    default T @NotNull [] toArray(IntFunction<T[]> generator) {
+    default T @NotNull [] toArray(@NotNull IntFunction<T[]> generator) {
         return stream().toArray(generator);
     }
 

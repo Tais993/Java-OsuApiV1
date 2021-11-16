@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class CacheHandlerImpl implements CacheHandler {
     private static final Logger logger = LoggerFactory.getLogger(CacheHandlerImpl.class);
@@ -32,6 +33,8 @@ public class CacheHandlerImpl implements CacheHandler {
 
     public CacheHandlerImpl(@NotNull CachingPolicy defaultCachingPolicy,
                             @NotNull Map<Class<?>, CachingPolicy> cachingPolicies) {
+        Objects.requireNonNull(defaultCachingPolicy, "defaultCachingPolicy cannot be null");
+        Objects.requireNonNull(cachingPolicies, "cachingPolicies cannot be null");
 
         userCache = new IdNameCacheImpl<>(
                 cachingPolicies.getOrDefault(UserImpl.class, defaultCachingPolicy)

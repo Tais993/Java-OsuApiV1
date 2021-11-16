@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -37,7 +38,7 @@ public record BeatmapSetRequest(
 
     BeatmapSetRequest(LocalDateTime since, long beatmapSetId, long beatmapId,
                       String user, UserType userType, GameMode mode,
-                      boolean includeConverted, String beatmapHash, int limit, Collection<Mod> mods) {
+                      boolean includeConverted, String beatmapHash, int limit, @NotNull Collection<Mod> mods) {
 
         this(since, beatmapSetId, beatmapId,
                 user, userType, mode,
@@ -45,32 +46,33 @@ public record BeatmapSetRequest(
                 (mods.isEmpty()) ? EnumSet.noneOf(Mod.class) : EnumSet.copyOf(mods));
     }
 
+    @NotNull
     @Override
     @Contract(value = "_ -> param1", mutates = "param1")
-    public @NotNull
-    UriBuilder setUriParams(UriBuilder uriBuilder) {
+    public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
+        Objects.requireNonNull(uriBuilder, "UriBuilder cannot be null");
 
-        if (since != null) {
+        if (null != since) {
             uriBuilder.queryParam("since", since.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         }
 
-        if (beatmapSetId != 0L) {
+        if (0L != beatmapSetId) {
             uriBuilder.queryParam("s", beatmapSetId);
         }
 
-        if (beatmapId != 0L) {
+        if (0L != beatmapId) {
             uriBuilder.queryParam("b", beatmapId);
         }
 
-        if (user != null) {
+        if (null != user) {
             uriBuilder.queryParam("u", user);
         }
 
-        if (userType != null) {
+        if (null != userType) {
             uriBuilder.queryParam("type", userType.getType());
         }
 
-        if (mode != null) {
+        if (null != mode) {
             uriBuilder.queryParam("m", mode.getMode());
         }
 
@@ -78,15 +80,15 @@ public record BeatmapSetRequest(
             uriBuilder.queryParam("a", 1);
         }
 
-        if (beatmapHash != null) {
+        if (null != beatmapHash) {
             uriBuilder.queryParam("h", beatmapHash);
         }
 
-        if (limit != 0) {
+        if (0 != limit) {
             uriBuilder.queryParam("limit", limit);
         }
 
-        if (mods != null) {
+        if (null != mods) {
             uriBuilder.queryParam("mods", Mod.toBitwise(mods));
         }
 

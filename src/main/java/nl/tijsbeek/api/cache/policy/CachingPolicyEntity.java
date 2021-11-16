@@ -7,6 +7,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  * Represents an osu entity
  *
@@ -67,6 +69,8 @@ public enum CachingPolicyEntity {
 
     @Contract(pure = true)
     CachingPolicyEntity(@NotNull Class<?> relatingClass) {
+        Objects.requireNonNull(relatingClass, "relatingClass cannot be null");
+
         this.relatingClass = relatingClass;
     }
 

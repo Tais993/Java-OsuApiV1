@@ -58,7 +58,7 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
     default @Nullable LocalDateTime submitDate() {
         String submitDateString = submitDateString();
 
-        if (submitDateString == null) {
+        if (null == submitDateString) {
             return null;
         }
 
@@ -86,7 +86,7 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
     default @Nullable LocalDateTime approvedDate() {
         String approvedDateString = approvedDateString();
 
-        if (approvedDateString == null) {
+        if (null == approvedDateString) {
             return null;
         }
 

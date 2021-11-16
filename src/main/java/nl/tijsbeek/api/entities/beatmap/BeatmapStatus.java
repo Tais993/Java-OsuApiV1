@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
+import java.util.Objects;
+
 /**
  * The "approved" / "ranked" state of the beatmap
  */
@@ -27,12 +29,12 @@ public enum BeatmapStatus {
     @Contract(pure = true)
     public static BeatmapStatus getById(@Range(from = -2, to = 4) int id) {
         for (BeatmapStatus beatmapStatus : values()) {
-            if (beatmapStatus.getId() == id) {
+            if (beatmapStatus.id == id) {
                 return beatmapStatus;
             }
         }
 
-        throw new IllegalArgumentException("No BeatmapStatus with id " + id);
+        throw new IllegalArgumentException("No BeatmapStatus with the given id %s".formatted(id));
     }
 
 
@@ -41,6 +43,8 @@ public enum BeatmapStatus {
 
     @Contract(pure = true)
     BeatmapStatus(@NotNull String displayName, int id) {
+        Objects.requireNonNull(displayName, "displayName cannot be null");
+
         this.displayName = displayName;
         this.id = id;
     }

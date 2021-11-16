@@ -3,10 +3,7 @@ package nl.tijsbeek.api.requests;
 import nl.tijsbeek.api.entities.GameMode;
 import nl.tijsbeek.api.entities.Mod;
 import nl.tijsbeek.api.entities.user.UserType;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
+import org.jetbrains.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Builder for {@link BeatmapSetRequest BeatmapSetRequests}.
@@ -62,7 +60,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setSince(LocalDateTime since) {
+    public BeatmapSetRequestBuilder setSince(@Nullable LocalDateTime since) {
         this.since = since;
         return this;
     }
@@ -117,7 +115,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setCreatorId(String creatorId) {
+    public BeatmapSetRequestBuilder setCreatorId(@Nullable String creatorId) {
         this.creator = creatorId;
         this.userType = UserType.ID;
         return this;
@@ -132,7 +130,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setCreatorName(String creatorName) {
+    public BeatmapSetRequestBuilder setCreatorName(@Nullable String creatorName) {
         this.creator = creatorName;
         this.userType = UserType.NAME;
         return this;
@@ -147,7 +145,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setCreator(String creator) {
+    public BeatmapSetRequestBuilder setCreator(@Nullable String creator) {
         this.creator = creator;
         return this;
     }
@@ -163,7 +161,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_,_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setCreator(String creator, UserType userType) {
+    public BeatmapSetRequestBuilder setCreator(@Nullable String creator, @Nullable UserType userType) {
         this.creator = creator;
         this.userType = userType;
         return this;
@@ -177,7 +175,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setGameMode(GameMode mode) {
+    public BeatmapSetRequestBuilder setGameMode(@Nullable GameMode mode) {
         this.mode = mode;
         return this;
     }
@@ -208,7 +206,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setBeatmapHash(String beatmapHash) {
+    public BeatmapSetRequestBuilder setBeatmapHash(@Nullable String beatmapHash) {
         this.beatmapHash = beatmapHash;
         return this;
     }
@@ -225,8 +223,9 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
     public BeatmapSetRequestBuilder setLimit(@Range(from = MIN_LIMIT, to = MAX_LIMIT) int limit) {
         //noinspection ConstantConditions
         if (MIN_LIMIT > limit || limit > MAX_LIMIT) {
-            throw new IllegalArgumentException("Limit must be between " + MIN_LIMIT + " and " + MAX_LIMIT);
+            throw new IllegalArgumentException("Limit must be between %s and %s".formatted(MIN_LIMIT, MAX_LIMIT));
         }
+
         this.limit = limit;
         return this;
     }
@@ -242,7 +241,9 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder addMods(Mod... mods) {
+    public BeatmapSetRequestBuilder addMods(@NotNull Mod... mods) {
+        Objects.requireNonNull(mods, "mods cannot be null");
+
         return addMods(List.of(mods));
     }
 
@@ -257,7 +258,9 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder addMods(Collection<Mod> mods) {
+    public BeatmapSetRequestBuilder addMods(@NotNull Collection<Mod> mods) {
+        Objects.requireNonNull(mods, "mods cannot be null");
+
         this.mods.addAll(mods);
         return this;
     }
@@ -274,7 +277,9 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setMods(Mod... mods) {
+    public BeatmapSetRequestBuilder setMods(@NotNull Mod... mods) {
+        Objects.requireNonNull(mods, "mods cannot be null");
+
         return setMods(List.of(mods));
     }
 
@@ -290,7 +295,9 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapSetRequestBuilder setMods(Collection<Mod> mods) {
+    public BeatmapSetRequestBuilder setMods(@NotNull Collection<Mod> mods) {
+        Objects.requireNonNull(mods, "mods cannot be null");
+
         this.mods.clear();
         this.mods.addAll(mods);
         return this;

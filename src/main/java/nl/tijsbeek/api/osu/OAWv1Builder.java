@@ -10,10 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Builds the {@link OAWv1}
@@ -54,7 +51,7 @@ public final class OAWv1Builder {
         return this;
     }
 
-    /**
+    /**x
      * Set's the default {@link CachingPolicy}
      * <p>
      * When creating a default caching policy, use {@link CachingPolicyBuilder#defaultPolicy()}
@@ -81,9 +78,7 @@ public final class OAWv1Builder {
     @NotNull
     @Contract("_ -> this")
     public OAWv1Builder addCachingPolicy(@NotNull CachingPolicy cachingPolicy) {
-        if (null == cachingPolicy.entity()) {
-            throw new IllegalStateException("The entity can never be null of non-default caching policies!");
-        }
+        Objects.requireNonNull(cachingPolicy.entity(), "The CachingPolicy's entity cannot be null of non-default caching policies");
 
         cachingPolicies.add(cachingPolicy);
         return this;

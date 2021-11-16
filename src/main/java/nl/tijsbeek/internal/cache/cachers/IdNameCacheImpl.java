@@ -15,8 +15,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 
-import static nl.tijsbeek.internal.Constants.NULL_FALSE;
-
 public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameCache<T> {
     private static final Logger logger = LoggerFactory.getLogger(IdNameCacheImpl.class);
 
@@ -27,6 +25,8 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
 
 
     public IdNameCacheImpl(@NotNull CachingPolicy cachingPolicy) {
+        Objects.requireNonNull(cachingPolicy, "The given cachingPolicy cannot be null");
+
         idEntityCache = new IdCacheImpl<>(cachingPolicy);
         nameEntityCache = new NameCacheImpl<>(cachingPolicy);
     }
@@ -41,6 +41,8 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     @NotNull
     @Override
     public Collection<T> getItemsById(@NotNull Iterable<Long> ids) {
+        Objects.requireNonNull(ids, "The given iterable cannot be null");
+
         return idEntityCache.getItemsById(ids);
     }
 
@@ -54,17 +56,23 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     @NotNull
     @Override
     public Collection<T> getItemsByName(@NotNull Iterable<String> names) {
+        Objects.requireNonNull(names, "The given iterable cannot be null");
+
         return nameEntityCache.getItemsByName(names);
     }
 
 
     public void addItem(@NotNull T idHolder) {
+        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
+
         idEntityCache.addItem(idHolder);
         nameEntityCache.addItem(idHolder);
     }
 
 
     public void removeItem(@NotNull T idHolder) {
+        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
+
         idEntityCache.removeItem(idHolder);
         nameEntityCache.removeItem(idHolder);
     }
@@ -118,8 +126,8 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     }
 
 
-    @Contract(value = NULL_FALSE, pure = true)
     @Override
+    @Contract(value = "null -> false", pure = true)
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;

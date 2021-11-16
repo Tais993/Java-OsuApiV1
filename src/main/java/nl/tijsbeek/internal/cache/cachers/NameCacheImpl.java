@@ -22,8 +22,11 @@ public class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T
     private final Cache<String, T> cache;
 
     public NameCacheImpl(@NotNull CachingPolicy cachingPolicy) {
+
         super(Caffeine.newBuilder()
-                .maximumSize(cachingPolicy.size())
+                .maximumSize(
+                        Objects.requireNonNull(cachingPolicy, "cachingPolicy cannot be null").size()
+                )
                 .expireAfterAccess(cachingPolicy.duration(), cachingPolicy.timeUnit())
                 .build());
         cache = getCache();

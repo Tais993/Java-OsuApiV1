@@ -25,7 +25,9 @@ public class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> impl
 
     public IdCacheImpl(@NotNull CachingPolicy cachingPolicy) {
         super(Caffeine.newBuilder()
-                .maximumSize(cachingPolicy.size())
+                .maximumSize(
+                        Objects.requireNonNull(cachingPolicy, "The given cachingPolicy may not be null!").size()
+                )
                 .expireAfterAccess(cachingPolicy.duration(), cachingPolicy.timeUnit())
                 .build());
         cache = getCache();
@@ -40,16 +42,22 @@ public class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> impl
     @NotNull
     @Override
     public Collection<T> getItemsById(@NotNull Iterable<Long> ids) {
+        Objects.requireNonNull(ids, "The given iterable cannot be null");
+
         return cache.getAllPresent(ids).values();
     }
 
 
     public void addItem(@NotNull T idHolder) {
+        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
+
         cache.put(idHolder.id(), idHolder);
         logger.debug("Added id-holder:{} to cache", idHolder.id());
     }
 
     public void removeItem(@NotNull T idHolder) {
+        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
+
         removeItemById(idHolder.id());
     }
 

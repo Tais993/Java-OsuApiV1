@@ -5,6 +5,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  * Used with the {@link UserRequestBuilder}
  * <p>
@@ -30,6 +32,8 @@ public enum UserType {
 
     @Contract(pure = true)
     UserType(@NotNull String type) {
+        Objects.requireNonNull(type, "type cannot be null");
+
         this.type = type;
     }
 

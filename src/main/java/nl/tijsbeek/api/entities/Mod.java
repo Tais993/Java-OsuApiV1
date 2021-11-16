@@ -116,6 +116,11 @@ public enum Mod {
     @Contract(pure = true)
     Mod(int bitwise, @NotNull String displayName, @NotNull String abbreviation,
         @NotNull String url, @NotNull EnumSet<GameMode> gameModes) {
+        Objects.requireNonNull(displayName, "displayName cannot be null");
+        Objects.requireNonNull(abbreviation, "abbreviation cannot be null");
+        Objects.requireNonNull(url, "url cannot be null");
+        Objects.requireNonNull(gameModes, "gameModes cannot be null");
+
 
         this.bitwise = bitwise;
         this.gameModes = gameModes;
