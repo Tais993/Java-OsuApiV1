@@ -63,7 +63,6 @@ public class AbstractCache<K, T> implements CustomCache<T> {
     }
 
 
-    @Contract(pure = true)
     @Override
     public boolean contains(@Nullable Object object) {
         return map.containsValue(object);

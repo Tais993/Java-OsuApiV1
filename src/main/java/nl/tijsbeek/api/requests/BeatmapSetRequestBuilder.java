@@ -19,8 +19,19 @@ import java.util.Objects;
 public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetRequest> {
     private static final Logger logger = LoggerFactory.getLogger(BeatmapSetRequestBuilder.class);
 
+    /**
+     * Max amount of beatmaps to return
+     */
     private static final int MAX_LIMIT = 500;
+
+    /**
+     * Min amount of beatmaps to return
+     */
     private static final int MIN_LIMIT = 0;
+
+    /**
+     * Default amount of beatmaps to return
+     */
     private static final int DEFAULT_LIMIT = 500;
 
     private LocalDateTime since;
@@ -47,8 +58,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
      * Constructs this builder.
      */
     @Contract(pure = true)
-    public BeatmapSetRequestBuilder() {
-    }
+    public BeatmapSetRequestBuilder() {}
 
     /**
      * Sets the date.

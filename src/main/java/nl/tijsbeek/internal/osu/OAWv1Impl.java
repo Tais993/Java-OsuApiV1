@@ -37,7 +37,7 @@ public class OAWv1Impl implements OAWv1 {
     private final @NotNull WebClient webClient;
 
 
-    public OAWv1Impl(@NotNull String token, @Nullable CachingPolicy argumentCachingPolicy,
+    public OAWv1Impl(@NotNull String token, @Nullable CachingPolicy argumentDefaultCachingPolicy,
                      @NotNull Map<Class<?>, CachingPolicy> cachingPolicyMap) {
 
         Objects.requireNonNull(token, "The given token cannot be null");
@@ -46,9 +46,9 @@ public class OAWv1Impl implements OAWv1 {
         this.token = token;
 
 
-        CachingPolicy defaultCachingPolicy = argumentCachingPolicy;
+        CachingPolicy defaultCachingPolicy = argumentDefaultCachingPolicy;
 
-        if (null == argumentCachingPolicy) {
+        if (null == argumentDefaultCachingPolicy) {
             defaultCachingPolicy = CachingPolicyBuilder.createDefaultPolicy().createCachingPolicy();
         }
 

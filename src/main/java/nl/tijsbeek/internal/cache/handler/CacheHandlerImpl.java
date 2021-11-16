@@ -33,9 +33,6 @@ public class CacheHandlerImpl implements CacheHandler {
 
     public CacheHandlerImpl(@NotNull CachingPolicy defaultCachingPolicy,
                             @NotNull Map<Class<?>, CachingPolicy> cachingPolicies) {
-        Objects.requireNonNull(defaultCachingPolicy, "defaultCachingPolicy cannot be null");
-        Objects.requireNonNull(cachingPolicies, "cachingPolicies cannot be null");
-
         Objects.requireNonNull(defaultCachingPolicy, "The given defaultCachingPolicy cannot be null");
         Objects.requireNonNull(cachingPolicies, "The given cachingPolicies cannot be null");
 

@@ -74,7 +74,7 @@ public final class OAWv1Builder {
      *
      * @param cachingPolicy the {@link CachingPolicy} to add
      * @return this builder
-     * @throws IllegalStateException when a default caching policy has been given.
+     * @throws NullPointerException when a default caching policy has been given.
      */
     @NotNull
     @Contract("_ -> this")

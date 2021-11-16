@@ -199,6 +199,7 @@ public interface User extends IdHolder, NameHolder {
      *
      * @return the profile picture
      */
+    @NotNull
     default String profilePictureUrl() {
         return BASE_PFP_URL + idString();
     }

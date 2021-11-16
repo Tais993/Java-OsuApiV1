@@ -77,8 +77,9 @@ public enum CachingPolicyEntity {
     /**
      * @return the Entity's {@link Class} instance
      */
+    @NotNull
     @Contract(pure = true)
-    public @NotNull Class<?> getRelatingClass() {
+    public Class<?> getRelatingClass() {
         return relatingClass;
     }
 

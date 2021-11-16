@@ -29,7 +29,7 @@ public interface NameCache<T extends NameHolder> extends CustomCacheStream<T> {
      *
      * @param names the {@link IdHolder IdHolder's} their id
      * @return the {@link IdHolder IdHolder's} in a
-     * {@link java.util.List< IdHolder >}
+     * {@link java.util.List<IdHolder>}
      */
     @NotNull Collection<T> getItemsByName(@NotNull Iterable<String> names);
 
@@ -39,7 +39,7 @@ public interface NameCache<T extends NameHolder> extends CustomCacheStream<T> {
      *
      * @param names the {@link IdHolder IdHolder's} their id
      * @return the {@link IdHolder IdHolder's} in a
-     * {@link java.util.List< IdHolder >}
+     * {@link java.util.List<IdHolder>}
      */
     default @NotNull Collection<T> getItemsByName(@NotNull String... names) {
         Objects.requireNonNull(names, "The given names cannot be null");

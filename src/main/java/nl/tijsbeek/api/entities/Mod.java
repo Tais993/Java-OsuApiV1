@@ -1,9 +1,6 @@
 package nl.tijsbeek.api.entities;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.UnmodifiableView;
+import org.jetbrains.annotations.*;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -116,12 +113,6 @@ public enum Mod {
     @Contract(pure = true)
     Mod(int bitwise, @NotNull String displayName, @NotNull String abbreviation,
         @NotNull String url, @NotNull EnumSet<GameMode> gameModes) {
-        Objects.requireNonNull(displayName, "displayName cannot be null");
-        Objects.requireNonNull(abbreviation, "abbreviation cannot be null");
-        Objects.requireNonNull(url, "url cannot be null");
-        Objects.requireNonNull(gameModes, "gameModes cannot be null");
-
-
         Objects.requireNonNull(displayName, "The given displayName cannot be null");
         Objects.requireNonNull(abbreviation, "The given abbreviation cannot be null");
         Objects.requireNonNull(url, "The given url cannot be null");
@@ -204,7 +195,7 @@ public enum Mod {
      * @see #getGameModes()
      */
     @Contract(value = "null -> false", pure = true)
-    public boolean worksWithGivenMod(GameMode gameMode) {
+    public boolean worksWithGivenMod(@Nullable GameMode gameMode) {
         return gameModes.contains(gameMode);
     }
 
