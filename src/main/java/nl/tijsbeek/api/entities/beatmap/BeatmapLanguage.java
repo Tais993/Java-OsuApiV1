@@ -38,12 +38,12 @@ public enum BeatmapLanguage {
     @Contract(pure = true)
     public static BeatmapLanguage getById(@Range(from = 0, to = 14) int id) {
         for (BeatmapLanguage language : values()) {
-            if (language.id == id) {
+            if (language.getId() == id) {
                 return language;
             }
         }
 
-        throw new IllegalArgumentException("No language with the given id %s".formatted(id));
+        throw new IllegalArgumentException("Id " + id + " out of range (0 to 14)");
     }
 
     private final int id;
@@ -57,7 +57,7 @@ public enum BeatmapLanguage {
      */
     @Contract(pure = true)
     BeatmapLanguage(int id, @NotNull String name) {
-        Objects.requireNonNull(name, "name cannot be null");
+        Objects.requireNonNull(name, "The given name cannot be null");
 
         this.id = id;
         this.name = name;

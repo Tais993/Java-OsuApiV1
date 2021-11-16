@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * The interface for caches containing items by their id
@@ -38,7 +39,7 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * @param ids the {@link IdHolder IdHolder's} their id
      * @return the {@link IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
-    default @NotNull Collection<T> getItemsById(long @NotNull ... ids) {
+    default @NotNull Collection<T> getItemsById(long... ids) {
         return getItemsById(
                 Arrays.stream(ids)
                         .boxed()
@@ -52,7 +53,9 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * @param ids the {@link IdHolder IdHolder's} their id
      * @return the {@link IdHolder IdHolder's} in a {@link java.util.List<IdHolder>}
      */
-    default @NotNull Collection<T> getItemsById(String @NotNull ... ids) {
+    default @NotNull Collection<T> getItemsById(@NotNull String... ids) {
+        Objects.requireNonNull(ids, "The given ID's cannot be null");
+
         return getItemsById(
                 Arrays.stream(ids)
                         .map(Long::parseLong)
@@ -67,6 +70,8 @@ public interface IdCache<T extends IdHolder> extends CustomCacheStream<T> {
      * @return the {@link IdHolder}
      */
     default @Nullable T getItemById(@NotNull String id) {
+        Objects.requireNonNull(id, "The given ID cannot be null");
+
         return getItemById(Long.parseLong(id));
     }
 }

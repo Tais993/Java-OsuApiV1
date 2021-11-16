@@ -14,15 +14,26 @@ import java.util.concurrent.TimeUnit;
 /**
  * The builder to create {@link CachingPolicy CachingPolicies} with.
  * <p>
- * Use {@link #fromEntity(CachingPolicyEntity)} and {@link #defaultPolicy()} for getting a builder instance
+ * Use {@link #createFromEntity(CachingPolicyEntity)} and {@link #createDefaultPolicy()} for getting a builder instance
  */
 public final class CachingPolicyBuilder {
     private static final Logger logger = LoggerFactory.getLogger(CachingPolicyBuilder.class);
 
 
+    /**
+     * The default caching policy size
+     */
     private static final long DEFAULT_SIZE = 0L;
-    private static final long DEFAULT_DURATION = 0L;
-    private static final TimeUnit DEFAULT_DURATION_TIMEUNIT = TimeUnit.SECONDS;
+
+    /**
+     * The default duration of the caching policy
+     */
+    private static final long DEFAULT_DURATION = 10L;
+
+    /**
+     * The default time unit of the caching policy
+     */
+    private static final TimeUnit DEFAULT_DURATION_TIMEUNIT = TimeUnit.MINUTES;
 
 
     private final @Nullable CachingPolicyEntity entity;
@@ -32,7 +43,7 @@ public final class CachingPolicyBuilder {
 
     @Contract(pure = true)
     private CachingPolicyBuilder(@NotNull CachingPolicyEntity entity) {
-        Objects.requireNonNull(entity, "entity cannot be null");
+        Objects.requireNonNull(entity, "The given entity cannot be null");
 
         this.entity = entity;
     }
@@ -50,8 +61,8 @@ public final class CachingPolicyBuilder {
      */
     @Contract(value = "_ -> new", pure = true)
     @NotNull
-    public static CachingPolicyBuilder fromEntity(@NotNull CachingPolicyEntity entity) {
-        Objects.requireNonNull(entity, "entity cannot be null");
+    public static CachingPolicyBuilder createFromEntity(@NotNull CachingPolicyEntity entity) {
+        Objects.requireNonNull(entity, "The given entity cannot be null");
 
         return new CachingPolicyBuilder(entity);
     }
@@ -63,7 +74,7 @@ public final class CachingPolicyBuilder {
      */
     @Contract(value = " -> new", pure = true)
     @NotNull
-    public static CachingPolicyBuilder defaultPolicy() {
+    public static CachingPolicyBuilder createDefaultPolicy() {
         return new CachingPolicyBuilder();
     }
 
@@ -96,10 +107,8 @@ public final class CachingPolicyBuilder {
     @Contract(value = "_, _ -> this", mutates = "this")
     @NotNull
     public CachingPolicyBuilder setDuration(long duration, @NotNull TimeUnit timeUnit) {
-        Objects.requireNonNull(timeUnit, "timeUnit cannot be null");
-
         this.duration = duration;
-        this.timeUnit = timeUnit;
+        this.timeUnit = Objects.requireNonNull(timeUnit, "The given timeUnit cannot be null");
         return this;
     }
 

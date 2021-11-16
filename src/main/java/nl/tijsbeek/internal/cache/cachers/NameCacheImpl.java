@@ -22,11 +22,11 @@ public class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T
     private final Cache<String, T> cache;
 
     public NameCacheImpl(@NotNull CachingPolicy cachingPolicy) {
-
         super(Caffeine.newBuilder()
                 .maximumSize(
-                        Objects.requireNonNull(cachingPolicy, "cachingPolicy cannot be null").size()
-                )
+                        Objects.requireNonNull(cachingPolicy,
+                                        "The given cachingPolicy cannot be null")
+                                .size())
                 .expireAfterAccess(cachingPolicy.duration(), cachingPolicy.timeUnit())
                 .build());
         cache = getCache();
@@ -35,27 +35,37 @@ public class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T
 
     @Nullable
     @Override
-    public T getItemByName(String name) {
+    public T getItemByName(@NotNull String name) {
+        Objects.requireNonNull(name, "The given name cannot be null");
+
         return cache.getIfPresent(name);
     }
 
     @NotNull
     @Override
     public Collection<T> getItemsByName(@NotNull Iterable<String> names) {
+        Objects.requireNonNull(names, "The given names cannot be null");
+
         return cache.getAllPresent(names).values();
     }
 
 
     public void addItem(@NotNull T nameHolder) {
+        Objects.requireNonNull(nameHolder, "The given nameHolder cannot be null");
+
         cache.put(nameHolder.name(), nameHolder);
         logger.debug("Added name-holder:{} to cache", nameHolder.name());
     }
 
     public void removeItem(@NotNull T nameHolder) {
+        Objects.requireNonNull(nameHolder, "The given nameHolder cannot be null");
+
         removeItemByName(nameHolder.name());
     }
 
-    public void removeItemByName(String name) {
+    public void removeItemByName(@NotNull String name) {
+        Objects.requireNonNull(name, "The given name cannot be null");
+
         cache.invalidate(name);
         logger.debug("Removed name-holder:{} from cache", name);
     }

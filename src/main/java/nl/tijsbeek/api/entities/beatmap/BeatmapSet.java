@@ -18,6 +18,16 @@ import java.util.List;
  */
 public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
 
+    /**
+     * The format for cover-thumbnail URL's
+     */
+    String COVER_THUMBNAIL_FORMAT = "https://b.ppy.sh/thumb/%sl.jpg";
+
+    /**
+     * The format for cover-backgrounds URL's
+     */
+    String COVER_IMAGE_FORMAT = "https://assets.ppy.sh/beatmaps/%s/covers/cover.jpg";
+
     @NotNull
     @Override
     @Contract(pure = true)
@@ -214,4 +224,25 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
      * @return the amount of favourites
      */
     int favouriteCount();
+
+
+    /**
+     * The beatmap's cover image URL
+     *
+     * @return the cover image URL
+     * @see #COVER_IMAGE_FORMAT
+     */
+    default @NotNull String coverImageUrl() {
+        return COVER_IMAGE_FORMAT.formatted(beatmapSetId());
+    }
+
+    /**
+     * The beatmap's cover thumbnail URL
+     *
+     * @return the cover thumbnail URL
+     * @see #COVER_THUMBNAIL_FORMAT
+     */
+    default @NotNull String coverThumbnailUrl() {
+        return COVER_THUMBNAIL_FORMAT.formatted(beatmapSetId());
+    }
 }

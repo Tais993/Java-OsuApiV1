@@ -34,12 +34,12 @@ public enum BeatmapGenre {
     @Contract(pure = true)
     public static BeatmapGenre getById(@Range(from = 0, to = 14) int id) {
         for (BeatmapGenre beatmapGenre : values()) {
-            if (beatmapGenre.id == id) {
+            if (beatmapGenre.getId() == id) {
                 return beatmapGenre;
             }
         }
 
-        throw new IllegalArgumentException("No BeatmapStatus with the given id %s".formatted(id));
+        throw new IllegalArgumentException("Id " + id + " out of range (0 to 14)");
     }
 
     private final int id;
@@ -53,7 +53,7 @@ public enum BeatmapGenre {
      */
     @Contract(pure = true)
     BeatmapGenre(int id, @NotNull String name) {
-        Objects.requireNonNull(name, "name cannot be null");
+        Objects.requireNonNull(name, "The given name cannot be null");
 
         this.id = id;
         this.name = name;

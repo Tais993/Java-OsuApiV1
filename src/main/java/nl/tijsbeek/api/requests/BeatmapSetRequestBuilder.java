@@ -242,7 +242,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
     public BeatmapSetRequestBuilder addMods(@NotNull Mod... mods) {
-        Objects.requireNonNull(mods, "mods cannot be null");
+        Objects.requireNonNull(mods, "The given mods cannot be null");
 
         return addMods(List.of(mods));
     }
@@ -259,7 +259,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
     public BeatmapSetRequestBuilder addMods(@NotNull Collection<Mod> mods) {
-        Objects.requireNonNull(mods, "mods cannot be null");
+        Objects.requireNonNull(mods, "The given mods cannot be null");
 
         this.mods.addAll(mods);
         return this;
@@ -278,7 +278,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
     public BeatmapSetRequestBuilder setMods(@NotNull Mod... mods) {
-        Objects.requireNonNull(mods, "mods cannot be null");
+        Objects.requireNonNull(mods, "The given mods cannot be null");
 
         return setMods(List.of(mods));
     }
@@ -296,7 +296,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
     public BeatmapSetRequestBuilder setMods(@NotNull Collection<Mod> mods) {
-        Objects.requireNonNull(mods, "mods cannot be null");
+        Objects.requireNonNull(mods, "The given mods cannot be null");
 
         this.mods.clear();
         this.mods.addAll(mods);

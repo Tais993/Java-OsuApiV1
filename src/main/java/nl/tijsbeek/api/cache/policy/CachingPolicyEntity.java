@@ -69,7 +69,7 @@ public enum CachingPolicyEntity {
 
     @Contract(pure = true)
     CachingPolicyEntity(@NotNull Class<?> relatingClass) {
-        Objects.requireNonNull(relatingClass, "relatingClass cannot be null");
+        Objects.requireNonNull(relatingClass, "The given relatingClass cannot be null");
 
         this.relatingClass = relatingClass;
     }

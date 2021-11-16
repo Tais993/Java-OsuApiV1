@@ -145,7 +145,7 @@ public class UserRequestBuilder implements RequestBuilder<UserRequest> {
     @NotNull
     @Override
     public UserRequest create() {
-        Objects.requireNonNull(user, "The user has to be set!");
+        Objects.requireNonNull(user, "The user cannot be null");
 
         return new UserRequest(user, userType, gameMode, eventDays);
     }

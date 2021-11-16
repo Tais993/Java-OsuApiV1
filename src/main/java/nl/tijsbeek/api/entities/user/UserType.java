@@ -32,7 +32,7 @@ public enum UserType {
 
     @Contract(pure = true)
     UserType(@NotNull String type) {
-        Objects.requireNonNull(type, "type cannot be null");
+        Objects.requireNonNull(type, "The given type cannot be null");
 
         this.type = type;
     }

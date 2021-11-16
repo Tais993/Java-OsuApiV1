@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,8 @@ enum OAWv1Mapper {
 
     @Contract("_ -> new")
     static Collection<BeatmapSet> mapToBeatmapSets(@NotNull Collection<BeatmapImpl> beatmapImpls) {
+        Objects.requireNonNull(beatmapImpls, "The given beatmapImpls cannot be null");
+
         return beatmapImpls.stream()
                 .collect(
                         Collectors.groupingBy(BeatmapImpl::beatmapSetId,
@@ -30,6 +33,8 @@ enum OAWv1Mapper {
     @NotNull
     @Contract("_ -> new")
     static Optional<BeatmapSet> mapToBeatmapSet(@NotNull List<BeatmapImpl> beatmapImpls) {
+        Objects.requireNonNull(beatmapImpls, "The given beatmapImpls cannot be null");
+
         Beatmap beatmap = beatmapImpls.get(0);
 
         return mapToBeatmapSets(beatmapImpls)
@@ -41,6 +46,8 @@ enum OAWv1Mapper {
     @NotNull
     @Contract("_ -> new")
     static Optional<Beatmap> mapToBeatmap(@NotNull List<BeatmapImpl> beatmapImpls) {
+        Objects.requireNonNull(beatmapImpls, "The given beatmapImpls cannot be null");
+
         return Optional.ofNullable(beatmapImpls.get(0));
     }
 }

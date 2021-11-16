@@ -10,7 +10,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public record CachingPolicyImpl(@Nullable CachingPolicyEntity entity, long size, long duration, @NotNull TimeUnit timeUnit)
+public record CachingPolicyImpl(@Nullable CachingPolicyEntity entity, long size, long duration,
+                                @NotNull TimeUnit timeUnit)
         implements CachingPolicy {
     private static final Logger logger = LoggerFactory.getLogger(CachingPolicyImpl.class);
 
@@ -18,6 +19,6 @@ public record CachingPolicyImpl(@Nullable CachingPolicyEntity entity, long size,
         this.entity = entity;
         this.size = size;
         this.duration = duration;
-        this.timeUnit = Objects.requireNonNull(timeUnit, "timeUnit cannot be null");
+        this.timeUnit = Objects.requireNonNull(timeUnit, "The given timeUnit cannot be null");
     }
 }

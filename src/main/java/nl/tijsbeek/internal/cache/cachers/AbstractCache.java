@@ -14,8 +14,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
-import static nl.tijsbeek.internal.Constants.NULL_FALSE;
-
 /**
  * Handles a lot of the methods required for the {@link CustomCache}
  *
@@ -93,7 +91,7 @@ public class AbstractCache<K, T> implements CustomCache<T> {
 
 
     @Override
-    @Contract(value = NULL_FALSE, pure = true)
+    @Contract(value = "null -> false", pure = true)
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;

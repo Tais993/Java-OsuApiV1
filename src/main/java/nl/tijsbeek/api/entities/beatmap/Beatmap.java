@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static nl.tijsbeek.api.entities.beatmap.BeatmapSet.COVER_IMAGE_FORMAT;
+import static nl.tijsbeek.api.entities.beatmap.BeatmapSet.COVER_THUMBNAIL_FORMAT;
+
 /**
  * An osu beatmap, which is a playable "map" in osu.
  * This beatmap contains information about the map, such as the slider count, gamemode,  and more.
@@ -22,6 +25,7 @@ import java.util.List;
  * @see <a href="https://github.com/ppy/osu-api/wiki#beatmap">osu! API on beatmaps</a>
  */
 public interface Beatmap extends IdHolder, NameHolder {
+
 
     /**
      * The beatmap's status
@@ -359,4 +363,24 @@ public interface Beatmap extends IdHolder, NameHolder {
      * @return true if the beatmap has audio
      */
     boolean hasAudioAvailable();
+
+    /**
+     * The beatmap's cover image URL
+     *
+     * @return the cover image URL
+     * @see BeatmapSet#COVER_IMAGE_FORMAT
+     */
+    default @NotNull String coverImageUrl() {
+        return COVER_IMAGE_FORMAT.formatted(beatmapSetId());
+    }
+
+    /**
+     * The beatmap's cover thumbnail URL
+     *
+     * @return the cover thumbnail URL
+     * @see BeatmapSet#COVER_THUMBNAIL_FORMAT
+     */
+    default @NotNull String coverThumbnailUrl() {
+        return COVER_THUMBNAIL_FORMAT.formatted(beatmapSetId());
+    }
 }

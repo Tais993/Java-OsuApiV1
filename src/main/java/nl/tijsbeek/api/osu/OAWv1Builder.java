@@ -7,6 +7,7 @@ import nl.tijsbeek.internal.osu.OAWv1Impl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ public final class OAWv1Builder {
     private CachingPolicy defaultCachingPolicy;
     private final Collection<CachingPolicy> cachingPolicies = new ArrayList<>(CachingPolicyEntity.values().length);
 
-    private OAWv1Builder(String token) {
+    private OAWv1Builder(@Nullable String token) {
         this.token = token;
     }
 
@@ -34,7 +35,7 @@ public final class OAWv1Builder {
      */
     @NotNull
     @Contract("_ -> new")
-    public static OAWv1Builder createOsuBuilder(String token) {
+    public static OAWv1Builder createOsuBuilder(@Nullable String token) {
         return new OAWv1Builder(token);
     }
 
@@ -46,22 +47,22 @@ public final class OAWv1Builder {
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public OAWv1Builder setToken(String token) {
+    public OAWv1Builder setToken(@Nullable String token) {
         this.token = token;
         return this;
     }
 
-    /**x
+    /**
      * Set's the default {@link CachingPolicy}
      * <p>
-     * When creating a default caching policy, use {@link CachingPolicyBuilder#defaultPolicy()}
+     * When creating a default caching policy, use {@link CachingPolicyBuilder#createDefaultPolicy()}
      *
      * @param cachingPolicy the {@link CachingPolicy}
      * @return this builder
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public OAWv1Builder setDefaultCachingPolicy(CachingPolicy cachingPolicy) {
+    public OAWv1Builder setDefaultCachingPolicy(@Nullable CachingPolicy cachingPolicy) {
         defaultCachingPolicy = cachingPolicy;
         return this;
     }
@@ -69,7 +70,7 @@ public final class OAWv1Builder {
     /**
      * Adds a {@link CachingPolicy} to the list
      * <p>
-     * Use {@link CachingPolicyBuilder#fromEntity(CachingPolicyEntity)} for creation of {@link CachingPolicy CachingPolicies}
+     * Use {@link CachingPolicyBuilder#createFromEntity(CachingPolicyEntity)} for creation of {@link CachingPolicy CachingPolicies}
      *
      * @param cachingPolicy the {@link CachingPolicy} to add
      * @return this builder
@@ -78,7 +79,8 @@ public final class OAWv1Builder {
     @NotNull
     @Contract("_ -> this")
     public OAWv1Builder addCachingPolicy(@NotNull CachingPolicy cachingPolicy) {
-        Objects.requireNonNull(cachingPolicy.entity(), "The CachingPolicy's entity cannot be null of non-default caching policies");
+        Objects.requireNonNull(cachingPolicy, "The given cachingPolicy cannot be null");
+        Objects.requireNonNull(cachingPolicy.entity(), "The given cachingPolicy.entity() cannot be null");
 
         cachingPolicies.add(cachingPolicy);
         return this;

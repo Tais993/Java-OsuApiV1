@@ -36,6 +36,9 @@ public class CacheHandlerImpl implements CacheHandler {
         Objects.requireNonNull(defaultCachingPolicy, "defaultCachingPolicy cannot be null");
         Objects.requireNonNull(cachingPolicies, "cachingPolicies cannot be null");
 
+        Objects.requireNonNull(defaultCachingPolicy, "The given defaultCachingPolicy cannot be null");
+        Objects.requireNonNull(cachingPolicies, "The given cachingPolicies cannot be null");
+
         userCache = new IdNameCacheImpl<>(
                 cachingPolicies.getOrDefault(UserImpl.class, defaultCachingPolicy)
         );

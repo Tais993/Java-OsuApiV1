@@ -33,8 +33,7 @@ public record UserRequest(@NotNull String user, @Nullable UserType userType, @Nu
     @Override
     @Contract(value = "_ -> param1", mutates = "param1")
     public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
-        Objects.requireNonNull(uriBuilder, "uriBuilder cannot be null");
-
+        Objects.requireNonNull(uriBuilder, "The given uriBuilder cannot be null");
 
         uriBuilder.queryParam("u", user);
 

@@ -29,12 +29,12 @@ public enum BeatmapStatus {
     @Contract(pure = true)
     public static BeatmapStatus getById(@Range(from = -2, to = 4) int id) {
         for (BeatmapStatus beatmapStatus : values()) {
-            if (beatmapStatus.id == id) {
+            if (beatmapStatus.getId() == id) {
                 return beatmapStatus;
             }
         }
 
-        throw new IllegalArgumentException("No BeatmapStatus with the given id %s".formatted(id));
+        throw new IllegalArgumentException("Id " + id + " out of range (-2 to 4)");
     }
 
 

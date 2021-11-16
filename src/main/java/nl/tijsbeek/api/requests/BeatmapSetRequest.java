@@ -5,6 +5,7 @@ import nl.tijsbeek.api.entities.Mod;
 import nl.tijsbeek.api.entities.user.UserType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriBuilder;
@@ -23,22 +24,22 @@ import java.util.Set;
  * Creation of a request can be done using {@link BeatmapSetRequestBuilder}
  */
 public record BeatmapSetRequest(
-        LocalDateTime since,
+        @Nullable LocalDateTime since,
         long beatmapSetId,
         long beatmapId,
-        String user,
-        UserType userType,
-        GameMode mode,
+        @Nullable String user,
+        @Nullable UserType userType,
+        @Nullable GameMode mode,
         boolean includeConverted,
-        String beatmapHash,
+        @Nullable String beatmapHash,
         int limit,
-        Set<Mod> mods)
+        @NotNull Set<Mod> mods)
         implements Request {
     private static final Logger logger = LoggerFactory.getLogger(BeatmapSetRequest.class);
 
-    BeatmapSetRequest(LocalDateTime since, long beatmapSetId, long beatmapId,
-                      String user, UserType userType, GameMode mode,
-                      boolean includeConverted, String beatmapHash, int limit, @NotNull Collection<Mod> mods) {
+    BeatmapSetRequest(@Nullable LocalDateTime since, long beatmapSetId, long beatmapId,
+                      @Nullable String user, @Nullable UserType userType, @Nullable GameMode mode,
+                      boolean includeConverted, @Nullable String beatmapHash, int limit, @NotNull Collection<Mod> mods) {
 
         this(since, beatmapSetId, beatmapId,
                 user, userType, mode,
@@ -50,7 +51,7 @@ public record BeatmapSetRequest(
     @Override
     @Contract(value = "_ -> param1", mutates = "param1")
     public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
-        Objects.requireNonNull(uriBuilder, "UriBuilder cannot be null");
+        Objects.requireNonNull(uriBuilder, "The given uriBuilder cannot be null");
 
         if (null != since) {
             uriBuilder.queryParam("since", since.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
@@ -88,7 +89,7 @@ public record BeatmapSetRequest(
             uriBuilder.queryParam("limit", limit);
         }
 
-        if (null != mods) {
+        if (!mods.isEmpty()) {
             uriBuilder.queryParam("mods", Mod.toBitwise(mods));
         }
 
