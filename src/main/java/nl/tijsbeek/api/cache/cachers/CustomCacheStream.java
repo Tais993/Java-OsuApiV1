@@ -81,7 +81,7 @@ public interface CustomCacheStream<T> extends CustomCache<T> {
      * @return an array of T
      */
     @NotNull
-    default T @NotNull [] toArray(@NotNull IntFunction<T[]> generator) {
+    default T[] toArray(@NotNull IntFunction<T[]> generator) {
         Objects.requireNonNull(generator, "The given generator cannot be null");
 
         return stream().toArray(generator);

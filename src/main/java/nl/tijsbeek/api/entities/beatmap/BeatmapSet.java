@@ -2,10 +2,7 @@ package nl.tijsbeek.api.entities.beatmap;
 
 import nl.tijsbeek.api.entities.holders.IdHolder;
 import nl.tijsbeek.api.entities.holders.NameHolder;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnmodifiableView;
+import org.jetbrains.annotations.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,11 +18,13 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
     /**
      * The format for cover-thumbnail URL's
      */
+    @NonNls
     String COVER_THUMBNAIL_FORMAT = "https://b.ppy.sh/thumb/%sl.jpg";
 
     /**
      * The format for cover-backgrounds URL's
      */
+    @NonNls
     String COVER_IMAGE_FORMAT = "https://assets.ppy.sh/beatmaps/%s/covers/cover.jpg";
 
     @NotNull
@@ -68,7 +67,7 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
     default @Nullable LocalDateTime submitDate() {
         String submitDateString = submitDateString();
 
-        if (submitDateString == null) {
+        if (null == submitDateString) {
             return null;
         }
 
@@ -96,7 +95,7 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
     default @Nullable LocalDateTime approvedDate() {
         String approvedDateString = approvedDateString();
 
-        if (approvedDateString == null) {
+        if (null == approvedDateString) {
             return null;
         }
 
@@ -232,7 +231,8 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
      * @return the cover image URL
      * @see #COVER_IMAGE_FORMAT
      */
-    default @NotNull String coverImageUrl() {
+    @NotNull
+    default String coverImageUrl() {
         return COVER_IMAGE_FORMAT.formatted(beatmapSetId());
     }
 
@@ -242,7 +242,8 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
      * @return the cover thumbnail URL
      * @see #COVER_THUMBNAIL_FORMAT
      */
-    default @NotNull String coverThumbnailUrl() {
+    @NotNull
+    default String coverThumbnailUrl() {
         return COVER_THUMBNAIL_FORMAT.formatted(beatmapSetId());
     }
 }

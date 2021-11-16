@@ -47,32 +47,33 @@ public record BeatmapSetRequest(
                 (mods.isEmpty()) ? EnumSet.noneOf(Mod.class) : EnumSet.copyOf(mods));
     }
 
+    @NotNull
     @Override
     @Contract(value = "_ -> param1", mutates = "param1")
-    public @NotNull UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
+    public UriBuilder setUriParams(@NotNull UriBuilder uriBuilder) {
         Objects.requireNonNull(uriBuilder, "The given uriBuilder cannot be null");
 
-        if (since != null) {
+        if (null != since) {
             uriBuilder.queryParam("since", since.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         }
 
-        if (beatmapSetId != 0L) {
+        if (0L != beatmapSetId) {
             uriBuilder.queryParam("s", beatmapSetId);
         }
 
-        if (beatmapId != 0L) {
+        if (0L != beatmapId) {
             uriBuilder.queryParam("b", beatmapId);
         }
 
-        if (user != null) {
+        if (null != user) {
             uriBuilder.queryParam("u", user);
         }
 
-        if (userType != null) {
+        if (null != userType) {
             uriBuilder.queryParam("type", userType.getType());
         }
 
-        if (mode != null) {
+        if (null != mode) {
             uriBuilder.queryParam("m", mode.getMode());
         }
 
@@ -80,11 +81,11 @@ public record BeatmapSetRequest(
             uriBuilder.queryParam("a", 1);
         }
 
-        if (beatmapHash != null) {
+        if (null != beatmapHash) {
             uriBuilder.queryParam("h", beatmapHash);
         }
 
-        if (limit != 0) {
+        if (0 != limit) {
             uriBuilder.queryParam("limit", limit);
         }
 

@@ -131,6 +131,7 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
         return idEntityCache.iterator();
     }
 
+
     @Override
     @Contract(value = "null -> false", pure = true)
     public boolean equals(@Nullable Object obj) {

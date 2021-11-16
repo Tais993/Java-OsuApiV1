@@ -16,11 +16,9 @@ public record CachingPolicyImpl(@Nullable CachingPolicyEntity entity, long size,
     private static final Logger logger = LoggerFactory.getLogger(CachingPolicyImpl.class);
 
     public CachingPolicyImpl(@Nullable CachingPolicyEntity entity, long size, long duration, @NotNull TimeUnit timeUnit) {
-
         this.entity = entity;
         this.size = size;
         this.duration = duration;
         this.timeUnit = Objects.requireNonNull(timeUnit, "The given timeUnit cannot be null");
-
     }
 }

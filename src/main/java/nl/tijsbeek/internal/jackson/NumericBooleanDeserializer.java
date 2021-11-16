@@ -17,6 +17,6 @@ public class NumericBooleanDeserializer extends JsonDeserializer<Boolean> {
     public Boolean deserialize(@NotNull JsonParser p, DeserializationContext ctxt) throws IOException {
         Objects.requireNonNull(p, "The given p cannot be null");
 
-        return !"0".equals(p.getText());
+        return !("0".equals(p.getText()));
     }
 }

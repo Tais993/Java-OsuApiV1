@@ -2,6 +2,7 @@ package nl.tijsbeek.api.entities.user;
 
 import nl.tijsbeek.api.entities.holders.IdHolder;
 import nl.tijsbeek.api.entities.holders.NameHolder;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import java.util.Set;
  * @see <a href="https://github.com/ppy/osu-api/wiki#user">osu! API on users</a>
  */
 public interface User extends IdHolder, NameHolder {
+    @NonNls String BASE_PFP_URL = "https://s.ppy.sh/a/";
 
     /**
      * Time the player joined in UTC
@@ -197,7 +199,8 @@ public interface User extends IdHolder, NameHolder {
      *
      * @return the profile picture
      */
+    @NotNull
     default String profilePictureUrl() {
-        return "https://s.ppy.sh/a/" + idString();
+        return BASE_PFP_URL + idString();
     }
 }

@@ -53,9 +53,8 @@ public interface Beatmap extends IdHolder, NameHolder {
     default @Nullable LocalDateTime submitDate() {
         String submitDateString = submitDateString();
 
-        if (submitDateString == null) {
+        if (null == submitDateString)
             return null;
-        }
 
         return LocalDateTime.parse(submitDateString,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
@@ -81,7 +80,7 @@ public interface Beatmap extends IdHolder, NameHolder {
     default @Nullable LocalDateTime approvedDate() {
         String approvedDateString = approvedDateString();
 
-        if (approvedDateString == null) {
+        if (null == approvedDateString) {
             return null;
         }
 
@@ -190,7 +189,7 @@ public interface Beatmap extends IdHolder, NameHolder {
      *
      * @return a {@link BeatmapDifficulty} instance
      */
-    BeatmapDifficulty difficulty();
+    @NotNull BeatmapDifficulty difficulty();
 
     /**
      * The amount of time in seconds your HP drains.

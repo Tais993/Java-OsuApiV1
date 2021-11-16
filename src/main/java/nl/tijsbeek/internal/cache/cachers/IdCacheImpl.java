@@ -71,6 +71,7 @@ public class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> impl
         if (this == obj) return true;
         if (null == obj || getClass() != obj.getClass()) return false;
         if (!super.equals(obj)) return false;
+
         IdCacheImpl<?> idCache = (IdCacheImpl<?>) obj;
         return cache.equals(idCache.cache);
     }
