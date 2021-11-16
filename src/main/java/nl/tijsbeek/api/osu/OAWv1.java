@@ -61,9 +61,9 @@ public interface OAWv1 {
     @NotNull Mono<Optional<BeatmapSet>> retrieveBeatmapSet(@NotNull BeatmapSetRequest beatmapSetRequest);
 
     /**
-     * The {@link nl.tijsbeek.api.cache.handler.CacheHandler} to be used for getting cached items
+     * The {@link CacheHandler} to be used for getting cached items
      *
-     * @return the {@link nl.tijsbeek.api.cache.handler.CacheHandler}
+     * @return the {@link CacheHandler}
      */
     @NotNull CacheHandler getCacheHandler();
 }
