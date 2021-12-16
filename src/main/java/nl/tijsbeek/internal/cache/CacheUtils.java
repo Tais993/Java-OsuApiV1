@@ -2,53 +2,45 @@ package nl.tijsbeek.internal.cache;
 
 import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.api.entities.beatmap.BeatmapSet;
+import nl.tijsbeek.api.entities.scores.BeatmapScore;
+import nl.tijsbeek.api.entities.scores.BestPerformance;
+import nl.tijsbeek.api.entities.scores.RecentlyPlayed;
 import nl.tijsbeek.api.entities.user.User;
-import nl.tijsbeek.internal.cache.cachers.IdNameCacheImpl;
-import nl.tijsbeek.internal.cache.handler.CacheHandlerImpl;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.Arrays;
 
-public record CacheUtils(CacheHandlerImpl cacheHandlerImpl) {
-    private static final Logger logger = LoggerFactory.getLogger(CacheUtils.class);
+public interface CacheUtils {
 
-    public void cacheBeatmapSets(@NotNull final Iterable<? extends BeatmapSet> beatmapSets) {
-        Objects.requireNonNull(beatmapSets, "The given beatmapSets cannot be null");
+    void cacheBeatmapSets(@Nullable final Iterable<? extends BeatmapSet> beatmapSets);
 
-        beatmapSets.forEach(beatmapSet -> {
-            cacheBeatmapSet(beatmapSet);
-            beatmapSet.beatmaps().forEach(this::cacheBeatmap);
-        });
-    }
-
-    public void cacheBeatmapSets(@NotNull final BeatmapSet... beatmapSets) {
-        Objects.requireNonNull(beatmapSets, "The given beatmapSets cannot be null");
-
-        cacheBeatmapSets(List.of(beatmapSets));
+    default void cacheBeatmapSets(@Nullable final BeatmapSet... beatmapSets) {
+        cacheBeatmapSets(Arrays.asList(beatmapSets));
     }
 
 
-    public void cacheUser(@NotNull final User user) {
-        Objects.requireNonNull(user, "The given user cannot be null");
+    void cacheBeatmapScores(@Nullable final Iterable<? extends BeatmapScore> beatmapScores);
 
-        IdNameCacheImpl<User> userCache = (IdNameCacheImpl<User>) cacheHandlerImpl.getUserCache();
-        userCache.addItem(user);
+    default void cacheBeatmapScores(@Nullable final BeatmapScore... beatmapScores) {
+        cacheBeatmapScores(Arrays.asList(beatmapScores));
     }
 
-    public void cacheBeatmapSet(@NotNull final BeatmapSet beatmapSet) {
-        Objects.requireNonNull(beatmapSet, "The given beatmapSet cannot be null");
+    void cacheBestPerformances(@Nullable final Iterable<? extends BestPerformance> bestPerformances);
 
-        IdNameCacheImpl<BeatmapSet> beatmapSetCache = (IdNameCacheImpl<BeatmapSet>) cacheHandlerImpl.getBeatmapSetCache();
-        beatmapSetCache.addItem(beatmapSet);
+    default void cacheBestPerformances(@Nullable final BestPerformance... bestPerformances) {
+        cacheBestPerformances(Arrays.asList(bestPerformances));
     }
 
-    public void cacheBeatmap(@NotNull final Beatmap beatmap) {
-        Objects.requireNonNull(beatmap, "The given beatmap cannot be null");
 
-        IdNameCacheImpl<Beatmap> beatmapCache = (IdNameCacheImpl<Beatmap>) cacheHandlerImpl.getBeatmapCache();
-        beatmapCache.addItem(beatmap);
-    }
+
+    void cacheBeatmapSet(@Nullable final BeatmapSet beatmapSet);
+
+    void cacheBeatmap(@Nullable final Beatmap beatmap);
+
+    void cacheUser(@Nullable final User user);
+
+
+    void cacheBeatmapScore(@Nullable BeatmapScore beatmapScore);
+
+    void cacheBestPerformance(@Nullable BestPerformance bestPerformance);
 }

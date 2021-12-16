@@ -47,8 +47,8 @@ public class IdCacheImpl<T extends IdHolder> extends AbstractCache<Long, T> impl
     }
 
 
-    public void addItem(@NotNull final T idHolder) {
-        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
+    public void addItem(@Nullable final T idHolder) {
+        if (null == idHolder) return;
 
         cache.put(idHolder.id(), idHolder);
         logger.debug("Added id-holder:{} to cache", idHolder.id());

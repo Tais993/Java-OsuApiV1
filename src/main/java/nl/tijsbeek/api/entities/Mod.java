@@ -3,7 +3,6 @@ package nl.tijsbeek.api.entities;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * An osu mod.
@@ -11,98 +10,106 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @see <a href="https://osu.ppy.sh/wiki/en/Game_modifier">osu! wiki</a>
  */
 public enum Mod {
-    NONE(0, "none", "",
+    NONE(0L, "none", "",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
 
 
     /* Difficulty decreasing mods */
-    EASY(1 << 2, "Easy", "EZ", "Easy",
+    EASY(1L << 1L, "Easy", "EZ", "Easy",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
-    NO_FAIL(1, "No Fail", "NF", "No_Fail",
+    NO_FAIL(1L, "No Fail", "NF", "No_Fail",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
-    HALF_TIME(1 << 9, "Half Time", "HT", "Half_Time",
+    HALF_TIME(1L << 8L, "Half Time", "HT", "Half_Time",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
 
 
     /* Difficulty increasing mods */
-    HARD_ROCK(1 << 5, "Hard Rock", "HR", "Hard_Rock",
+    HARD_ROCK(1L << 4L, "Hard Rock", "HR", "Hard_Rock",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
-    SUDDEN_DEATH(1 << 6, "Sudden Death", "SD", "Sudden_Death",
+    SUDDEN_DEATH(1L << 5L, "Sudden Death", "SD", "Sudden_Death",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
-    PERFECT(1 << 15 + SUDDEN_DEATH.getBitwise(), "Perfect", "PF", "Perfect",
-            EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
-
-    DOUBLE_TIME(1 << 7, "Double Time", "DT", "Double_Time",
-            EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
-    NIGHTCORE(1 << 10 + DOUBLE_TIME.getBitwise(), "Nightcore", "NC", "Nightcore",
+    PERFECT(1L << 14L + SUDDEN_DEATH.getBitwise(), "Perfect", "PF", "Perfect",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
 
-    HIDDEN(1 << 4, "Hidden", "HD", "Hidden ",
+    DOUBLE_TIME(1L << 6L, "Double Time", "DT", "Double_Time",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
-    FADE_IN(1 << 21, "Fade In", "FI", "Fade_In",
+    NIGHTCORE(1L << 9L + DOUBLE_TIME.getBitwise(), "Nightcore", "NC", "Nightcore",
+            EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
+
+    HIDDEN((1L << 3L), "Hidden", "HD", "Hidden ",
+            EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
+    FADE_IN(1L << 20L, "Fade In", "FI", "Fade_In",
             EnumSet.of(GameMode.MANIA)),
 
-    FLASHLIGHT(1 << 11, "Flashlight", "FL", "Flashlight",
+    FLASHLIGHT(1L << 10L, "Flashlight", "FL", "Flashlight",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
 
 
     /* Special */
-    RELAX(1 << 8, "Relax", "RL", "Relax",
+    RELAX(1L << 7L, "Relax", "RL", "Relax",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.MANIA)),
-    AUTOPILOT(1 << 14, "Autopilot", "AP", "Autopilot",
+    AUTOPILOT(1L << 13L, "Autopilot", "AP", "Autopilot",
             EnumSet.of(GameMode.OSU)),
-    SPUN_OUT(1 << 13, "Spun out", "SO", "Spun_Out",
+    SPUN_OUT(1L << 12L, "Spun out", "SO", "Spun_Out",
             EnumSet.of(GameMode.OSU)),
 
-    MIRROR(1 << 31, "mirror", "MR", "Mirror",
+    MIRROR(1L << 30L, "mirror", "MR", "Mirror",
             EnumSet.of(GameMode.MANIA)),
-    RANDOM(1 << 22, "Random", "RD", "Random",
+    RANDOM(1L << 21L, "Random", "RD", "Random",
             EnumSet.of(GameMode.OSU)),
 
-    AUTO(1 << 12, "Auto", "AT", "Auto",
+    AUTO(1L << 11L, "Auto", "AT", "Auto",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
-    CINEMA(1 << 23, "Cinema", "CM", "Cinema",
-            EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
-
-    SCORE_V2(1 << 30, "Score V2", "SV2", "ScoreV2",
+    CINEMA(1L << 22L, "Cinema", "CM", "Cinema",
             EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
 
-    TOUCH_DEVICE(1 << 3, "touch device", "TD", "",
+    SCORE_V2(1L << 29L, "Score V2", "SV2", "ScoreV2",
+            EnumSet.of(GameMode.OSU, GameMode.TAIKO, GameMode.CTB, GameMode.MANIA)),
+
+    TOUCH_DEVICE(1L << 2L, "touch device", "TD", "",
             EnumSet.of(GameMode.OSU)),
 
 
     /* Special - all key mods */
-    KEY_1(1 << 27, "1K", "xK",
+    KEY_1(1L << 26L, "1K", "xK",
             EnumSet.of(GameMode.MANIA)),
-    KEY_2(1 << 29, "2K", "xK",
+    KEY_2(1L << 28L, "2K", "xK",
             EnumSet.of(GameMode.MANIA)),
-    KEY_3(1 << 28, "3K", "xK",
+    KEY_3(1L << 27L, "3K", "xK",
             EnumSet.of(GameMode.MANIA)),
-    KEY_4(1 << 16, "4K", "xK",
+    KEY_4(1L << 15L, "4K", "xK",
             EnumSet.of(GameMode.MANIA)),
-    KEY_5(1 << 17, "5K", "xK",
+    KEY_5(1L << 16L, "5K", "xK",
             EnumSet.of(GameMode.MANIA)),
-    KEY_6(1 << 18, "6K", "xK",
+    KEY_6(1L << 17L, "6K", "xK",
             EnumSet.of(GameMode.MANIA)),
-    KEY_7(1 << 19, "7K", "xK",
+    KEY_7(1L << 18L, "7K", "xK",
             EnumSet.of(GameMode.MANIA)),
-    KEY_8(1 << 20, "8K", "xK",
+    KEY_8(1L << 19L, "8K", "xK",
             EnumSet.of(GameMode.MANIA)),
-    KEY_9(1 << 25, "9K", "xK",
+    KEY_9(1L << 24L, "9K", "xK",
             EnumSet.of(GameMode.MANIA)),
 
-    KEY_COOP(1 << 26, "Co-op", "Co-op",
+    KEY_COOP(1L << 25L, "Co-op", "Co-op",
             EnumSet.of(GameMode.MANIA)),
 
 
     /* Cutting edge / experimental */
-    TARGET(1 << 24, "Target Practice", "TP", "Target_Practice",
+    TARGET(1L << 23L, "Target Practice", "TP", "Target_Practice",
             EnumSet.of(GameMode.OSU));
 
     private static final String BASE_URL = "https://osu.ppy.sh/wiki/en/Game_modifier/";
 
+    private static final List<Mod> sortedMods;
 
-    private final int bitwise;
+    static {
+                sortedMods = Arrays.stream(values())
+                        .sorted(Collections.reverseOrder(Comparator.comparingLong(Mod::getBitwise)))
+                        .toList();
+        }
+
+
+    private final long bitwise;
     private final EnumSet<GameMode> gameModes;
 
     private final String displayName;
@@ -111,7 +118,7 @@ public enum Mod {
 
 
     @Contract(pure = true)
-    Mod(final int bitwise, @NotNull final String displayName, @NotNull final String abbreviation,
+    Mod(final long bitwise, @NotNull final String displayName, @NotNull final String abbreviation,
         @NotNull final String url, @NotNull final EnumSet<GameMode> gameModes) {
         Objects.requireNonNull(displayName, "The given displayName cannot be null");
         Objects.requireNonNull(abbreviation, "The given abbreviation cannot be null");
@@ -126,7 +133,7 @@ public enum Mod {
     }
 
     @Contract(pure = true)
-    Mod(final int bitwise, @NotNull final String displayName, @NotNull final String url, @NotNull final EnumSet<GameMode> gameModes) {
+    Mod(final long bitwise, @NotNull final String displayName, @NotNull final String url, @NotNull final EnumSet<GameMode> gameModes) {
         this(bitwise, displayName, displayName, url, gameModes);
     }
 
@@ -136,7 +143,7 @@ public enum Mod {
      * @return the bitwise value.
      */
     @Contract(pure = true)
-    public int getBitwise() {
+    public long getBitwise() {
         return bitwise;
     }
 
@@ -204,9 +211,9 @@ public enum Mod {
      *
      * @param mods the mods to convert.
      * @return the mods converted to a bitwise value.
-     * @see #fromBitwise(int)
+     * @see #fromBitwise(long)
      */
-    public static int toBitwise(@NotNull final Mod... mods) {
+    public static long toBitwise(@NotNull final Mod... mods) {
         Objects.requireNonNull(mods, "The given mods cannot be null");
 
         return toBitwise(List.of(mods));
@@ -217,42 +224,44 @@ public enum Mod {
      *
      * @param mods the mods to convert.
      * @return the mods converted to a bitwise value.
-     * @see #fromBitwise(int)
+     * @see #fromBitwise(long)
      */
-    public static int toBitwise(@NotNull final Collection<Mod> mods) {
+    public static long toBitwise(@NotNull final Collection<Mod> mods) {
         Objects.requireNonNull(mods, "The given mods cannot be null");
 
         return mods.stream()
-                .mapToInt(Mod::getBitwise)
+                .mapToLong(Mod::getBitwise)
                 .sum();
     }
 
     /**
      * Converts the given bitwise value to a {@link Set} of mods.
      *
-     * @param bitwiseInt the bitwise value to convert.
+     * @param bitwiseParam the bitwise value to convert.
      * @return the mods converted from the bitwise value.
      * @see #toBitwise(Collection)
      */
     @NotNull
-    public static Set<Mod> fromBitwise(final int bitwiseInt) {
-        List<Mod> reversedMods = new ArrayList<>(List.of(Mod.values()));
-        Collections.reverse(reversedMods);
-
+    public static Set<Mod> fromBitwise(final long bitwiseParam) {
         Set<Mod> mods = EnumSet.noneOf(Mod.class);
 
-        AtomicInteger bitwise = new AtomicInteger(bitwiseInt);
-        while (bitwise.get() != 0) {
 
-            for (final Mod reversedMod : reversedMods) {
-                if (bitwise.get() >= reversedMod.getBitwise()) {
-                    mods.add(reversedMod);
-                    bitwise.set(bitwise.get() - reversedMod.getBitwise());
-                }
-            }
+        long bitwise = bitwiseParam;
+        while (0L != bitwise) {
+            bitwise = findMod(bitwise, mods);
         }
 
         return mods;
+    }
+
+    private static long findMod(long bitwise, Collection<Mod> mods) {
+        for (final Mod reversedMod : sortedMods) {
+            if (bitwise >= reversedMod.getBitwise()) {
+                mods.add(reversedMod);
+                return bitwise - reversedMod.getBitwise();
+            }
+        }
+        return bitwise;
     }
 
     @NonNls
