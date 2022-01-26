@@ -78,8 +78,7 @@ public class OAWv1Impl implements OAWv1 {
 
         return createResponse(userRequest, "get_user")
                 .bodyToMono(new UserImplListType())
-                .map(users -> users.get(0))
-                .map(OAWv1Mapper::mapToUser)
+                .<User>map(users -> users.get(0))
                 .doOnSuccess(cacheUtils::cacheUser);
     }
 

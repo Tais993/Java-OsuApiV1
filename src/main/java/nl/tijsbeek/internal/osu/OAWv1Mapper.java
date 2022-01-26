@@ -76,9 +76,4 @@ enum OAWv1Mapper {
     public static List<BeatmapScore> mapToBeatmapScores(final @NotNull Collection<BeatmapScoreImpl> beatmapScores) {
         return beatmapScores.stream().map(BeatmapScore.class::cast).toList();
     }
-
-    @Contract(value = "_ -> param1", pure = true)
-    public static User mapToUser(final User user) {
-        return user;
-    }
 }
