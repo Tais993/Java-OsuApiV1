@@ -4,10 +4,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
 public enum Grade {
     SS(),
     SSH(),
