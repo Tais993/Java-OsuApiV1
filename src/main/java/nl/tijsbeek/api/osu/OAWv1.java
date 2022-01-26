@@ -32,7 +32,7 @@ public interface OAWv1 {
      * @return A {@link Mono<User>} of {@link User}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_user">osu-wiki get_user</a>
      */
-    @NotNull Mono<? extends User> retrieveUser(@NotNull final UserRequest userRequest);
+    @NotNull Mono<User> retrieveUser(@NotNull final UserRequest userRequest);
 
     /**
      * Retrieve all beatmapsets based on the Request created
@@ -51,7 +51,7 @@ public interface OAWv1 {
      * @return A {@link Flux<User>} of {@link Beatmap}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
      */
-    @NotNull Mono<Optional<Beatmap>> retrieveBeatmap(@NotNull final BeatmapSetRequest beatmapSetRequest);
+    @NotNull Mono<Beatmap> retrieveBeatmap(@NotNull final BeatmapSetRequest beatmapSetRequest);
 
     /**
      * Retrieve a beatmapset based on the Request created <br />
@@ -61,7 +61,7 @@ public interface OAWv1 {
      * @return A {@link Flux<User>} of {@link Beatmap}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_beatmaps">osu-wiki get_beatmaps</a>
      */
-    @NotNull Mono<Optional<BeatmapSet>> retrieveBeatmapSet(@NotNull final BeatmapSetRequest beatmapSetRequest);
+    @NotNull Mono<BeatmapSet> retrieveBeatmapSet(@NotNull final BeatmapSetRequest beatmapSetRequest);
 
     /**
      * Retrieves the scores of a beatmap, not to confuse with {@link #retrieveBeatmap(BeatmapSetRequest)} <br />

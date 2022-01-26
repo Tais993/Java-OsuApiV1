@@ -73,12 +73,13 @@ public class OAWv1Impl implements OAWv1 {
 
 
     @Override
-    public @NotNull Mono<? extends User> retrieveUser(@NotNull final UserRequest userRequest) {
+    public @NotNull Mono<User> retrieveUser(@NotNull final UserRequest userRequest) {
         Objects.requireNonNull(userRequest, "The given userRequest cannot be null");
 
         return createResponse(userRequest, "get_user")
                 .bodyToMono(new UserImplListType())
                 .map(users -> users.get(0))
+                .map(OAWv1Mapper::mapToUser)
                 .doOnSuccess(cacheUtils::cacheUser);
     }
 
@@ -94,24 +95,24 @@ public class OAWv1Impl implements OAWv1 {
     }
 
     @Override
-    public @NotNull Mono<Optional<Beatmap>> retrieveBeatmap(@NotNull final BeatmapSetRequest beatmapSetRequest) {
+    public @NotNull Mono<Beatmap> retrieveBeatmap(@NotNull final BeatmapSetRequest beatmapSetRequest) {
         Objects.requireNonNull(beatmapSetRequest, "The given beatmapSetRequest cannot be null");
 
         return createResponse(beatmapSetRequest, "get_beatmaps")
                 .bodyToMono(new BeatmapImplListType())
                 .map(OAWv1Mapper::mapToBeatmap)
-                .doOnSuccess(beatmap -> beatmap.ifPresent(cacheUtils::cacheBeatmap));
+                .doOnSuccess(cacheUtils::cacheBeatmap);
     }
 
     @NotNull
     @Override
-    public Mono<Optional<BeatmapSet>> retrieveBeatmapSet(@NotNull final BeatmapSetRequest beatmapSetRequest) {
+    public Mono<BeatmapSet> retrieveBeatmapSet(@NotNull final BeatmapSetRequest beatmapSetRequest) {
         Objects.requireNonNull(beatmapSetRequest, "The given beatmapSetRequest cannot be null");
 
         return createResponse(beatmapSetRequest, "get_beatmaps")
                 .bodyToMono(new BeatmapImplListType())
-                .map(OAWv1Mapper::mapToBeatmapSet)
-                .doOnSuccess(beatmapSet -> beatmapSet.ifPresent(cacheUtils::cacheBeatmapSets));
+                .mapNotNull(OAWv1Mapper::mapToBeatmapSet)
+                .doOnSuccess(cacheUtils::cacheBeatmapSets);
     }
 
     @Override

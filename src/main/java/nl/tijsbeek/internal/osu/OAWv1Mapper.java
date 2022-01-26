@@ -5,13 +5,16 @@ import nl.tijsbeek.api.entities.beatmap.BeatmapSet;
 import nl.tijsbeek.api.entities.scores.BeatmapScore;
 import nl.tijsbeek.api.entities.scores.BestPerformance;
 import nl.tijsbeek.api.entities.scores.RecentlyPlayed;
+import nl.tijsbeek.api.entities.user.User;
 import nl.tijsbeek.internal.entities.beatmap.BeatmapImpl;
 import nl.tijsbeek.internal.entities.beatmap.BeatmapSetImpl;
 import nl.tijsbeek.internal.entities.scores.BeatmapScoreImpl;
 import nl.tijsbeek.internal.entities.scores.BestPerformanceImpl;
 import nl.tijsbeek.internal.entities.scores.RecentlyPlayedImpl;
+import nl.tijsbeek.internal.entities.user.UserImpl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,9 +39,8 @@ enum OAWv1Mapper {
                 .stream().toList();
     }
 
-    @NotNull
-    @Contract("_ -> new")
-    static Optional<BeatmapSet> mapToBeatmapSet(@NotNull final List<BeatmapImpl> beatmapImpls) {
+    @Nullable
+    static BeatmapSet mapToBeatmapSet(@NotNull final List<BeatmapImpl> beatmapImpls) {
         Objects.requireNonNull(beatmapImpls, "The given beatmapImpls cannot be null");
 
         Beatmap beatmap = beatmapImpls.get(0);
@@ -46,15 +48,15 @@ enum OAWv1Mapper {
         return mapToBeatmapSets(beatmapImpls)
                 .stream()
                 .filter(beatmapSet -> beatmapSet.id() == beatmap.beatmapSetId())
-                .findAny();
+                .findAny()
+                .orElse(null);
     }
 
-    @NotNull
-    @Contract("_ -> new")
-    static Optional<Beatmap> mapToBeatmap(@NotNull final List<BeatmapImpl> beatmapImpls) {
+    @Nullable
+    static Beatmap mapToBeatmap(@NotNull final List<BeatmapImpl> beatmapImpls) {
         Objects.requireNonNull(beatmapImpls, "The given beatmapImpls cannot be null");
 
-        return Optional.ofNullable(beatmapImpls.get(0));
+        return beatmapImpls.get(0);
     }
 
     @NotNull
@@ -73,5 +75,10 @@ enum OAWv1Mapper {
     @Contract("_ -> new")
     public static List<BeatmapScore> mapToBeatmapScores(final @NotNull Collection<BeatmapScoreImpl> beatmapScores) {
         return beatmapScores.stream().map(BeatmapScore.class::cast).toList();
+    }
+
+    @Contract(value = "_ -> param1", pure = true)
+    public static User mapToUser(final User user) {
+        return user;
     }
 }
