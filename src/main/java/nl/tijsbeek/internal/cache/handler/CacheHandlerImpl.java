@@ -60,7 +60,7 @@ public class CacheHandlerImpl implements CacheHandler {
         );
         beatmapScoresCache = new IdCacheImpl<>(
                 cachingPolicies.getOrDefault(BeatmapScoreImpl.class, defaultCachingPolicy)
-        ) {};
+        );
         bestPerformanceCache = new IdCacheImpl<>(
                 cachingPolicies.getOrDefault(BestPerformanceImpl.class, defaultCachingPolicy)
         );

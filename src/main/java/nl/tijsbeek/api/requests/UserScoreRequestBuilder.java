@@ -2,10 +2,7 @@ package nl.tijsbeek.api.requests;
 
 import nl.tijsbeek.api.entities.GameMode;
 import nl.tijsbeek.api.entities.user.UserType;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Range;
+import org.jetbrains.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,9 +11,9 @@ import java.util.Objects;
 public class UserScoreRequestBuilder implements RequestBuilder<UserScoreRequest> {
     private static final Logger logger = LoggerFactory.getLogger(UserScoreRequestBuilder.class);
 
-    private final static int MIN_AMOUNT_LIMIT = 1;
-    private final static int MAX_AMOUNT_LIMIT = 50;
-    private final static int DEFAULT_AMOUNT_LIMIT = 10;
+    private static final int MIN_AMOUNT_LIMIT = 1;
+    private static final int MAX_AMOUNT_LIMIT = 50;
+    private static final int DEFAULT_AMOUNT_LIMIT = 10;
 
     private String user;
     private UserType userType;
@@ -95,7 +92,7 @@ public class UserScoreRequestBuilder implements RequestBuilder<UserScoreRequest>
      * @return this builder
      */
     @NotNull
-    public UserScoreRequestBuilder setGameMode(GameMode gameMode) {
+    public UserScoreRequestBuilder setGameMode(final GameMode gameMode) {
         this.gameMode = gameMode;
         return this;
     }
@@ -117,5 +114,19 @@ public class UserScoreRequestBuilder implements RequestBuilder<UserScoreRequest>
         Objects.requireNonNull(user, "The user cannot be null");
 
         return new UserScoreRequest(user, userType, gameMode, limit);
+    }
+
+
+    @NonNls
+    @NotNull
+    @Override
+    @Contract(pure = true)
+    public String toString() {
+        return "UserScoreRequestBuilder{" +
+                "user='" + user + '\'' +
+                ", userType=" + userType +
+                ", gameMode=" + gameMode +
+                ", limit=" + limit +
+                '}';
     }
 }

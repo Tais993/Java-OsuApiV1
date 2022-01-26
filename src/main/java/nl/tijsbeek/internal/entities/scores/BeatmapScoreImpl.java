@@ -7,7 +7,8 @@ import nl.tijsbeek.api.entities.scores.BeatmapScore;
 import nl.tijsbeek.api.entities.scores.Grade;
 import nl.tijsbeek.internal.jackson.IntToModsDeserializer;
 import nl.tijsbeek.internal.jackson.NumericBooleanDeserializer;
-import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
@@ -38,4 +39,6 @@ public record BeatmapScoreImpl(
         @JsonDeserialize(using = NumericBooleanDeserializer.class)
         @JsonProperty("replay_available") boolean hasReplayAvailable
 ) implements BeatmapScore {
+        private static final Logger logger = LoggerFactory.getLogger(BeatmapScoreImpl.class);
+
 }

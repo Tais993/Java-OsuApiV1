@@ -63,10 +63,31 @@ public interface OAWv1 {
      */
     @NotNull Mono<Optional<BeatmapSet>> retrieveBeatmapSet(@NotNull final BeatmapSetRequest beatmapSetRequest);
 
+    /**
+     * Retrieves the scores of a beatmap, not to confuse with {@link #retrieveBeatmap(BeatmapSetRequest)} <br />
+     *
+     * @param beatmapScoreRequest the {@link BeatmapScoreRequest}
+     * @return a {@link Mono} of a {@link List} with {@link BeatmapScore Beatmapscores}
+     * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_scores">osu-wiki get_scores</a>
+     */
     @NotNull Mono<List<BeatmapScore>> retrieveBeatmapScores(@NotNull final BeatmapScoreRequest beatmapScoreRequest);
 
-    Mono<List<BestPerformance>> retrieveBestPerformances(@NotNull final UserScoreRequest userScoreRequest);
+    /**
+     * Retrieves the best performances of the given user
+     *
+     * @param userScoreRequest the {@link UserScoreRequest}
+     * @return a {@link Mono} of a {@link List} with {@link BestPerformance}
+     * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_user_best">osu-wiki get_user_best_score</a>
+     */
+    @NotNull Mono<List<BestPerformance>> retrieveBestPerformances(@NotNull final UserScoreRequest userScoreRequest);
 
+    /**
+     * Retrieve the most recently played plays of the given user
+     *
+     * @param userScoreRequest the {@link UserScoreRequest}
+     * @return a {@link Mono} of a {@link List} with {@link RecentlyPlayed}
+     * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_user_recent">osu-wiki get_user_recent</a>
+     */
     @NotNull Mono<List<RecentlyPlayed>> retrieveRecentPlays(@NotNull final UserScoreRequest userScoreRequest);
 
     /**

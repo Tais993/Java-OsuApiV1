@@ -6,6 +6,8 @@ import nl.tijsbeek.api.entities.user.UserType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriBuilder;
 
 import java.util.Objects;
@@ -19,6 +21,7 @@ public record BeatmapScoreRequest(
         @NotNull Set<Mod> mods,
         int limit
 ) implements Request {
+    private static final Logger logger = LoggerFactory.getLogger(BeatmapScoreRequest.class);
 
     @NotNull
     @Override
@@ -28,7 +31,7 @@ public record BeatmapScoreRequest(
 
         uriBuilder.queryParam("b", beatmapId);
 
-        if (user != null) {
+        if (null != user) {
             uriBuilder.queryParam("u", user);
         }
 

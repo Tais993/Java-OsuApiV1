@@ -52,7 +52,7 @@ public record BeatmapSetImpl(List<Beatmap> beatmaps,
 
     @NotNull
     @Contract("_ -> new")
-    public static BeatmapSet of(@NotNull final List<? extends Beatmap> beatmaps) {
+    public static BeatmapSet of(final @NotNull List<? extends @NotNull Beatmap> beatmaps) {
         if (beatmaps.isEmpty()) {
             throw new IndexOutOfBoundsException("Beatmap list is empty");
         }

@@ -100,9 +100,7 @@ public class OAWv1Impl implements OAWv1 {
         return createResponse(beatmapSetRequest, "get_beatmaps")
                 .bodyToMono(new BeatmapImplListType())
                 .map(OAWv1Mapper::mapToBeatmap)
-                .doOnSuccess(beatmap -> {
-                    beatmap.ifPresent(cacheUtils::cacheBeatmap);
-                });
+                .doOnSuccess(beatmap -> beatmap.ifPresent(cacheUtils::cacheBeatmap));
     }
 
     @NotNull
@@ -127,7 +125,7 @@ public class OAWv1Impl implements OAWv1 {
     }
 
     @Override
-    public Mono<List<BestPerformance>> retrieveBestPerformances(@NotNull final UserScoreRequest userScoreRequest) {
+    public @NotNull Mono<List<BestPerformance>> retrieveBestPerformances(@NotNull final UserScoreRequest userScoreRequest) {
         Objects.requireNonNull(userScoreRequest, "The given userScoreRequest cannot be null");
 
         return createResponse(userScoreRequest, "get_user_best")

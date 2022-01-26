@@ -4,7 +4,6 @@ import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.api.entities.beatmap.BeatmapSet;
 import nl.tijsbeek.api.entities.scores.BeatmapScore;
 import nl.tijsbeek.api.entities.scores.BestPerformance;
-import nl.tijsbeek.api.entities.scores.RecentlyPlayed;
 import nl.tijsbeek.api.entities.user.User;
 import org.jetbrains.annotations.Nullable;
 

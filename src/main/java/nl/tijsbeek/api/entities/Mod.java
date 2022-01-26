@@ -98,7 +98,7 @@ public enum Mod {
     TARGET(1L << 23L, "Target Practice", "TP", "Target_Practice",
             EnumSet.of(GameMode.OSU));
 
-    private static final String BASE_URL = "https://osu.ppy.sh/wiki/en/Game_modifier/";
+    private static final @NonNls String BASE_URL = "https://osu.ppy.sh/wiki/en/Game_modifier/";
 
     private static final List<Mod> sortedMods;
 
@@ -254,7 +254,7 @@ public enum Mod {
         return mods;
     }
 
-    private static long findMod(long bitwise, Collection<Mod> mods) {
+    private static long findMod(final long bitwise, final Collection<? super Mod> mods) {
         for (final Mod reversedMod : sortedMods) {
             if (bitwise >= reversedMod.getBitwise()) {
                 mods.add(reversedMod);

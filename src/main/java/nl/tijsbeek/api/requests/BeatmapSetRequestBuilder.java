@@ -126,8 +126,8 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
     public BeatmapSetRequestBuilder setCreatorId(@Nullable final String creatorId) {
-        this.creator = creatorId;
-        this.userType = UserType.ID;
+        creator = creatorId;
+        userType = UserType.ID;
         return this;
     }
 
@@ -141,8 +141,8 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
     public BeatmapSetRequestBuilder setCreatorName(@Nullable final String creatorName) {
-        this.creator = creatorName;
-        this.userType = UserType.NAME;
+        creator = creatorName;
+        userType = UserType.NAME;
         return this;
     }
 
@@ -232,7 +232,7 @@ public class BeatmapSetRequestBuilder implements RequestBuilder<BeatmapSetReques
     @Contract(value = "_ -> this", mutates = "this")
     public BeatmapSetRequestBuilder setLimit(@Range(from = MIN_LIMIT, to = MAX_LIMIT) final int limit) {
         //noinspection ConstantConditions
-        if (MIN_LIMIT > limit || limit > MAX_LIMIT) {
+        if (MIN_LIMIT > limit || MAX_LIMIT < limit) {
             throw new IllegalArgumentException("Limit must be between %s and %s".formatted(MIN_LIMIT, MAX_LIMIT));
         }
 

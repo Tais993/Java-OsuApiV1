@@ -12,7 +12,7 @@ public interface RequestBuilder<T extends Request> {
     /**
      * Builds the request based.
      *
-     * @return the {@link Request} based on this builders variables
+     * @return the {@link Request} based on the builder's variables
      */
     @NotNull
     @Contract(" -> new")

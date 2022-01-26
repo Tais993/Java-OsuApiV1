@@ -3,10 +3,7 @@ package nl.tijsbeek.api.requests;
 import nl.tijsbeek.api.entities.GameMode;
 import nl.tijsbeek.api.entities.Mod;
 import nl.tijsbeek.api.entities.user.UserType;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Range;
+import org.jetbrains.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,9 +12,9 @@ import java.util.*;
 public class BeatmapScoreRequestBuilder implements RequestBuilder<BeatmapScoreRequest> {
     private static final Logger logger = LoggerFactory.getLogger(BeatmapScoreRequestBuilder.class);
 
-    private final static int MIN_AMOUNT_LIMIT = 1;
-    private final static int MAX_AMOUNT_LIMIT = 100;
-    private final static int DEFAULT_AMOUNT_LIMIT = 50;
+    private static final int MIN_AMOUNT_LIMIT = 1;
+    private static final int MAX_AMOUNT_LIMIT = 100;
+    private static final int DEFAULT_AMOUNT_LIMIT = 50;
 
     private Long beatmapId;
     private String user;
@@ -28,7 +25,7 @@ public class BeatmapScoreRequestBuilder implements RequestBuilder<BeatmapScoreRe
     private int limit = DEFAULT_AMOUNT_LIMIT;
 
     @NotNull
-    public BeatmapScoreRequestBuilder setBeatmapId(@Nullable Long beatmapId) {
+    public BeatmapScoreRequestBuilder setBeatmapId(@Nullable final Long beatmapId) {
         this.beatmapId = beatmapId;
         return this;
     }
@@ -104,7 +101,7 @@ public class BeatmapScoreRequestBuilder implements RequestBuilder<BeatmapScoreRe
      * @return this builder
      */
     @NotNull
-    public BeatmapScoreRequestBuilder setGameMode(GameMode gameMode) {
+    public BeatmapScoreRequestBuilder setGameMode(final GameMode gameMode) {
         this.gameMode = gameMode;
         return this;
     }
@@ -129,7 +126,7 @@ public class BeatmapScoreRequestBuilder implements RequestBuilder<BeatmapScoreRe
      *
      * @param mods the mods to add
      * @return this builder
-     * @see #setMods(Set)
+     * @see #setMods(Collection)
      * @see EnumSet
      */
     @NotNull
@@ -153,10 +150,8 @@ public class BeatmapScoreRequestBuilder implements RequestBuilder<BeatmapScoreRe
      */
     @NotNull
     @Contract(value = "_ -> this", mutates = "this")
-    public BeatmapScoreRequestBuilder setMods(@NotNull final Set<Mod> mods) {
-        Objects.requireNonNull(mods, "The given mods cannot be null");
-
-        this.mods = mods;
+    public BeatmapScoreRequestBuilder setMods(@NotNull final Collection<Mod> mods) {
+        this.mods = Objects.requireNonNull(Set.copyOf(mods), "The given mods cannot be null");
         return this;
     }
 
@@ -166,5 +161,19 @@ public class BeatmapScoreRequestBuilder implements RequestBuilder<BeatmapScoreRe
         Objects.requireNonNull(beatmapId, "The beatmapId cannot be null");
 
         return new BeatmapScoreRequest(beatmapId, user, userType, gameMode, mods, limit);
+    }
+
+    @NonNls
+    @NotNull
+    @Override
+    public String toString() {
+        return "BeatmapScoreRequestBuilder{" +
+                "beatmapId=" + beatmapId +
+                ", user='" + user + '\'' +
+                ", userType=" + userType +
+                ", gameMode=" + gameMode +
+                ", mods=" + mods +
+                ", limit=" + limit +
+                '}';
     }
 }

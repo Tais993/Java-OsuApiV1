@@ -5,6 +5,8 @@ import nl.tijsbeek.api.entities.user.UserType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriBuilder;
 
 import java.util.Objects;
@@ -15,6 +17,7 @@ public record UserScoreRequest(
         @Nullable GameMode gameMode,
         int limit
 ) implements Request {
+    private static final Logger logger = LoggerFactory.getLogger(UserScoreRequest.class);
 
     @NotNull
     @Override

@@ -7,6 +7,8 @@ import nl.tijsbeek.api.entities.scores.Grade;
 import nl.tijsbeek.api.entities.scores.RecentlyPlayed;
 import nl.tijsbeek.internal.jackson.IntToModsDeserializer;
 import nl.tijsbeek.internal.jackson.NumericBooleanDeserializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
@@ -31,4 +33,5 @@ public record RecentlyPlayedImpl(
 
         @JsonProperty("beatmap_id") long beatmapId
 ) implements RecentlyPlayed {
+        private static final Logger logger = LoggerFactory.getLogger(RecentlyPlayedImpl.class);
 }

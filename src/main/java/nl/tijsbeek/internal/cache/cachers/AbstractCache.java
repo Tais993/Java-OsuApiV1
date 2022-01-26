@@ -97,7 +97,7 @@ public class AbstractCache<K, T> implements CustomCache<T> {
 
         AbstractCache<?, ?> abstractCache = (AbstractCache<?, ?>) obj;
 
-        return Objects.equals(cache, abstractCache.cache);
+        return Objects.equals(cache, abstractCache.getCache());
     }
 
     @Override

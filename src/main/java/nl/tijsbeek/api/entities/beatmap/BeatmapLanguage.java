@@ -43,7 +43,7 @@ public enum BeatmapLanguage {
             }
         }
 
-        throw new IllegalArgumentException("Id " + id + " out of range (0 to 14)");
+        throw new IllegalArgumentException("Id %s out of range (0 to 14)".formatted(id));
     }
 
     private final int id;
