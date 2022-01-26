@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 /**
- * An osu "player", formally known as User. <br />
+ * An osu "player", formerly known as User. <br />
  * Contains all the information visible on the website.
  * <p>
  * An example is <a href="https://osu.ppy.sh/users/2">Peppy on the osu site</a>

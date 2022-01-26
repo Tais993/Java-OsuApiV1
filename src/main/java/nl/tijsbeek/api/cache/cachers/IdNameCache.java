@@ -4,7 +4,7 @@ import nl.tijsbeek.api.entities.holders.IdHolder;
 import nl.tijsbeek.api.entities.holders.NameHolder;
 
 /**
- * The interface for caches containing items by their Name and Id
+ * The interface for caches containing items by their Name and ID
  *
  * @param <T> the {@link IdHolder} and {@link NameHolder}
  */

@@ -59,7 +59,7 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
     @Nullable String submitDateString();
 
     /**
-     * The submit date as a {@link LocalDateTime}
+     * The submitted date as a {@link LocalDateTime}
      *
      * @return {@link #submitDateString()} as a {@link LocalDateTime}
      * @see #submitDateString()
@@ -87,7 +87,7 @@ public interface BeatmapSet extends IdHolder, NameHolder, Iterable<Beatmap> {
     @Nullable String approvedDateString();
 
     /**
-     * The approve date as a {@link LocalDateTime}
+     * The date approved as a {@link LocalDateTime}
      *
      * @return {@link #approvedDateString()} as a {@link LocalDateTime}
      * @see #approvedDateString()

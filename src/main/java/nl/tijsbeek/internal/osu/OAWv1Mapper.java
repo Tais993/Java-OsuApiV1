@@ -2,8 +2,14 @@ package nl.tijsbeek.internal.osu;
 
 import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.api.entities.beatmap.BeatmapSet;
+import nl.tijsbeek.api.entities.scores.BeatmapScore;
+import nl.tijsbeek.api.entities.scores.BestPerformance;
+import nl.tijsbeek.api.entities.scores.RecentlyPlayed;
 import nl.tijsbeek.internal.entities.beatmap.BeatmapImpl;
 import nl.tijsbeek.internal.entities.beatmap.BeatmapSetImpl;
+import nl.tijsbeek.internal.entities.scores.BeatmapScoreImpl;
+import nl.tijsbeek.internal.entities.scores.BestPerformanceImpl;
+import nl.tijsbeek.internal.entities.scores.RecentlyPlayedImpl;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,5 +55,23 @@ enum OAWv1Mapper {
         Objects.requireNonNull(beatmapImpls, "The given beatmapImpls cannot be null");
 
         return Optional.ofNullable(beatmapImpls.get(0));
+    }
+
+    @NotNull
+    @Contract("_ -> new")
+    static List<BestPerformance> mapToBestPerformance(final @NotNull Collection<BestPerformanceImpl> bestPerformances) {
+        return bestPerformances.stream().map(BestPerformance.class::cast).toList();
+    }
+
+    @NotNull
+    @Contract("_ -> new")
+    public static List<RecentlyPlayed> mapToRecentPlays(final @NotNull Collection<RecentlyPlayedImpl> recentPlays) {
+        return recentPlays.stream().map(RecentlyPlayed.class::cast).toList();
+    }
+
+    @NotNull
+    @Contract("_ -> new")
+    public static List<BeatmapScore> mapToBeatmapScores(final @NotNull Collection<BeatmapScoreImpl> beatmapScores) {
+        return beatmapScores.stream().map(BeatmapScore.class::cast).toList();
     }
 }

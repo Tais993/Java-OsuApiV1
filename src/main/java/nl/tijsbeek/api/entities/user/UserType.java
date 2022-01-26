@@ -19,11 +19,11 @@ import java.util.Objects;
  */
 public enum UserType {
     /**
-     * Sets the given user to be handled as an username
+     * Sets the given user to be handled as a username
      */
     NAME("string"),
     /**
-     * Sets the given user to be handled as an user-id
+     * Sets the given user to be handled as a user-id
      */
     ID("id");
 

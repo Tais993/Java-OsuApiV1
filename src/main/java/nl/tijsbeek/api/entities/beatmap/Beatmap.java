@@ -15,7 +15,7 @@ import static nl.tijsbeek.api.entities.beatmap.BeatmapSet.COVER_THUMBNAIL_FORMAT
 
 /**
  * An osu beatmap, which is a playable "map" in osu.
- * This beatmap contains information about the map, such as the slider count, gamemode,  and more.
+ * This beatmap contains information about the map, such as the slider count, game mode,  and more.
  *
  * <p>
  * Examples are <a href="https://osu.ppy.sh/beatmapsets/1540868#taiko/3254237">osu!mania</a>
@@ -45,7 +45,7 @@ public interface Beatmap extends IdHolder, NameHolder {
     @Nullable String submitDateString();
 
     /**
-     * The submit date as a {@link LocalDateTime}
+     * The date submitted as a {@link LocalDateTime}
      *
      * @return {@link #submitDateString()} as a {@link LocalDateTime}
      * @see #submitDateString()
@@ -72,7 +72,7 @@ public interface Beatmap extends IdHolder, NameHolder {
     @Nullable String approvedDateString();
 
     /**
-     * The approve date as a {@link LocalDateTime}
+     * The date approved as a {@link LocalDateTime}
      *
      * @return {@link #approvedDateString()} as a {@link LocalDateTime}
      * @see #approvedDateString()
@@ -208,7 +208,7 @@ public interface Beatmap extends IdHolder, NameHolder {
     /**
      * The beatmap's genre
      *
-     * @return a {@link BeatmapGenre} instace
+     * @return a {@link BeatmapGenre} instance
      */
     @NotNull BeatmapGenre genre();
 

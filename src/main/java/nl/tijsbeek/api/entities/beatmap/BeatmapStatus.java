@@ -34,7 +34,7 @@ public enum BeatmapStatus {
             }
         }
 
-        throw new IllegalArgumentException("Id " + id + " out of range (-2 to 4)");
+        throw new IllegalArgumentException("Id %s out of range (-2 to 4)".formatted(id));
     }
 
 

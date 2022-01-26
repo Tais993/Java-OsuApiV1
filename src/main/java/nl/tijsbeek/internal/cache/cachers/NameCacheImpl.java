@@ -50,8 +50,8 @@ public class NameCacheImpl<T extends NameHolder> extends AbstractCache<String, T
     }
 
 
-    public void addItem(@NotNull final T nameHolder) {
-        Objects.requireNonNull(nameHolder, "The given nameHolder cannot be null");
+    public void addItem(@Nullable final T nameHolder) {
+        if (null == nameHolder) return;
 
         cache.put(nameHolder.name(), nameHolder);
         logger.debug("Added name-holder:{} to cache", nameHolder.name());

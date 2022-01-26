@@ -64,9 +64,7 @@ public class IdNameCacheImpl<T extends IdHolder & NameHolder> implements IdNameC
     }
 
 
-    public void addItem(@NotNull final T idHolder) {
-        Objects.requireNonNull(idHolder, "The given idHolder cannot be null");
-
+    public void addItem(@Nullable final T idHolder) {
         idEntityCache.addItem(idHolder);
         nameEntityCache.addItem(idHolder);
     }
