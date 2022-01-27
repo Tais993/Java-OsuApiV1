@@ -1,2 +1,3 @@
 /.gradle/
 /src/main/java/nl/tijsbeek/testing/Main.java
+/src/main/java/nl/tijsbeek/testing/Application.java

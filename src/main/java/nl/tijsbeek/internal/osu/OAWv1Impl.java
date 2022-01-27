@@ -35,6 +35,9 @@ import java.util.*;
 public class OAWv1Impl implements OAWv1 {
     private static final Logger logger = LoggerFactory.getLogger(OAWv1Impl.class);
 
+    // TODO make unlimited?
+    private static final int MAX_MEMORY_SIZE_WEBCLIENT = 1024000;
+
     private final String token;
 
     private final @NotNull CacheHandlerImpl cacheHandlerImpl;
@@ -61,7 +64,10 @@ public class OAWv1Impl implements OAWv1 {
         cacheHandlerImpl = new CacheHandlerImpl(defaultCachingPolicy, cachingPolicyMap);
         cacheUtils = new CacheUtilsImpl(cacheHandlerImpl);
 
-        webClient = WebClient.builder().baseUrl("https://osu.ppy.sh/api/").build();
+        ExchangeStrategies exchangeStrategies = ExchangeStrategies.builder()
+                .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(MAX_MEMORY_SIZE_WEBCLIENT)).build();
+        webClient = WebClient.builder().baseUrl("https://osu.ppy.sh/api/")
+                .exchangeStrategies(exchangeStrategies).build();
 
         logger.info("OAW instance has been created with token {}", token);
     }
