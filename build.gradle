@@ -15,25 +15,23 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.6'
-    implementation 'org.springframework.boot:spring-boot-starter-webflux:2.5.6'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:2.6.3'
 
-    implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
-
-
-    implementation 'org.jetbrains:annotations:22.0.0'
-    implementation 'com.github.ben-manes.caffeine:caffeine:3.0.4'
+    implementation 'org.jetbrains:annotations:23.0.0'
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.0.5'
 
 
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.0'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.6'
-    testImplementation 'io.projectreactor:reactor-test:3.4.12'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.3'
+    testImplementation 'io.projectreactor:reactor-test:3.4.14'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
 
 test {
