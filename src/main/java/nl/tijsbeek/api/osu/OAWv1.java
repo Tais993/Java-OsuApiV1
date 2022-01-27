@@ -28,6 +28,8 @@ public interface OAWv1 {
     /**
      * Retrieve a user based on the Request created
      *
+     * <b>This grabs the first given Beatmap</b>
+     *
      * @param userRequest the request
      * @return A {@link Mono<User>} of {@link User}
      * @see <a href="https://github.com/ppy/osu-api/wiki#apiget_user">osu-wiki get_user</a>
@@ -45,7 +47,7 @@ public interface OAWv1 {
 
     /**
      * Retrieve a beatmap based on the Request created <br />
-     * This grabs the first given Beatmap
+     * <b>This grabs the first given Beatmap</b>
      *
      * @param beatmapSetRequest the request
      * @return A {@link Flux<User>} of {@link Beatmap}

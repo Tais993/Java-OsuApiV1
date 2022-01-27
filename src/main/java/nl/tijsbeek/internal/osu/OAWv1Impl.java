@@ -4,6 +4,7 @@ import nl.tijsbeek.api.cache.policy.CachingPolicy;
 import nl.tijsbeek.api.cache.policy.CachingPolicyBuilder;
 import nl.tijsbeek.api.entities.beatmap.Beatmap;
 import nl.tijsbeek.api.entities.beatmap.BeatmapSet;
+import nl.tijsbeek.api.entities.exceptions.EmptyResponseException;
 import nl.tijsbeek.api.entities.scores.BeatmapScore;
 import nl.tijsbeek.api.entities.scores.BestPerformance;
 import nl.tijsbeek.api.entities.scores.RecentlyPlayed;
@@ -24,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -78,7 +80,13 @@ public class OAWv1Impl implements OAWv1 {
 
         return createResponse(userRequest, "get_user")
                 .bodyToMono(new UserImplListType())
-                .<User>map(users -> users.get(0))
+                .<User>mapNotNull(users -> {
+                    if (users.isEmpty()) {
+                        throw new EmptyResponseException("No users were found with the given request");
+                    } else {
+                        return users.get(0);
+                    }
+                })
                 .doOnSuccess(cacheUtils::cacheUser);
     }
 
